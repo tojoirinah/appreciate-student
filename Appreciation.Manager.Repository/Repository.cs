@@ -31,7 +31,7 @@ namespace Appreciation.Manager.Repository
             var item = _table.FirstOrDefaultAsync(i => i.Id == entity.Id);
             if (item != null)
             {
-               await Task.Run(() =>_table.Remove(item.Result));
+                await Task.Run(() => _table.Remove(item.Result));
             }
         }
 

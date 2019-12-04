@@ -1,5 +1,4 @@
 using Appreciation.Manager.Api.App_Data;
-using Appreciation.Manager.Api.App_Start;
 using Appreciation.Manager.Repository.Contracts;
 using System;
 using System.Web.Http;
@@ -20,7 +19,7 @@ namespace Appreciation.Manager.Api
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             // SwaggerConfig.Register();
-           
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -45,7 +44,7 @@ namespace Appreciation.Manager.Api
                 var unitOfWork = Container.Resolve<IUnitOfWork>();
                 unitOfWork.CommitAsync();
             }
-           
+
         }
 
         protected void Application_Error(object sender, EventArgs e)

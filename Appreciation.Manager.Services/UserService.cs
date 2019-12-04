@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Appreciation.Manager.Infrastructure.Models;
+﻿using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Utils;
+using System;
+using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
 {
@@ -20,7 +20,7 @@ namespace Appreciation.Manager.Services
             Users user = null;
             user = await ((IUserRepository)_repository).GetUserName(auth.UserName);
 
-            if(user!=null)
+            if (user != null)
             {
                 var encryptedPassword = PasswordContractor.Instance.GeneratePassword(auth.Password, user.SecuritySalt);
 

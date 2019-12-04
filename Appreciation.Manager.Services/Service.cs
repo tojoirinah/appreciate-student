@@ -29,7 +29,7 @@ namespace Appreciation.Manager.Services
             _repository = repository;
         }
 
- 
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _repository.GetAllAsync();

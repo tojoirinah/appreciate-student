@@ -1,8 +1,7 @@
 namespace Appreciation.Manager.Infrastructure.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Suppression_Table_UserSetting : DbMigration
     {
         public override void Up()
@@ -20,20 +19,20 @@ namespace Appreciation.Manager.Infrastructure.Migrations
             DropColumn("dbo.Student", "Setting_Id");
             DropTable("dbo.UserSetting");
         }
-        
+
         public override void Down()
         {
             CreateTable(
                 "dbo.UserSetting",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Age = c.Int(nullable: false),
-                        Civility = c.Int(nullable: false),
-                        DateCreated = c.DateTime(nullable: false),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Age = c.Int(nullable: false),
+                    Civility = c.Int(nullable: false),
+                    DateCreated = c.DateTime(nullable: false),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             AddColumn("dbo.Student", "Setting_Id", c => c.Guid());
             AlterColumn("dbo.tb_User", "RoleId", c => c.Guid(nullable: false));
             AlterColumn("dbo.UserNote", "Student_Id", c => c.Guid());

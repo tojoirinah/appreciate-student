@@ -1,8 +1,7 @@
 namespace Appreciation.Manager.Infrastructure.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddUsername_to_table : DbMigration
     {
         public override void Up()
@@ -33,7 +32,7 @@ namespace Appreciation.Manager.Infrastructure.Migrations
             AddForeignKey("dbo.UserNote", "SubjectId", "dbo.Subject", "Id", cascadeDelete: true);
             AddForeignKey("dbo.Student", "UserId", "dbo.tb_User", "Id", cascadeDelete: true);
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Student", "UserId", "dbo.tb_User");

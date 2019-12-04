@@ -31,7 +31,7 @@ namespace Appreciation.Manager.Api.App_Data
         /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-            
+
             container.RegisterAllTypes(typeof(ReadOnlyRepository<>));
             container.RegisterAllTypes(typeof(Repository.Tests.ReadOnlyRepositoryTest<>));
             container.RegisterAllTypes(typeof(Service<>));

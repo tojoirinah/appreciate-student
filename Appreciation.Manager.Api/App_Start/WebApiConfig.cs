@@ -14,7 +14,7 @@ namespace Appreciation.Manager.Api
                 var cors = new EnableCorsAttribute(Settings.CorsDomain, "*", "*");
                 config.EnableCors(cors);
             }
-          
+
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();

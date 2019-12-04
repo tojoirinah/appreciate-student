@@ -5,9 +5,6 @@ using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services.Tests
@@ -38,7 +35,7 @@ namespace Appreciation.Manager.Services.Tests
                     Password = "kenshiro1321345589$po"
                 };
                 var user = await _userService.Login(req);
-               // Assert.IsNotNull(user);
+                // Assert.IsNotNull(user);
             }
             catch (Exception ex)
             {
@@ -59,7 +56,7 @@ namespace Appreciation.Manager.Services.Tests
                 var user = await _userService.Login(req);
                 Assert.IsNotNull(user);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.AreEqual(ex.Message, "Le mot de passe est invalide");
             }
@@ -70,8 +67,10 @@ namespace Appreciation.Manager.Services.Tests
         {
             try
             {
-                var req = new AuthenticationRequest() {
-                    UserName = "UserName001", Password = "kenshiro1321345589$po"
+                var req = new AuthenticationRequest()
+                {
+                    UserName = "UserName001",
+                    Password = "kenshiro1321345589$po"
                 };
                 var user = await _userService.Login(req);
                 Assert.IsNotNull(user);
