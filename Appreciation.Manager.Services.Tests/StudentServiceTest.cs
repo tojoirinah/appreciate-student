@@ -1,4 +1,5 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
+﻿using Appreciation.Manager.Infrastructure.Enumerations;
+using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Repository.Tests;
 using Appreciation.Manager.Services.Contracts;
@@ -69,7 +70,10 @@ namespace Appreciation.Manager.Services.Tests
                     FirstName = "Prenom 004",
                     Name = "Nom 004",
                     Password = "123456",
-                    RoleId = new Guid("4900fdfb-9afb-4a74-b952-95b0e5bf68a5"),
+                    Role= new UserRole() {
+                        Id = (int)RoleEnum.Student,
+                        RoleName = "Student"
+                    },
                     SecuritySalt = "123456"
                 },
                 Notes = new List<UserNote>()
@@ -212,7 +216,11 @@ namespace Appreciation.Manager.Services.Tests
                     FirstName = "Prenom 004",
                     Name = "Nom 004",
                     Password = "123456",
-                    RoleId = new Guid("4900fdfb-9afb-4a74-b952-95b0e5bf68a5"),
+                    Role = new UserRole()
+                    {
+                        Id = (int)RoleEnum.Student,
+                        RoleName = "Student"
+                    },
                     SecuritySalt = "123456"
                 },
                 Notes = new List<UserNote>()
@@ -339,10 +347,9 @@ namespace Appreciation.Manager.Services.Tests
                     SecuritySalt = "bMjKQVV8|G5ZAe9M0wj8X|LIXFZps0CBbfDRhTY32GYPB7PxTnMbHhkX4mumNrlmH9yoaBmBERG4S2hYUC1fnb|zY0KUZ8MNJ0miBfBxsbl3UAMfbf0wlVg8GF8tumrcxD3cgtfTtkIDcEeynFtUevC|GOLF5APPLEegg9MUSIC0walmartjack8XBOX|c5UjOhAYYi3Z12TKxYNsnwp2zuRbw3xPnBv9ejH80jlWLgpE2mYjCfFlnYpzu9C4|qmmYgTgNQOWeKxptfnEkdNMH2JRKzNk1GNg9Yv7hFKxtNBaUJ1ThZXzC8e52c1Td",
                     Role = new UserRole()
                     {
-                        Id = new System.Guid("4900fdfb-9afb-4a74-b952-95b0e5bf68a5"),
-                        DateCreated = DateTime.Now,
-                        Identity = 2
-                    }
+                        Id = (int)RoleEnum.Student,
+                        RoleName = "Student"
+                    },
                 },
                 Notes = new List<UserNote>()
                 {
@@ -470,10 +477,9 @@ namespace Appreciation.Manager.Services.Tests
                     SecuritySalt = "bMjKQVV8|G5ZAe9M0wj8X|LIXFZps0CBbfDRhTY32GYPB7PxTnMbHhkX4mumNrlmH9yoaBmBERG4S2hYUC1fnb|zY0KUZ8MNJ0miBfBxsbl3UAMfbf0wlVg8GF8tumrcxD3cgtfTtkIDcEeynFtUevC|GOLF5APPLEegg9MUSIC0walmartjack8XBOX|c5UjOhAYYi3Z12TKxYNsnwp2zuRbw3xPnBv9ejH80jlWLgpE2mYjCfFlnYpzu9C4|qmmYgTgNQOWeKxptfnEkdNMH2JRKzNk1GNg9Yv7hFKxtNBaUJ1ThZXzC8e52c1Td",
                     Role = new UserRole()
                     {
-                        Id = new System.Guid("4900fdfb-9afb-4a74-b952-95b0e5bf68a5"),
-                        DateCreated = DateTime.Now,
-                        Identity = 3
-                    }
+                        Id = (int)RoleEnum.Student,
+                        RoleName = "Student"
+                    },
                 },
                 Notes = new List<UserNote>()
                 {
@@ -574,7 +580,7 @@ namespace Appreciation.Manager.Services.Tests
             var isUpdatedAge = oldItem.Age != itemUpdated.Age;
             var isUpdatedNote = itemUpdated.Notes.Sum(n => n.Note) == (18 + 15 + 11 + 7);
             var isNameUPdated = itemUpdated.User.Name == "Nom 007";
-            var isRoleUpdate = itemUpdated.User.Role.Identity == 3;
+            var isRoleUpdate = itemUpdated.User.Role.Id == (int)RoleEnum.Student;
             var isSameCount = countBeforeUpdating == countAfterUpdating;
             Assert.IsTrue(isUpdatedAge && isSameCount && isUpdatedNote && isNameUPdated && isRoleUpdate);
         }
