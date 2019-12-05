@@ -1,4 +1,5 @@
 using Appreciation.Manager.Api.App_Data;
+using Appreciation.Manager.Repository;
 using Appreciation.Manager.Repository.Contracts;
 using System;
 using System.Web.Http;
@@ -18,39 +19,32 @@ namespace Appreciation.Manager.Api
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            // SwaggerConfig.Register();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Container = UnityBootStrapper.Initialise();
-
-            //var factory = new IocControllerFactory(Container);
-            //ControllerBuilder.Current.SetControllerFactory(factory);
         }
 
-        protected void Application_BeginRequest()
-        {
-            //if (Request.Headers.AllKeys.Contains("Origin") && Request.HttpMethod == "OPTIONS")
-            //{
-            //    Response.Flush();
-            //}
-        }
-
-        protected void Application_EndRequest()
+        protected void Application_EndRequest(object sender, EventArgs e)
         {
             if (!IsRollback)
             {
                 var unitOfWork = Container.Resolve<IUnitOfWork>();
                 unitOfWork.CommitAsync();
+                //var unitOfWork = UnitOfWorkUtils.GetCurrentUnitOfWork;
+                //if(unitOfWork!=null)
+                //    unitOfWork.CommitAsync();
+                //UnitOfWorkUtils.DestroyUnitOfWork();
             }
 
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            var unitOfWork = Container.Resolve<IUnitOfWork>();
-            unitOfWork.RollbackAsync();
+            // var unitOfWork = Container.Resolve<IUnitOfWork>();
+            // unitOfWork.RollbackAsync();
+            //UnitOfWorkUtils.DestroyUnitOfWork();
             IsRollback = true;
         }
     }

@@ -33,6 +33,10 @@ namespace Appreciation.Manager.Api
                         // additional fields by chaining methods off SingleApiVersion.
                         //
                         c.SingleApiVersion("v1", "Appreciation.Manager.Api");
+                        c.ApiKey("Token")
+                            .Description("Filling bearer token here")
+                            .Name("Authorization")
+                            .In("header");
 
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
                         // In this case, you must provide a lambda that tells Swashbuckle which actions should be
@@ -164,6 +168,7 @@ namespace Appreciation.Manager.Api
                     })
                 .EnableSwaggerUi(c =>
                     {
+                        c.EnableApiKeySupport("Authorization", "header");
                         // Use the "InjectStylesheet" option to enrich the UI with one or more additional CSS stylesheets.
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.

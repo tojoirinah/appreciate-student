@@ -1,9 +1,15 @@
-﻿using Appreciation.Manager.Repository;
+﻿using Appreciation.Manager.Api.App_Start;
+using Appreciation.Manager.Infrastructure.Models;
+using Appreciation.Manager.Repository;
+using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services;
+using Appreciation.Manager.Services.Contracts.Data_Transfert;
+using AutoMapper;
 using System.Web.Http;
 using System.Web.Mvc;
 using Unity;
 using Unity.AspNet.Mvc;
+using Unity.Lifetime;
 
 namespace Appreciation.Manager.Api.App_Data
 {
@@ -12,6 +18,11 @@ namespace Appreciation.Manager.Api.App_Data
         public static IUnityContainer Initialise()
         {
             var container = BuildUnityContainer();
+
+            // mapping with automapper
+            var mapper = MappingProfile.InitializeAutoMapper(typeof(Student), typeof(AddStudentRequest)).CreateMapper();
+            container.RegisterInstance<IMapper>(mapper);
+
             var resolver = new UnityDependencyResolver(container);
             DependencyResolver.SetResolver(resolver);
             GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
@@ -31,10 +42,10 @@ namespace Appreciation.Manager.Api.App_Data
         /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-
-            container.RegisterAllTypes(typeof(ReadOnlyRepository<>));
-            container.RegisterAllTypes(typeof(Repository.Tests.ReadOnlyRepositoryTest<>));
-            container.RegisterAllTypes(typeof(Service<>));
+           // container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
+            container.RegisterAllTypes(typeof(ReadOnlyRepository<>), LifecycleKind.Scoped);
+            container.RegisterAllTypes(typeof(Repository.Tests.ReadOnlyRepositoryTest<>),  LifecycleKind.PerRequest); 
+            container.RegisterAllTypes(typeof(Service<>),LifecycleKind.Default);
         }
     }
 }

@@ -21,11 +21,11 @@ namespace Appreciation.Manager.Infrastructure
         }
 
         public bool IsDisposed { get; set; }
-        public new void Dispose()
-        {
-            IsDisposed = true;
-            base.Dispose();
-        }
+        //public new void Dispose()
+        //{
+        //    IsDisposed = true;
+        //    base.Dispose();
+        //}
 
     }
 }

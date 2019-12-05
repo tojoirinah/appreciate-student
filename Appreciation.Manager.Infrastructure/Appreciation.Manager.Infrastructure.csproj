@@ -53,17 +53,10 @@
     <Compile Include="AppreciationContext.cs" />
     <Compile Include="Enumerations\BehaviorEnum.cs" />
     <Compile Include="Enumerations\CivilityEnum.cs" />
-    <Compile Include="Migrations\201912022048543_InitialCreate.cs" />
-    <Compile Include="Migrations\201912022048543_InitialCreate.designer.cs">
-      <DependentUpon>201912022048543_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912031508419_Suppression_Table_UserSetting.cs" />
-    <Compile Include="Migrations\201912031508419_Suppression_Table_UserSetting.Designer.cs">
-      <DependentUpon>201912031508419_Suppression_Table_UserSetting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912041255251_AddUsername_to_table.cs" />
-    <Compile Include="Migrations\201912041255251_AddUsername_to_table.Designer.cs">
-      <DependentUpon>201912041255251_AddUsername_to_table.cs</DependentUpon>
+    <Compile Include="Enumerations\RoleEnum.cs" />
+    <Compile Include="Migrations\201912051442215_RecreateStructure.cs" />
+    <Compile Include="Migrations\201912051442215_RecreateStructure.Designer.cs">
+      <DependentUpon>201912051442215_RecreateStructure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -84,14 +77,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912022048543_InitialCreate.resx">
-      <DependentUpon>201912022048543_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912031508419_Suppression_Table_UserSetting.resx">
-      <DependentUpon>201912031508419_Suppression_Table_UserSetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912041255251_AddUsername_to_table.resx">
-      <DependentUpon>201912041255251_AddUsername_to_table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912051442215_RecreateStructure.resx">
+      <DependentUpon>201912051442215_RecreateStructure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

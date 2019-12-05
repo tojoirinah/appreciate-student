@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Appreciation.Manager.Infrastructure.Models
 {
-    [Table("tb_User", Schema = "dbo")]
+    [Table("User", Schema = "dbo")]
     public class Users : BaseEntity
     {
         [Required]
@@ -30,7 +30,7 @@ namespace Appreciation.Manager.Infrastructure.Models
         [StringLength(500)]
         public string Password { get; set; }
 
-        public Guid RoleId { get; set; }
+        public long RoleId { get; set; }
 
         [ForeignKey("RoleId")]
         public virtual UserRole Role { get; set; }
