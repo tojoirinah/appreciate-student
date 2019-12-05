@@ -28,7 +28,7 @@ namespace Appreciation.Manager.Repository
 
         public async Task RemoveAsync(T entity)
         {
-            var item = _table.FirstOrDefaultAsync(i => i.Id == entity.Id);
+            var item = _table.FirstOrDefault(i => i.Id == entity.Id);
             if (item != null)
             {
                 await Task.Run(() => _table.Remove(item.Result));
@@ -37,7 +37,7 @@ namespace Appreciation.Manager.Repository
 
         public async Task AddOrUpdateAsync(T entity)
         {
-            var item = _table.FirstOrDefaultAsync(i => i.Id == entity.Id);
+            var item = _table.FirstOrDefault(i => i.Id == entity.Id);
             if (item != null)
             {
                 await Task.Run(() =>
