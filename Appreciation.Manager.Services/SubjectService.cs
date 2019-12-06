@@ -6,7 +6,7 @@ namespace Appreciation.Manager.Services
 {
     public class SubjectService : Service<Subject>, ISubjectService
     {
-        public SubjectService(IUnitOfWork unitOfWork, ISubjectRepository repository) : base(unitOfWork, repository)
+        public SubjectService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }

@@ -10,15 +10,16 @@ namespace Appreciation.Manager.Services
 {
     public class UserService : Service<Users>, IUserService
     {
-
-        public UserService(IUnitOfWork unitOfWork, IUserRepository repository) : base(unitOfWork, repository)
+        protected IUserRepository _repository;
+        public UserService(IUnitOfWork unitOfWork, IUserRepository repository) : base(unitOfWork)
         {
+            _repository = repository;
         }
 
         public async Task<Users> Login(AuthenticationRequest auth)
         {
             Users user = null;
-            user = await ((IUserRepository)_repository).GetUserName(auth.UserName);
+            user = await _repository.GetUserName(auth.UserName);
 
             if (user != null)
             {
@@ -33,6 +34,15 @@ namespace Appreciation.Manager.Services
             }
 
             throw new Exception("Le login n'existe pas");
+        }
+
+        public async override Task AddOrUpdateAsync(Users entity)
+        {
+            var securitySalt = EncryptContractor.Instance.SetDefault(Settings.IV,Settings.Key).GenerateEncryptedSecuritySalt();
+            entity.Password = PasswordContractor.Instance.GeneratePassword(entity.Password, securitySalt);
+            entity.SecuritySalt = securitySalt;
+
+            await _unitOfWork.Repository<Users>().AddOrUpdateAsync(entity);
         }
     }
 }

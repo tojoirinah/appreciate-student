@@ -6,7 +6,7 @@ namespace Appreciation.Manager.Services
 {
     public class ExamService : Service<Exam>, IExamService
     {
-        public ExamService(IUnitOfWork unitOfWork, IExamRepository repository) : base(unitOfWork, repository)
+        public ExamService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Transfert\AddExamRequest.cs" />
     <Compile Include="Data Transfert\AddStudentRequest.cs" />
     <Compile Include="Data Transfert\AddUsersRequest.cs" />
     <Compile Include="Data Transfert\AuthenticationRequest.cs" />

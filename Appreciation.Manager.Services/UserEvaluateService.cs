@@ -6,7 +6,7 @@ namespace Appreciation.Manager.Services
 {
     public class UserEvaluateService : Service<UserEvaluate>, IUserEvaluateService
     {
-        public UserEvaluateService(IUnitOfWork unitOfWork, IUserEvaluateRepository repository) : base(unitOfWork, repository)
+        public UserEvaluateService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }

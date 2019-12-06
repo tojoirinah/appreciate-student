@@ -1,4 +1,5 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
+﻿using Appreciation.Manager.Infrastructure;
+using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using System;
 using System.Data.Entity;
@@ -9,7 +10,8 @@ namespace Appreciation.Manager.Repository
 {
     public class Repository<T> : ReadOnlyRepository<T>, IRepository<T> where T : BaseEntity
     {
-        public Repository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        // public Repository(AppreciationContext unitOfWork) : base(unitOfWork)
+        public Repository(AppreciationContext context) : base(context)
         {
 
         }
@@ -23,7 +25,9 @@ namespace Appreciation.Manager.Repository
 
         private async Task AddAsync(T entity)
         {
-            await Task.Run(() => _table.Add(entity));
+            entity.DateCreated = DateTime.Now;
+            entity.Id = Guid.NewGuid();
+            _table.Add(entity);
         }
 
         public async Task RemoveAsync(T entity)
@@ -43,7 +47,7 @@ namespace Appreciation.Manager.Repository
                 await Task.Run(() =>
                 {
                     _table.Attach(entity);
-                    _unitOfWork.Context.Entry(entity).State = EntityState.Modified;
+                    _context.Entry(entity).State = EntityState.Modified;
                 });
             }
             else

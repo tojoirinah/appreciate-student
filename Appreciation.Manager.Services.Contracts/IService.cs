@@ -11,5 +11,6 @@ namespace Appreciation.Manager.Services.Contracts
         Task<T> GetByIdAsync(Guid id);
         Task RemoveAsync(T entity);
         Task AddOrUpdateAsync(T entity);
+        Task Completed();
     }
 }

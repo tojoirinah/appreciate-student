@@ -7,7 +7,6 @@ namespace Appreciation.Manager.Infrastructure.Models
     public class Exam : BaseEntity
     {
         public int Number { get; set; }
-        public DateTime DateCreated { get; set; }
         public string Name { get; set; }
     }
 }

@@ -15,6 +15,13 @@ namespace Appreciation.Manager.Api.App_Data
 {
     public class UnityBootStrapper
     {
+        public static IUnityContainer Ioc { 
+            get { return _container; } 
+        
+        }
+
+        private static IUnityContainer _container;
+
         public static IUnityContainer Initialise()
         {
             var container = BuildUnityContainer();
@@ -26,6 +33,7 @@ namespace Appreciation.Manager.Api.App_Data
             var resolver = new UnityDependencyResolver(container);
             DependencyResolver.SetResolver(resolver);
             GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
+            _container = container;
             return container;
         }
         private static IUnityContainer BuildUnityContainer()
@@ -42,9 +50,12 @@ namespace Appreciation.Manager.Api.App_Data
         /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-           // container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
+            
+            
             container.RegisterAllTypes(typeof(ReadOnlyRepository<>), LifecycleKind.Scoped);
-            container.RegisterAllTypes(typeof(Repository.Tests.ReadOnlyRepositoryTest<>),  LifecycleKind.PerRequest); 
+            container.RegisterAllTypes(typeof(Repository.Tests.ReadOnlyRepositoryTest<>),  LifecycleKind.PerRequest);
+            
             container.RegisterAllTypes(typeof(Service<>),LifecycleKind.Default);
         }
     }

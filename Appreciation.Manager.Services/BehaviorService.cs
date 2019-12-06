@@ -6,7 +6,7 @@ namespace Appreciation.Manager.Services
 {
     public class BehaviorService : Service<Behavior>, IBehaviorService
     {
-        public BehaviorService(IUnitOfWork unitOfWork, IBehaviorRepository repository) : base(unitOfWork, repository)
+        public BehaviorService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }

@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
 {
-    public class UserNoteService : Service, IUserNoteService
+    public class UserNoteService : Service<UserNote>, IUserNoteService
     {
-        protected readonly IUserNoteRepository _repository;
+        protected readonly IRepository<UserNote> _repository;
         protected readonly ISubjectService _subjectService;
         protected readonly IExamService _examService;
         protected readonly IUserEvaluateService _userEvaluateService;
 
         public UserNoteService(IUnitOfWork unitOfWork,
-            IUserNoteRepository repository,
             ISubjectService subjectService,
             IExamService examService,
             IUserEvaluateService userEvaluateService) : base(unitOfWork)
         {
-            _repository = repository;
+            _repository = _unitOfWork.Repository<UserNote>();
             _subjectService = subjectService;
             _examService = examService;
             _userEvaluateService = userEvaluateService;

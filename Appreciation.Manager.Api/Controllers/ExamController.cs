@@ -1,68 +1,67 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
+﻿using Appreciation.Manager.Api.App_Start;
+using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
-using Appreciation.Manager.Utils;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
 {
-   // [Authorize]
-    public class StudentController : ApiBaseController
+    public class ExamController : ApiBaseController
     {
-        protected readonly IStudentService _studentService;
+        protected readonly IExamService _service;
 
-        public StudentController(IMapper mapper,IStudentService studentService) : base(mapper)
+        public ExamController(IMapper mapper, IExamService service) : base(mapper)
         {
-            _studentService = studentService;
+            _service = service;
         }
-        
+
         [HttpPost]
-        [Route("api/Student/Add")]
-        public async Task<IHttpActionResult> AddStudent([FromBody]AddStudentRequest studentReq)
+        [Route("api/Exam/Add")]
+        public IHttpActionResult AddExam([FromBody]AddExamRequest request)
         {
             try
             {
-                Student student = _mapper.Map<Student>(studentReq);
-                await _studentService.AddOrUpdateAsync(student);
-                await _studentService.Completed();
+                var entity = _mapper.Map<Exam>(request);
+                _service.AddOrUpdateAsync(entity);
+                _service.Completed();
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             return BadRequest();
         }
 
+        // GET: api/Exam
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Student/5
+        // GET: api/Exam/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Student
+        // POST: api/Exam
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Student/5
+        // PUT: api/Exam/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Student/5
+        // DELETE: api/Exam/5
         public void Delete(int id)
         {
         }

@@ -1,4 +1,5 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
+﻿using Appreciation.Manager.Infrastructure;
+using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,13 +10,20 @@ namespace Appreciation.Manager.Repository
 {
     public class ReadOnlyRepository<T> : IReadOnlyRepository<T> where T : BaseEntity
     {
-        protected readonly IUnitOfWork _unitOfWork;
+      //  protected readonly IUnitOfWork _unitOfWork;
         protected DbSet<T> _table;
+        protected readonly AppreciationContext _context;
 
-        public ReadOnlyRepository(IUnitOfWork unitOfWork)
+        //public ReadOnlyRepository(IUnitOfWork unitOfWork)
+        //{
+        //    _unitOfWork = unitOfWork;
+        //    _table = _unitOfWork.Context.Set<T>();
+        //}
+
+        public ReadOnlyRepository(AppreciationContext context)
         {
-            _unitOfWork = unitOfWork;
-            _table = _unitOfWork.Context.Set<T>();
+            _context = context;
+            _table = _context.Set<T>();
         }
 
         protected virtual IQueryable<T> Query(string[] arrays = null)

@@ -7,7 +7,7 @@ namespace Appreciation.Manager.Services
     public class BehaviorCriteriaService : Service<BehaviorCriteria>, IBehaviorCriteriaService
     {
 
-        public BehaviorCriteriaService(IUnitOfWork unitOfWork, IBehaviorCriteriaRepository repository) : base(unitOfWork, repository)
+        public BehaviorCriteriaService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 

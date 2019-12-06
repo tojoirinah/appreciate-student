@@ -1,4 +1,5 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
+﻿using Appreciation.Manager.Infrastructure.Enumerations;
+using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
 using System;
@@ -7,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
 {
-    public class StudentService : Service, IStudentService
+    public class StudentService : Service<Student>, IStudentService
     {
-        protected readonly IStudentRepository _repository;
+        protected IRepository<Student> _repository;
         protected readonly IUserService _userService;
         protected readonly IUserNoteService _userNoteService;
 
-        public StudentService(IUnitOfWork unitOfWork, IStudentRepository repository, IUserService userService, IUserNoteService userNoteService) : base(unitOfWork)
+        public StudentService(IUnitOfWork unitOfWork,  IUserService userService, IUserNoteService userNoteService) : base(unitOfWork)
         {
-            _repository = repository;
+            _repository = _unitOfWork.Repository<Student>();
             _userService = userService;
             _userNoteService = userNoteService;
         }
@@ -59,6 +60,8 @@ namespace Appreciation.Manager.Services
 
         public async Task AddOrUpdateAsync(Student entity)
         {
+            // set role
+            entity.User.RoleId = (int)RoleEnum.Student;
             await _userService.AddOrUpdateAsync(entity.User);
             if (entity.Notes != null)
             {
