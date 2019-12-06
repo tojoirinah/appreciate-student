@@ -54,20 +54,19 @@
     <Compile Include="Enumerations\BehaviorEnum.cs" />
     <Compile Include="Enumerations\CivilityEnum.cs" />
     <Compile Include="Enumerations\RoleEnum.cs" />
-    <Compile Include="Migrations\201912051442215_RecreateStructure.cs" />
-    <Compile Include="Migrations\201912051442215_RecreateStructure.Designer.cs">
-      <DependentUpon>201912051442215_RecreateStructure.cs</DependentUpon>
+    <Compile Include="Migrations\201912061622169_Create_Structure_02.cs" />
+    <Compile Include="Migrations\201912061622169_Create_Structure_02.Designer.cs">
+      <DependentUpon>201912061622169_Create_Structure_02.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Behavior.cs" />
     <Compile Include="Models\Exam.cs" />
-    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\SchoolYear.cs" />
+    <Compile Include="Models\StudentSchoolYear.cs" />
     <Compile Include="Models\NoteCriteria.cs" />
     <Compile Include="Models\BehaviorCriteria.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\UserNote.cs" />
-    <Compile Include="Models\UserEvaluate.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,8 +76,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912051442215_RecreateStructure.resx">
-      <DependentUpon>201912051442215_RecreateStructure.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912061622169_Create_Structure_02.resx">
+      <DependentUpon>201912061622169_Create_Structure_02.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

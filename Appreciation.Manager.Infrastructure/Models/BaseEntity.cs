@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Appreciation.Manager.Infrastructure.Models
 {
     public class BaseEntity
     {
-        public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
         public DateTime DateCreated { get; set; }
     }
 }

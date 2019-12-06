@@ -12,26 +12,16 @@ namespace Appreciation.Manager.Services
     {
         protected IRepository<Student> _repository;
         protected readonly IUserService _userService;
-        protected readonly IUserNoteService _userNoteService;
 
-        public StudentService(IUnitOfWork unitOfWork,  IUserService userService, IUserNoteService userNoteService) : base(unitOfWork)
+        public StudentService(IUnitOfWork unitOfWork,  IUserService userService) : base(unitOfWork)
         {
             _repository = _unitOfWork.Repository<Student>();
             _userService = userService;
-            _userNoteService = userNoteService;
         }
 
         public async Task AddAsync(Student entity)
         {
             await _userService.AddOrUpdateAsync(entity.User);
-            if (entity.Notes != null)
-            {
-                foreach (var note in entity.Notes)
-                {
-                    await _userNoteService.AddOrUpdateAsync(note);
-                }
-            }
-
             await _repository.AddOrUpdateAsync(entity);
         }
 
@@ -48,13 +38,8 @@ namespace Appreciation.Manager.Services
         public async Task RemoveAsync(Student entity)
         {
             await _userService.RemoveAsync(entity.User);
-            if (entity.Notes != null)
-            {
-                foreach (var note in entity.Notes)
-                {
-                    await _userNoteService.RemoveAsync(note);
-                }
-            }
+
+            // remove all note StudentSchoolYear TODO
             await _repository.RemoveAsync(entity);
         }
 
@@ -63,13 +48,6 @@ namespace Appreciation.Manager.Services
             // set role
             entity.User.RoleId = (int)RoleEnum.Student;
             await _userService.AddOrUpdateAsync(entity.User);
-            if (entity.Notes != null)
-            {
-                foreach (var note in entity.Notes)
-                {
-                    await _userNoteService.AddOrUpdateAsync(note);
-                }
-            }
             await _repository.AddOrUpdateAsync(entity);
         }
     }

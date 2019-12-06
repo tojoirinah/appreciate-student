@@ -17,13 +17,13 @@ namespace Appreciation.Manager.Infrastructure.Models
         [Required]
         public CivilityEnum Civility { get; set; }
 
-        public Guid UserId { get; set; }
+        public long UserId { get; set; }
 
         [ForeignKey("UserId")]
         public virtual Users User { get; set; }
 
 
-        public virtual ICollection<UserNote> Notes { get; set; }
+       
 
     }
 }

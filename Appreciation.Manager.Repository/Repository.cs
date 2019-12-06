@@ -26,7 +26,6 @@ namespace Appreciation.Manager.Repository
         private async Task AddAsync(T entity)
         {
             entity.DateCreated = DateTime.Now;
-            entity.Id = Guid.NewGuid();
             _table.Add(entity);
         }
 

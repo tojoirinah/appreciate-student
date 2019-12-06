@@ -10,9 +10,6 @@ namespace Appreciation.Manager.Infrastructure
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<NoteCriteria> NoteCriterias { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<UserEvaluate> UserEvaluates { get; set; }
-        public virtual DbSet<UserNote> UserNotes { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         public AppreciationContext() : base("name=AppreciationContext")

@@ -56,11 +56,9 @@
     <Compile Include="ReadOnlyRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="StudentRepository.cs" />
-    <Compile Include="SubjectRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="UserEvaluateRepository.cs" />
-    <Compile Include="UserNoteRepository.cs" />
     <Compile Include="UserRepository.cs" />
+    <Compile Include="UserRoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Appreciation.Manager.Infrastructure\Appreciation.Manager.Infrastructure.csproj">

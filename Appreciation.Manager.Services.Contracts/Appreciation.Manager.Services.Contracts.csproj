@@ -51,9 +51,7 @@
     <Compile Include="IExamService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="IStudentService.cs" />
-    <Compile Include="ISubjectService.cs" />
-    <Compile Include="IUserEvaluateService.cs" />
-    <Compile Include="IUserNoteService.cs" />
+    <Compile Include="IUserRoleService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

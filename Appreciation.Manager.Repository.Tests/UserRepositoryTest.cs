@@ -13,7 +13,7 @@ namespace Appreciation.Manager.Repository.Tests
         {
             _table.Add(new Users()
             {
-                Id = new System.Guid("0b69677c-1025-45c3-b65a-21573fe9f1fc"),
+                Id = 1,
                 DateCreated = new System.DateTime(2019, 1, 26),
                 FirstName = "Prenom 001",
                 Name = "Nom 001",
@@ -28,7 +28,7 @@ namespace Appreciation.Manager.Repository.Tests
             }); ;
             _table.Add(new Users()
             {
-                Id = new System.Guid("836b1be9-b708-4851-b637-fa3f1cf49a72"),
+                Id = 2,
                 DateCreated = new System.DateTime(2019, 1, 26),
                 FirstName = "Prenom 002",
                 Name = "Nom 002",
@@ -43,7 +43,7 @@ namespace Appreciation.Manager.Repository.Tests
             }); ;
             _table.Add(new Users()
             {
-                Id = new System.Guid("15c00730-b7a2-4108-83b0-37026d68a883"),
+                Id = 3,
                 DateCreated = new System.DateTime(2019, 1, 26),
                 FirstName = "Prenom 003",
                 Name = "Nom 003",

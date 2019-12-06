@@ -55,11 +55,9 @@
     <Compile Include="IReadOnlyRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IStudentRepository.cs" />
-    <Compile Include="ISubjectRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="IUserEvaluateRepository.cs" />
-    <Compile Include="IUserNoteRepository.cs" />
     <Compile Include="IUserRepository.cs" />
+    <Compile Include="IUserRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

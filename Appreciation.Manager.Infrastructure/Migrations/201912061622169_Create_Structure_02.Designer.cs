@@ -7,13 +7,13 @@ namespace Appreciation.Manager.Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-20911")]
-    public sealed partial class RecreateStructure : IMigrationMetadata
+    public sealed partial class Create_Structure_02 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RecreateStructure));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Create_Structure_02));
         
         string IMigrationMetadata.Id
         {
-            get { return "201912051442215_RecreateStructure"; }
+            get { return "201912061622169_Create_Structure_02"; }
         }
         
         string IMigrationMetadata.Source
