@@ -17,7 +17,7 @@ namespace Appreciation.Manager.Services
             _unitOfWork = unitOfWork;
         }
 
-        protected async Task<IEnumerable<T>> GetOrCreateAsync(string key, Func<string[],Task<IEnumerable<T>>> createItem)
+        protected async Task<IEnumerable<T>> GetOrCreateAsync(string key, Func<string[], Task<IEnumerable<T>>> createItem)
         {
 
             IEnumerable<T> cacheEntry;
@@ -28,7 +28,7 @@ namespace Appreciation.Manager.Services
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSize(11024)//Size amount
-                        //Priority on removing when reaching size limit (memory pressure)
+                               //Priority on removing when reaching size limit (memory pressure)
                 .SetPriority(CacheItemPriority.High)
                 // Keep in cache for this time, reset time if accessed.
                 .SetSlidingExpiration(TimeSpan.FromDays(7))
@@ -48,7 +48,7 @@ namespace Appreciation.Manager.Services
             return await _unitOfWork.Repository<T>().GetAllAsync();
         }
 
-        public async virtual Task<T> GetByIdAsync(Guid id)
+        public async virtual Task<T> GetByIdAsync(long id)
         {
             return await _unitOfWork.Repository<T>().GetByIdAsync(id);
         }
@@ -74,7 +74,7 @@ namespace Appreciation.Manager.Services
             {
                 await _unitOfWork.CommitAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await _unitOfWork.RollbackAsync();
                 throw ex;

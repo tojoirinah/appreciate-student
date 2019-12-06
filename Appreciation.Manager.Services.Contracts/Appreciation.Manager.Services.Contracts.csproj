@@ -49,7 +49,10 @@
     <Compile Include="IBehaviorCriteriaService.cs" />
     <Compile Include="IBehaviorService.cs" />
     <Compile Include="IExamService.cs" />
+    <Compile Include="INoteCriteriaService.cs" />
+    <Compile Include="ISchoolYearService.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="IStudentSchoolYearService.cs" />
     <Compile Include="IStudentService.cs" />
     <Compile Include="IUserRoleService.cs" />
     <Compile Include="IUserService.cs" />

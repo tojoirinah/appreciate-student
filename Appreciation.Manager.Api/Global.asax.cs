@@ -1,12 +1,8 @@
 using Appreciation.Manager.Api.App_Data;
-using Appreciation.Manager.Repository;
-using Appreciation.Manager.Repository.Contracts;
-using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Unity;
 
 namespace Appreciation.Manager.Api
 {

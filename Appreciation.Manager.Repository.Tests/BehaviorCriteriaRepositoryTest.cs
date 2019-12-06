@@ -20,7 +20,7 @@ namespace Appreciation.Manager.Repository.Tests
                     });
                 _table.Add(new BehaviorCriteria()
                 {
-                    Id =2,
+                    Id = 2,
                     DateCreated = DateTime.Now,
                     Criteria = Infrastructure.Enumerations.BehaviorEnum.Besoin_changement_Attitude,
                     Evaluate = "Vous devriez changer votre comportement"

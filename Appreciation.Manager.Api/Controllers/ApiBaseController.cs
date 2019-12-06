@@ -1,9 +1,4 @@
-﻿using Appreciation.Manager.Api.App_Start;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using AutoMapper;
 using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers

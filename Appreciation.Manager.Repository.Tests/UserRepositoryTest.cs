@@ -1,7 +1,6 @@
 ﻿using Appreciation.Manager.Infrastructure.Enumerations;
 using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 

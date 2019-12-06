@@ -4,9 +4,9 @@ using Appreciation.Manager.Repository.Contracts;
 
 namespace Appreciation.Manager.Repository
 {
-    public class ExamRepository : Repository<Exam>, IExamRepository
+    public class SchoolYearRepository : Repository<SchoolYear>, ISchoolYearRepository
     {
-        public ExamRepository(AppreciationContext unitOfWork) : base(unitOfWork)
+        public SchoolYearRepository(AppreciationContext context) : base(context)
         {
 
         }

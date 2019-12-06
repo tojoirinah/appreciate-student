@@ -10,7 +10,7 @@ namespace Appreciation.Manager.Repository
 {
     public class ReadOnlyRepository<T> : IReadOnlyRepository<T> where T : BaseEntity
     {
-      //  protected readonly IUnitOfWork _unitOfWork;
+        //  protected readonly IUnitOfWork _unitOfWork;
         protected DbSet<T> _table;
         protected readonly AppreciationContext _context;
 

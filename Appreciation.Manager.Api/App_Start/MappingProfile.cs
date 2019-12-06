@@ -2,10 +2,8 @@
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 
 namespace Appreciation.Manager.Api.App_Start
 {
@@ -13,7 +11,7 @@ namespace Appreciation.Manager.Api.App_Start
     {
         public static MapperConfiguration InitializeAutoMapper(Type source, Type target)
         {
-            MapperConfiguration config = new MapperConfiguration(cfg => cfg.CreateMappings(source,target));
+            MapperConfiguration config = new MapperConfiguration(cfg => cfg.CreateMappings(source, target));
 
             return config;
         }

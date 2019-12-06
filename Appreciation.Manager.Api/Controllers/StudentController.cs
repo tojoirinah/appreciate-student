@@ -1,28 +1,24 @@
 ﻿using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
-using Appreciation.Manager.Utils;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
 {
-   // [Authorize]
+    // [Authorize]
     public class StudentController : ApiBaseController
     {
         protected readonly IStudentService _studentService;
 
-        public StudentController(IMapper mapper,IStudentService studentService) : base(mapper)
+        public StudentController(IMapper mapper, IStudentService studentService) : base(mapper)
         {
             _studentService = studentService;
         }
-        
+
         [HttpPost]
         [Route("api/Student/Add")]
         public async Task<IHttpActionResult> AddStudent([FromBody]AddStudentRequest studentReq)
@@ -34,7 +30,7 @@ namespace Appreciation.Manager.Api.Controllers
                 await _studentService.Completed();
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

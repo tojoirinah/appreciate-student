@@ -1,6 +1,4 @@
 ﻿using Appreciation.Manager.Infrastructure.Enumerations;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,7 +21,7 @@ namespace Appreciation.Manager.Infrastructure.Models
         public virtual Users User { get; set; }
 
 
-       
+
 
     }
 }

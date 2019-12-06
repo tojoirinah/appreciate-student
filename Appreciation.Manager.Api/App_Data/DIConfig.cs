@@ -23,7 +23,7 @@ namespace Appreciation.Manager.Api.App_Data
                         container.RegisterType(intf, impl);
 
                 }
-                    
+
             }
 
         }

@@ -1,13 +1,9 @@
-﻿using Appreciation.Manager.Api.App_Start;
-using Appreciation.Manager.Infrastructure.Models;
+﻿using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers

@@ -14,7 +14,7 @@ namespace Appreciation.Manager.Repository
 
         public UnitOfWork(AppreciationContext context)
         {
-            if(Context == null)
+            if (Context == null)
                 Context = context;
         }
         public async Task CommitAsync()
@@ -40,7 +40,7 @@ namespace Appreciation.Manager.Repository
         public async Task Dispose()
         {
             Context.Dispose();
-           // Context = null;
+            // Context = null;
             GC.SuppressFinalize(this);
         }
 

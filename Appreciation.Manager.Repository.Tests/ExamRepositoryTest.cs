@@ -10,7 +10,7 @@ namespace Appreciation.Manager.Repository.Tests
         {
             _table.Add(new Exam()
             {
-                Id =1,
+                Id = 1,
                 DateCreated = DateTime.Now,
                 Name = "Exam 1",
                 Number = 1

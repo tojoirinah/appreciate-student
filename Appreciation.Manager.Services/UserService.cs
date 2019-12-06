@@ -38,7 +38,7 @@ namespace Appreciation.Manager.Services
 
         public async override Task AddOrUpdateAsync(Users entity)
         {
-            var securitySalt = EncryptContractor.Instance.SetDefault(Settings.IV,Settings.Key).GenerateEncryptedSecuritySalt();
+            var securitySalt = EncryptContractor.Instance.SetDefault(Settings.IV, Settings.Key).GenerateEncryptedSecuritySalt();
             entity.Password = PasswordContractor.Instance.GeneratePassword(entity.Password, securitySalt);
             entity.SecuritySalt = securitySalt;
 
