@@ -50,9 +50,9 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/StudentExam")]
-        public async Task<IHttpActionResult> StudentExamList()
+        public async Task<IHttpActionResult> StudentExamList([FromBody] StudentExamSearchRequest request)
         {
             try
             {

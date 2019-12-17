@@ -9,5 +9,8 @@ namespace Appreciation.Manager.Repository.Contracts
         Task RemoveByStudentId(long studentId);
 
         Task<IEnumerable<StudentExam>> GenerateComment();
+
+        Task<IEnumerable<StudentExam>> SearchStudentExam(long schoolYearId, long classroomId, long examId);
+
     }
 }

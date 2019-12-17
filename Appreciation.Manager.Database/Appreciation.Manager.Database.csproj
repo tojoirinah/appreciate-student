@@ -69,6 +69,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Scripts\20191217-dbo.sp_SearchStudentExam.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20191217-dbo.sp_GenerateComment.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\20191210-Reset_Database.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

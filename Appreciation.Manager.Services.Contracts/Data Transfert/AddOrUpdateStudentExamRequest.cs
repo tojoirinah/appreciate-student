@@ -33,4 +33,13 @@
         public bool IsClosed { get; set; }
 
     }
+
+    public class StudentExamSearchRequest : Request
+    {
+        public long SchoolYearId { get; set; }
+
+        public long ClassroomId { get; set; }
+
+        public long ExamId { get; set; }
+    }
 }
