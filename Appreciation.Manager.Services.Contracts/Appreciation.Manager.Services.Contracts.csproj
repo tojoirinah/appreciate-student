@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,28 +44,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data Transfert\AddExamRequest.cs" />
-    <Compile Include="Data Transfert\AddStudentRequest.cs" />
-    <Compile Include="Data Transfert\AddUsersRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateBehaviorEvaluateRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateClassroomRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateExamRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateNoteEvaluateRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateSchoolYearRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateStudentExamRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateStudentRequest.cs" />
+    <Compile Include="Data Transfert\AddOrUpdateUsersRequest.cs" />
     <Compile Include="Data Transfert\AuthenticationRequest.cs" />
     <Compile Include="Data Transfert\Request.cs" />
-    <Compile Include="IBehaviorCriteriaService.cs" />
+    <Compile Include="IBehaviorEvaluateService.cs" />
     <Compile Include="IBehaviorService.cs" />
+    <Compile Include="IClassroomService.cs" />
     <Compile Include="IExamService.cs" />
     <Compile Include="INoteCriteriaService.cs" />
+    <Compile Include="INoteEvaluateService.cs" />
     <Compile Include="ISchoolYearService.cs" />
     <Compile Include="IService.cs" />
-    <Compile Include="IStudentSchoolYearService.cs" />
+    <Compile Include="IStudentExamService.cs" />
     <Compile Include="IStudentService.cs" />
     <Compile Include="IUserRoleService.cs" />
-    <Compile Include="IUserService.cs" />
+    <Compile Include="IUsersService.cs" />
+    <Compile Include="Mappers\BehaviorEvaluateMapper.cs" />
+    <Compile Include="Mappers\ClassroomMapper.cs" />
+    <Compile Include="Mappers\ExamMapper.cs" />
+    <Compile Include="Mappers\NoteEvaluateMapper.cs" />
+    <Compile Include="Mappers\SchoolYearMapper.cs" />
+    <Compile Include="Mappers\StudentExamMapper.cs" />
+    <Compile Include="Mappers\StudentMapper.cs" />
+    <Compile Include="Mappers\UsersMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Appreciation.Manager.AppSettings\Appreciation.Manager.Utils.csproj">
+      <Project>{8f1e947c-00bc-439f-bed9-2a5ceb7abef3}</Project>
+      <Name>Appreciation.Manager.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Appreciation.Manager.Infrastructure\Appreciation.Manager.Infrastructure.csproj">
       <Project>{d8c710d2-008a-43a9-b140-7054e0689da0}</Project>
       <Name>Appreciation.Manager.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

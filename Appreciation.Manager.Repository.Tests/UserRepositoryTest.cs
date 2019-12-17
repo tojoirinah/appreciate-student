@@ -24,7 +24,7 @@ namespace Appreciation.Manager.Repository.Tests
                     Id = (int)RoleEnum.Student,
                     RoleName = "Student"
                 }
-            }); ;
+            }); 
             _table.Add(new Users()
             {
                 Id = 2,
@@ -39,7 +39,7 @@ namespace Appreciation.Manager.Repository.Tests
                     Id = (int)RoleEnum.Student,
                     RoleName = "Student"
                 }
-            }); ;
+            }); 
             _table.Add(new Users()
             {
                 Id = 3,
@@ -54,7 +54,7 @@ namespace Appreciation.Manager.Repository.Tests
                     Id = (int)RoleEnum.Student,
                     RoleName = "Student"
                 }
-            }); ;
+            }); 
         }
 
         public async Task<Users> GetUserName(string username)

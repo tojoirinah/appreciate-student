@@ -14,7 +14,7 @@ namespace Appreciation.Manager.Repository.Tests
         public ReadOnlyRepositoryTest(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _table = new List<T>();
+            _table = unitOfWork.Repository<T>();
         }
 
         protected virtual IQueryable<T> Query(string[] arrays = null)

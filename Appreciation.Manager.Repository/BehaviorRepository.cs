@@ -4,9 +4,9 @@ using Appreciation.Manager.Repository.Contracts;
 
 namespace Appreciation.Manager.Repository
 {
-    public class BehaviorRepository : Repository<Behavior>, IBehaviorRepository
+    public class BehaviorRepository : Repository<BehaviorEvaluate>, IBehaviorRepository
     {
-        public BehaviorRepository(AppreciationContext unitOfWork) : base(unitOfWork)
+        public BehaviorRepository(AppreciationContext context) : base(context)
         {
 
         }

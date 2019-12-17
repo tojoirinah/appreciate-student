@@ -1,9 +1,8 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
-using Appreciation.Manager.Services.Contracts;
+﻿using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
@@ -19,47 +18,87 @@ namespace Appreciation.Manager.Api.Controllers
 
         [HttpPost]
         [Route("api/Exam/Add")]
-        public IHttpActionResult AddExam([FromBody]AddExamRequest request)
+        public async Task<IHttpActionResult> AddExam([FromBody]AddExamRequest request)
         {
             try
             {
-                var entity = _mapper.Map<Exam>(request);
-                _service.AddOrUpdateAsync(entity);
-                _service.Completed();
+                await _service.AddAsync(request);
+                await _service.CommitAsync();
                 return Ok();
             }
             catch (Exception ex)
             {
-                throw ex;
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
             }
-            return BadRequest();
         }
 
-        // GET: api/Exam
-        public IEnumerable<string> Get()
+        [HttpPut]
+        [Route("api/Exam/Update")]
+        public async Task<IHttpActionResult> UpdateExam([FromBody]UpdateExamRequest request)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                await _service.UpdateAsync(request);
+                await _service.CommitAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
         }
 
-        // GET: api/Exam/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("api/Exam")]
+        public async Task<IHttpActionResult> ExamList()
         {
-            return "value";
+            try
+            {
+                var list = await _service.GetAllAsync();
+                await _service.CommitAsync();
+                return Ok(new { List = list });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
         }
 
-        // POST: api/Exam
-        public void Post([FromBody]string value)
+        [HttpGet]
+        [Route("api/Exam/id")]
+        public async Task<IHttpActionResult> ExamById([FromUri] long id)
         {
+            try
+            {
+                var item = await _service.GetByIdAsync(id);
+                await _service.CommitAsync();
+                return Ok(new { Item = item });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
         }
 
-        // PUT: api/Exam/5
-        public void Put(int id, [FromBody]string value)
+        [HttpDelete]
+        [Route("api/Exam/Delete")]
+        public async Task<IHttpActionResult> DeleteClassroom([FromUri]long id)
         {
-        }
-
-        // DELETE: api/Exam/5
-        public void Delete(int id)
-        {
+            try
+            {
+                await _service.RemoveAsync(id);
+                await _service.CommitAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
         }
     }
 }

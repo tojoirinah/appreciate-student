@@ -2,7 +2,7 @@
 
 namespace Appreciation.Manager.Services.Contracts
 {
-    public interface IBehaviorService : IService<Behavior>
+    public interface IBehaviorService : IServiceReadOnly<BehaviorEvaluate>
     {
     }
 }

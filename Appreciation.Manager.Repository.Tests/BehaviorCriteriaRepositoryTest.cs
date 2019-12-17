@@ -15,7 +15,7 @@ namespace Appreciation.Manager.Repository.Tests
                     {
                         Id = 1,
                         DateCreated = DateTime.Now,
-                        Criteria = Infrastructure.Enumerations.BehaviorEnum.Attitude_Exemplaire,
+                        Criteria = _,
                         Evaluate = "Continuez comme celà"
                     });
                 _table.Add(new BehaviorCriteria()

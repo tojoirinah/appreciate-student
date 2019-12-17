@@ -20,8 +20,8 @@ namespace Appreciation.Manager.Infrastructure.Models
         public string UserName { get; set; }
 
         [Required]
-        [Column("Security_salt", TypeName = "VARCHAR")]
-        [StringLength(500)]
+        [Column(TypeName = "VARCHAR")]
+        [MaxLength]
         public string SecuritySalt { get; set; }
 
         [Required]

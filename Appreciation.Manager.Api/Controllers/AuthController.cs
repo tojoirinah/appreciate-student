@@ -1,6 +1,7 @@
 ﻿using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Utils;
+using AutoMapper;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,11 +10,11 @@ using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
 {
-    public class AuthController : ApiController
+    public class AuthController : ApiBaseController
     {
-        protected readonly IUserService _userService;
+        protected readonly IUsersService _userService;
 
-        public AuthController(IUserService userService)
+        public AuthController(IMapper mapper, IUsersService userService) : base(mapper)
         {
             _userService = userService;
         }

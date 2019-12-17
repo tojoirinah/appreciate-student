@@ -4,9 +4,9 @@ using Appreciation.Manager.Repository.Contracts;
 
 namespace Appreciation.Manager.Repository
 {
-    public class UserRoleRepository : ReadOnlyRepository<UserRole>, IUserRoleRepository
+    public class UserRoleRepository : Repository<UserRole>, IUserRoleRepository
     {
-        public UserRoleRepository(AppreciationContext unitOfWork) : base(unitOfWork)
+        public UserRoleRepository(AppreciationContext context) : base(context)
         {
 
         }

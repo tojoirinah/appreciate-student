@@ -201,10 +201,18 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ApiBaseController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BehaviorController.cs" />
+    <Compile Include="Controllers\BehaviorEvaluateController.cs" />
+    <Compile Include="Controllers\ClassroomController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NoteCriteriaController.cs" />
+    <Compile Include="Controllers\NoteEvaluateController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SchoolYearController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\StudentExamController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -305,10 +313,6 @@
     <ProjectReference Include="..\Appreciation.Manager.Repository.Contracts\Appreciation.Manager.Repository.Contracts.csproj">
       <Project>{645498f9-7a90-4f48-a718-4fc3770ac39b}</Project>
       <Name>Appreciation.Manager.Repository.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Appreciation.Manager.Repository.Tests\Appreciation.Manager.Repository.Tests.csproj">
-      <Project>{3530a050-65f7-45bc-8335-5dee890ba96b}</Project>
-      <Name>Appreciation.Manager.Repository.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Appreciation.Manager.Repository\Appreciation.Manager.Repository.csproj">
       <Project>{2E0BF470-BAD7-4894-BD0E-54FD156E0EE2}</Project>

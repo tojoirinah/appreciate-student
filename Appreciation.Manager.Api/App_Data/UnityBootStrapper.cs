@@ -53,7 +53,7 @@ namespace Appreciation.Manager.Api.App_Data
 
 
             container.RegisterAllTypes(typeof(ReadOnlyRepository<>), LifecycleKind.Scoped);
-            container.RegisterAllTypes(typeof(Repository.Tests.ReadOnlyRepositoryTest<>), LifecycleKind.PerRequest);
+            //  container.RegisterAllTypes(typeof(Repository.Tests.ReadOnlyRepositoryTest<>), LifecycleKind.PerRequest);
 
             container.RegisterAllTypes(typeof(Service<>), LifecycleKind.Default);
         }

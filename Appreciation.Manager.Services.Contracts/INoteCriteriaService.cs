@@ -2,7 +2,7 @@
 
 namespace Appreciation.Manager.Services.Contracts
 {
-    public interface INoteCriteriaService : IService<NoteCriteria>
+    public interface INoteCriteriaService : IServiceReadOnly<NoteCriteria>
     {
     }
 }

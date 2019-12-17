@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
@@ -12,5 +13,9 @@ namespace Appreciation.Manager.Api.Controllers
             _mapper = mapper;
         }
 
+        protected string GetError(Exception ex)
+        {
+            return $"{ex.Message} \n{ex.InnerException?.Message} \n{ex.StackTrace}";
+        }
     }
 }

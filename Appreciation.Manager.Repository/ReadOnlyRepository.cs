@@ -10,20 +10,13 @@ namespace Appreciation.Manager.Repository
 {
     public class ReadOnlyRepository<T> : IReadOnlyRepository<T> where T : BaseEntity
     {
-        //  protected readonly IUnitOfWork _unitOfWork;
         protected DbSet<T> _table;
         protected readonly AppreciationContext _context;
-
-        //public ReadOnlyRepository(IUnitOfWork unitOfWork)
-        //{
-        //    _unitOfWork = unitOfWork;
-        //    _table = _unitOfWork.Context.Set<T>();
-        //}
 
         public ReadOnlyRepository(AppreciationContext context)
         {
             _context = context;
-            _table = _context.Set<T>();
+            _table = context.Set<T>();
         }
 
         protected virtual IQueryable<T> Query(string[] arrays = null)
@@ -44,5 +37,6 @@ namespace Appreciation.Manager.Repository
         {
             return await Query(arrays).ToListAsync();
         }
+
     }
 }

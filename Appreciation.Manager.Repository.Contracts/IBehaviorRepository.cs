@@ -2,7 +2,7 @@
 
 namespace Appreciation.Manager.Repository.Contracts
 {
-    public interface IBehaviorRepository : IRepository<Behavior>
+    public interface IBehaviorRepository : IRepository<BehaviorEvaluate>
     {
     }
 }

@@ -8,13 +8,12 @@ namespace Appreciation.Manager.Infrastructure.Models
     {
         [Column("Min")]
         public double NoteMin { get; set; }
+
         [Column("Max")]
         public double NoteMax { get; set; }
+
         [Column(TypeName = "VARCHAR")]
         [MaxLength()]
-        public string Evaluate { get; set; }
-        [Column(TypeName = "VARCHAR")]
-        [MaxLength()]
-        public string Conseils { get; set; }
+        public string Description { get; set; }
     }
 }

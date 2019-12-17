@@ -1,22 +1,22 @@
 ﻿using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
+using AutoMapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
 {
-    public class UserRoleService : Service<UserRole>, IUserRoleService
+    public class UserRoleService : ServiceReadOnly<UserRole>, IUserRoleService
     {
-        protected IUserRoleRepository _repository;
-        public UserRoleService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public UserRoleService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
         {
         }
 
-        public async virtual Task<IEnumerable<UserRole>> GetAllAsync()
+        public async override Task<IEnumerable<UserRole>> GetAllAsync()
         {
             string key = typeof(UserRole).FullName;
-            return await GetOrCreateAsync(key, _unitOfWork.Repository<UserRole>().GetAllAsync);
+            return await GetOrCreateAsync(key, _repository.GetAllAsync);
         }
     }
 }

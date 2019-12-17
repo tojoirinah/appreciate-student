@@ -6,14 +6,20 @@ namespace Appreciation.Manager.Infrastructure
     public class AppreciationContext : DbContext
     {
         public virtual DbSet<Behavior> Behaviors { get; set; }
-        public virtual DbSet<BehaviorCriteria> BehaviorCriterias { get; set; }
+        public virtual DbSet<BehaviorEvaluate> BehaviorEvaluates { get; set; }
+        public virtual DbSet<Classroom> Classrooms { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<NoteCriteria> NoteCriterias { get; set; }
+        public virtual DbSet<NoteEvaluate> NoteEvaluates { get; set; }
+        public virtual DbSet<SchoolYear> SchoolYears { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<StudentExam> StudentExams { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-        public AppreciationContext() : base("name=AppreciationContext")
+        public AppreciationContext() : base("AppreciationContext")
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppreciationContext>());
 
         }
 

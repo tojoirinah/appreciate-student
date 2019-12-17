@@ -2,7 +2,7 @@
 
 namespace Appreciation.Manager.Repository.Contracts
 {
-    public interface IUserRoleRepository : IReadOnlyRepository<UserRole>
+    public interface IUserRoleRepository : IRepository<UserRole>
     {
     }
 }

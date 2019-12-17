@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Appreciation.Manager.Infrastructure.Models
@@ -10,5 +11,8 @@ namespace Appreciation.Manager.Infrastructure.Models
         [Column(TypeName = "VARCHAR")]
         [StringLength(10)]
         public string Name { get; set; }
+
+        [DefaultValue("false")]
+        public bool IsClosed { get; set; }
     }
 }

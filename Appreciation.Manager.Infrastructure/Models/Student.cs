@@ -7,6 +7,16 @@ namespace Appreciation.Manager.Infrastructure.Models
     [Table("Student", Schema = "dbo")]
     public class Student : BaseEntity
     {
+        public long SchoolYearId { get; set; }
+
+        [ForeignKey("SchoolYearId")]
+        public virtual SchoolYear AnneeScolaire { get; set; }
+
+        public long ClassRoomId { get; set; }
+
+        [ForeignKey("ClassRoomId")]
+        public virtual Classroom Classroom { get; set; }
+
 
         [Required]
         public int Age { get; set; }

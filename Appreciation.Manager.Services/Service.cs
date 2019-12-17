@@ -1,6 +1,7 @@
 ﻿using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
+using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,64 @@ using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
 {
-    public class Service<T> : IService<T> where T : BaseEntity
+    public abstract class Service<T> : ServiceReadOnly<T>, IService<T> where T : BaseEntity
+    {
+
+        protected Service(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        {
+        }
+
+        public abstract Task AddAsync(object request);
+
+        public abstract Task UpdateAsync(object request);
+
+        public async virtual Task RemoveAsync(long id)
+        {
+            await Task.Run(() =>
+            {
+                var item = _repository.GetByIdAsync(id);
+                if (item != null)
+                    _repository.RemoveAsync(item.Result);
+            });
+        }
+
+
+    }
+
+    public class BaseService : IBaseService
     {
         protected IUnitOfWork _unitOfWork;
-        private MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
-        public Service(IUnitOfWork unitOfWork)
+
+        public BaseService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task Completed()
+        {
+            try
+            {
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw ex;
+            }
+        }
+    }
+
+    public class ServiceReadOnly<T> : BaseService, IServiceReadOnly<T> where T : BaseEntity
+    {
+        protected readonly IMapper _mapper;
+
+        private readonly MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
+        protected IRepository<T> _repository;
+
+        public ServiceReadOnly(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _repository = _unitOfWork.Repository<T>();
         }
 
         protected async Task<IEnumerable<T>> GetOrCreateAsync(string key, Func<string[], Task<IEnumerable<T>>> createItem)
@@ -45,40 +97,12 @@ namespace Appreciation.Manager.Services
 
         public async virtual Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _unitOfWork.Repository<T>().GetAllAsync();
+            return await _repository.GetAllAsync();
         }
 
         public async virtual Task<T> GetByIdAsync(long id)
         {
-            return await _unitOfWork.Repository<T>().GetByIdAsync(id);
-        }
-
-        public async virtual Task RemoveAsync(T entity)
-        {
-            await _unitOfWork.Repository<T>().RemoveAsync(entity);
-        }
-
-        public async virtual Task AddOrUpdateAsync(T entity)
-        {
-            await _unitOfWork.Repository<T>().AddOrUpdateAsync(entity);
-        }
-
-        public async Task Complete()
-        {
-            await _unitOfWork.CommitAsync();
-        }
-
-        public async Task Completed()
-        {
-            try
-            {
-                await _unitOfWork.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                await _unitOfWork.RollbackAsync();
-                throw ex;
-            }
+            return await _repository.GetByIdAsync(id);
         }
     }
 

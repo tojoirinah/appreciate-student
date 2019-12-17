@@ -2,6 +2,10 @@
 using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
+using Appreciation.Manager.Services.Contracts.Data_Transfert;
+using Appreciation.Manager.Services.Mappers;
+using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,55 +13,68 @@ namespace Appreciation.Manager.Services
 {
     public class StudentService : Service<Student>, IStudentService
     {
-        protected IRepository<Student> _repository;
-        protected readonly IUserService _userService;
-        protected readonly IStudentSchoolYearService _studentSchoolYearService;
+        protected readonly IUsersService _userService;
+        protected readonly IStudentExamService _studentSchoolYearService;
 
-        public StudentService(IUnitOfWork unitOfWork, IUserService userService, IStudentSchoolYearService studentSchoolYearService) : base(unitOfWork)
+        public StudentService(IUnitOfWork unitOfWork, IMapper mapper, IUsersService userService, IStudentExamService studentSchoolYearService) : base(unitOfWork, mapper)
         {
-            _repository = _unitOfWork.Repository<Student>();
             _userService = userService;
             _studentSchoolYearService = studentSchoolYearService;
         }
 
-        public async Task AddAsync(Student entity)
+        public override async Task AddAsync(object request)
         {
-            // update user
-            await _userService.AddOrUpdateAsync(entity.User);
+            if (!(request is AddStudentRequest))
+                throw new Exception("Convert type not allowed");
+
+            AddStudentRequest rq = (AddStudentRequest)request;
+            var std = rq.ProjectTo(_mapper);
+            std.User = rq.User.ProjectTo(_mapper, RoleEnum.Student);
+
             // update student
-            await _repository.AddOrUpdateAsync(entity);
+            await _repository.AddOrUpdateAsync(std);
         }
 
         public async override Task<IEnumerable<Student>> GetAllAsync()
         {
-            return await _repository.GetAllAsync(new string[] { "User", "User.Role", "Notes", "Notes.Matiere", "Notes.ControlContinu", "Notes.Evaluate" });
+            return await _repository.GetAllAsync(new string[] { "User", "User.Role", "AnneeScolaire", "ClassRoom" });
         }
 
         public async override Task<Student> GetByIdAsync(long id)
         {
-            return await _repository.GetByIdAsync(id, new string[] { "User", "User.Role", "Notes", "Notes.Matiere", "Notes.ControlContinu", "Notes.Evaluate" });
+            return await _repository.GetByIdAsync(id, new string[] { "User", "User.Role", "AnneeScolaire", "ClassRoom" });
         }
 
-        public async override Task RemoveAsync(Student entity)
+        public async override Task RemoveAsync(long id)
         {
+            var student = await _repository.GetByIdAsync(id);
+
             // remove user
-            await _userService.RemoveAsync(entity.User);
+            await _userService.RemoveAsync(student.User.Id);
 
             // remove all note StudentSchoolYear
-            await _studentSchoolYearService.RemoveAllStudentSchoolYearByStudentId(entity.Id);
+            await _studentSchoolYearService.RemoveAllStudentSchoolYearByStudentId(student.Id);
 
             // remove student
-            await _repository.RemoveAsync(entity);
+            await _repository.RemoveAsync(student);
         }
 
-        public async override Task AddOrUpdateAsync(Student entity)
+
+
+        public override async Task UpdateAsync(object request)
         {
-            // set role
-            entity.User.RoleId = (int)RoleEnum.Student;
-            // add user
-            await _userService.AddOrUpdateAsync(entity.User);
-            // add student
-            await _repository.AddOrUpdateAsync(entity);
+            if (!(request is UpdateInformationStudentRequest))
+                throw new Exception("Convert type not allowed");
+
+            UpdateInformationStudentRequest req = (UpdateInformationStudentRequest)request;
+            Student std = await _repository.GetByIdAsync(req.Id);
+            if (std == null)
+                throw new Exception("Student not found");
+
+            req.ProjectTo(std);
+
+            await _repository.AddOrUpdateAsync(std);
+
         }
     }
 }

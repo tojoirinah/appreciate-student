@@ -1,6 +1,14 @@
-﻿namespace Appreciation.Manager.Services
+﻿using Appreciation.Manager.Infrastructure.Models;
+using Appreciation.Manager.Repository.Contracts;
+using Appreciation.Manager.Services.Contracts;
+using AutoMapper;
+
+namespace Appreciation.Manager.Services
 {
-    class NoteCriteriaService
+    public class NoteCriteriaService : ServiceReadOnly<NoteCriteria>, INoteCriteriaService
     {
+        public NoteCriteriaService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
+        {
+        }
     }
 }

@@ -1,9 +1,7 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
-using Appreciation.Manager.Services.Contracts;
+﻿using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -12,11 +10,11 @@ namespace Appreciation.Manager.Api.Controllers
     // [Authorize]
     public class StudentController : ApiBaseController
     {
-        protected readonly IStudentService _studentService;
+        protected readonly IStudentService _service;
 
         public StudentController(IMapper mapper, IStudentService studentService) : base(mapper)
         {
-            _studentService = studentService;
+            _service = studentService;
         }
 
         [HttpPost]
@@ -25,42 +23,66 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                Student student = _mapper.Map<Student>(studentReq);
-                await _studentService.AddOrUpdateAsync(student);
-                await _studentService.Completed();
+                await _service.AddAsync(studentReq);
+                await _service.CommitAsync();
                 return Ok();
             }
             catch (Exception ex)
             {
-                throw ex;
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
             }
-            return BadRequest();
         }
 
-        public IEnumerable<string> Get()
+        [HttpPut]
+        [Route("api/Student/Update")]
+        public async Task<IHttpActionResult> UpdateStudent([FromBody]UpdateInformationStudentRequest studentReq)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                await _service.UpdateAsync(studentReq);
+                await _service.CommitAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
         }
 
-        // GET: api/Student/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("api/Student")]
+        public async Task<IHttpActionResult> StudentList()
         {
-            return "value";
+            try
+            {
+                var list = await _service.GetAllAsync();
+                await _service.CommitAsync();
+                return Ok(new { List = list });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
         }
 
-        // POST: api/Student
-        public void Post([FromBody]string value)
+        [HttpGet]
+        [Route("api/Student/id")]
+        public async Task<IHttpActionResult> StudentById([FromUri] long id)
         {
-        }
-
-        // PUT: api/Student/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Student/5
-        public void Delete(int id)
-        {
+            try
+            {
+                var student = await _service.GetByIdAsync(id);
+                await _service.CommitAsync();
+                return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
         }
     }
 }

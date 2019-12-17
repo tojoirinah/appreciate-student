@@ -48,17 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBehaviorCriteriaRepository.cs" />
+    <Compile Include="IBehaviorEvaluateRepository.cs" />
     <Compile Include="IBehaviorRepository.cs" />
+    <Compile Include="IClassroomRepository.cs" />
     <Compile Include="IExamRepository.cs" />
     <Compile Include="INoteCriteriaRepository.cs" />
+    <Compile Include="INoteEvaluateRepository.cs" />
     <Compile Include="IReadOnlyRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchoolYearRepository.cs" />
     <Compile Include="IStudentRepository.cs" />
-    <Compile Include="IStudentSchoolYearRepository.cs" />
+    <Compile Include="IStudentExamRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="IUserRepository.cs" />
+    <Compile Include="IUsersRepository.cs" />
     <Compile Include="IUserRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

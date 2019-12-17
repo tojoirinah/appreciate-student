@@ -13,9 +13,9 @@ namespace Appreciation.Manager.Repository.Tests
 
         }
 
-        public async Task<T> GetByIdAsync(Guid id, string[] arrays = null)
+        public async Task<T> GetByIdAsync(long id, string[] arrays = null)
         {
-            return await Task.Run(() => Query(arrays).FirstOrDefault());
+            return await Task.Run(() => Query(arrays).FirstOrDefault(x => x.Id == id));
         }
 
 

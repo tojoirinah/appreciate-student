@@ -6,7 +6,7 @@ namespace Appreciation.Manager.Repository
 {
     public class StudentRepository : Repository<Student>, IStudentRepository
     {
-        public StudentRepository(AppreciationContext unitOfWork) : base(unitOfWork)
+        public StudentRepository(AppreciationContext context) : base(context)
         {
 
         }

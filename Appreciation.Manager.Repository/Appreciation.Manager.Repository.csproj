@@ -48,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BehaviorCriteriaRepository.cs" />
+    <Compile Include="BehaviorEvaluateRepository.cs" />
     <Compile Include="BehaviorRepository.cs" />
+    <Compile Include="ClassroomRepository.cs" />
     <Compile Include="ExamRepository.cs" />
     <Compile Include="NoteCriteriaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,9 +58,9 @@
     <Compile Include="Repository.cs" />
     <Compile Include="SchoolYearRepository.cs" />
     <Compile Include="StudentRepository.cs" />
-    <Compile Include="StudentSchoolYearRepository.cs" />
+    <Compile Include="StudentExamRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="UserRepository.cs" />
+    <Compile Include="UsersRepository.cs" />
     <Compile Include="UserRoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ namespace Appreciation.Manager.Repository
 {
     public class NoteCriteriaRepository : Repository<NoteCriteria>, INoteCriteriaRepository
     {
-        public NoteCriteriaRepository(AppreciationContext unitOfWork) : base(unitOfWork)
+        public NoteCriteriaRepository(AppreciationContext context) : base(context)
         {
 
         }

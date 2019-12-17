@@ -2,7 +2,7 @@
 
 namespace Appreciation.Manager.Services.Contracts
 {
-    public interface IUserRoleService : IService<UserRole>
+    public interface IUserRoleService : IServiceReadOnly<UserRole>
     {
     }
 }
