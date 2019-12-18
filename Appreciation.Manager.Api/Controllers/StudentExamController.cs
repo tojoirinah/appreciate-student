@@ -56,7 +56,7 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                var list = await _service.SearchStudentExam(request);
                 await _service.CommitAsync();
                 return Ok(new { List = list });
             }
@@ -73,9 +73,9 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                await _service.GenerateComment();
                 await _service.CommitAsync();
-                return Ok(new { List = list });
+                return Ok();
             }
             catch (Exception ex)
             {

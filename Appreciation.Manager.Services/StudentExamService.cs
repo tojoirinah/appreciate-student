@@ -5,6 +5,9 @@ using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
@@ -28,12 +31,42 @@ namespace Appreciation.Manager.Services
 
         public async Task GenerateComment()
         {
-            await ((IStudentExamRepository)_repository).GenerateComment();
+            await _repository.ExecuteNonQuery("dbo.sp_GenerateComment");
         }
 
         public async Task RemoveAllStudentSchoolYearByStudentId(long studentId)
         {
-            await ((IStudentExamRepository)_repository).RemoveByStudentId(studentId);
+            await ((IStudentExamRepository)_repository).RemoveByStudentId(studentId); // todo
+        }
+
+        public async Task<IEnumerable<StudentExam>> SearchStudentExam(StudentExamSearchRequest request)
+        {
+            var schoolYearIdParameter = new SqlParameter
+            {
+                ParameterName = "schoolYearId",
+                Direction = ParameterDirection.Input,
+                SqlDbType = SqlDbType.BigInt,
+                Value = request.SchoolYearId
+            };
+
+            var classroomIdParameter = new SqlParameter
+            {
+                ParameterName = "classroomId",
+                Direction = ParameterDirection.Input,
+                SqlDbType = SqlDbType.BigInt,
+                Value = request.ClassroomId
+            };
+
+            var examIdParameter = new SqlParameter
+            {
+                ParameterName = "examId",
+                Direction = ParameterDirection.Input,
+                SqlDbType = SqlDbType.BigInt,
+                Value = request.ExamId
+            };
+
+            return await _repository.ExecWithStoreProcedure("dbo.sp_SearchStudentExam @schoolYearId, @classroomId, @examId", schoolYearIdParameter, classroomIdParameter, examIdParameter);
+
         }
 
         public override async Task UpdateAsync(object request)

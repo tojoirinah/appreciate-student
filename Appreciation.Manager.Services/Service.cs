@@ -42,17 +42,14 @@ namespace Appreciation.Manager.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Completed()
+        public async Task CommitAsync()
         {
-            try
-            {
-                await _unitOfWork.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                await _unitOfWork.RollbackAsync();
-                throw ex;
-            }
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task RollbackAsync()
+        {
+            await _unitOfWork.RollbackAsync();
         }
     }
 

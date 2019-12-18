@@ -2,16 +2,17 @@
 using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Repository
 {
     public class Repository<T> : ReadOnlyRepository<T>, IRepository<T> where T : BaseEntity
     {
-        public Repository(AppreciationContext unitOfWork) : base(unitOfWork)
-        // public Repository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public Repository(AppreciationContext context) : base(context)
         {
 
         }
@@ -72,6 +73,36 @@ namespace Appreciation.Manager.Repository
 
         }
 
+        public async Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter)
+        {
+            return await Task.Run(() => {
 
+                if (filter == null) throw new ArgumentNullException(nameof(filter),
+                                      $"The parameter filter can not be null");
+
+                return _table.Where(filter).ToList();
+            });
+        }
+
+        public async Task<T> GetDataAsync(Expression<Func<T, bool>> filter)
+        {
+            return await Task.Run(() => {
+                if (filter == null) throw new ArgumentNullException(nameof(filter),
+                                          $"The parameter filter can not be null");
+
+                return _table.FirstOrDefault(filter);
+            });
+        }
+
+        public async Task<IEnumerable<T>> ExecWithStoreProcedure(string query, params object[] parameters)
+        {
+            
+            return await Task.Run(() => _context.Database.SqlQuery<T>(query, parameters).ToList());
+        }
+
+        public async Task ExecuteNonQuery(string query, params object[] parameters)
+        {
+            await Task.Run(() => _context.Database.ExecuteSqlCommand(query, parameters));
+        }
     }
 }

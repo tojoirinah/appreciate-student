@@ -51,6 +51,7 @@
     <Compile Include="IBehaviorEvaluateRepository.cs" />
     <Compile Include="IBehaviorRepository.cs" />
     <Compile Include="IClassroomRepository.cs" />
+    <Compile Include="IEnumeratble.cs" />
     <Compile Include="IExamRepository.cs" />
     <Compile Include="INoteCriteriaRepository.cs" />
     <Compile Include="INoteEvaluateRepository.cs" />

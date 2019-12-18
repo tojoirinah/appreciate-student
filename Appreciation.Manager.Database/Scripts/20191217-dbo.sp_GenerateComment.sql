@@ -22,17 +22,18 @@ BEGIN
 		BEGIN
 			INSERT INTO #tStudentExam(Id,NoteEvaluate,BehaviorEvaluate,DateCreated)
 			(
-				SELECT 
+				SELECT DISTINCT
 					se.Id,
 					ne.Evaluation + ' .'+ ne.Advice,
 					be.Evaluation,
 					GETDATE()
 				FROM [dbo].[Student] st
 				INNER JOIN [dbo].[StudentExam] se ON se.[StudentId] = st.[Id]
-				INNER JOIN [dbo].[NoteCriteria] nc ON (nc.[Min] <= se.Note AND se.Note <= nc.Min)
+				INNER JOIN [dbo].[NoteCriteria] nc ON (nc.[Min] <= se.Note AND se.Note <= nc.Max)
 				INNER JOIN [dbo].[NoteEvaluate] ne ON ne.NoteCriteriaId = nc.Id
 				INNER JOIN [dbo].[BehaviorEvaluate] be ON (be.[BehaviorId] = se.[BehaviorId] AND be.NoteCriteriaId = ne.NoteCriteriaId)
 				WHERE st.[SchoolYearId] = @last_school_year_id
+				AND se.[IsClosed] = 0
 			)
 
 			IF EXISTS(SELECT 1 FROM #tStudentExam)

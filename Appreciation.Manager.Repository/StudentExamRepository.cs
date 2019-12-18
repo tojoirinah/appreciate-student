@@ -16,13 +16,13 @@ namespace Appreciation.Manager.Repository
 
         }
 
-        public async Task<IEnumerable<StudentExam>> GenerateComment()
-        {
-            return  await Task.Run(() => _context
-               .Database
-               .SqlQuery<StudentExam>("dbo.sp_GenerateComment")
-               .ToList());
-        }
+        //public async Task<IEnumerable<StudentExam>> GenerateComment()
+        //{
+        //    return  await Task.Run(() => _context
+        //       .Database
+        //       .SqlQuery<StudentExam>("dbo.sp_GenerateComment")
+        //       .ToList());
+        //}
 
         public async Task RemoveByStudentId(long studentId)
         {
@@ -33,38 +33,38 @@ namespace Appreciation.Manager.Repository
             }
         }
 
-        public async Task<IEnumerable<StudentExam>> SearchStudentExam(long schoolYearId, long classroomId, long examId)
-        {
-            var schoolYearIdParameter = new SqlParameter
-            {
-                ParameterName = "schoolYearId",
-                Direction = ParameterDirection.Input,
-                SqlDbType = SqlDbType.BigInt,
-                Value = schoolYearId
-            };
+        //public async Task<IEnumerable<StudentExam>> SearchStudentExam(long schoolYearId, long classroomId, long examId)
+        //{
+        //    var schoolYearIdParameter = new SqlParameter
+        //    {
+        //        ParameterName = "schoolYearId",
+        //        Direction = ParameterDirection.Input,
+        //        SqlDbType = SqlDbType.BigInt,
+        //        Value = schoolYearId
+        //    };
 
-            var classroomIdParameter = new SqlParameter
-            {
-                ParameterName = "classroomId",
-                Direction = ParameterDirection.Input,
-                SqlDbType = SqlDbType.BigInt,
-                Value = classroomId
-            };
+        //    var classroomIdParameter = new SqlParameter
+        //    {
+        //        ParameterName = "classroomId",
+        //        Direction = ParameterDirection.Input,
+        //        SqlDbType = SqlDbType.BigInt,
+        //        Value = classroomId
+        //    };
 
-            var examIdParameter = new SqlParameter
-            {
-                ParameterName = "examId",
-                Direction = ParameterDirection.Input,
-                SqlDbType = SqlDbType.BigInt,
-                Value = examId
-            };
+        //    var examIdParameter = new SqlParameter
+        //    {
+        //        ParameterName = "examId",
+        //        Direction = ParameterDirection.Input,
+        //        SqlDbType = SqlDbType.BigInt,
+        //        Value = examId
+        //    };
 
-            return await Task.Run(() => 
-                _context
-                   .Database
-                   .SqlQuery<StudentExam>("dbo.sp_SearchStudentExam @schoolYearId, @classroomId, @examId", schoolYearIdParameter, classroomIdParameter, examIdParameter)
-                   .ToList()
-               );
-        }
+        //    return await Task.Run(() => 
+        //        _context
+        //           .Database
+        //           .SqlQuery<StudentExam>("dbo.sp_SearchStudentExam @schoolYearId, @classroomId, @examId", schoolYearIdParameter, classroomIdParameter, examIdParameter)
+        //           .ToList()
+        //       );
+        //}
     }
 }

@@ -12,10 +12,5 @@ namespace Appreciation.Manager.Repository
         {
 
         }
-
-        public async Task<Users> GetUserName(string username)
-        {
-            return await _table.FirstOrDefaultAsync(itm => itm.UserName == username);
-        }
     }
 }

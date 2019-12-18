@@ -20,8 +20,7 @@ namespace Appreciation.Manager.Services
 
         public async Task<Users> Login(AuthenticationRequest auth)
         {
-            Users user = null;
-            user = await ((IUsersRepository)_repository).GetUserName(auth.UserName);
+            Users user = await _repository.GetDataAsync(x => x.Name == auth.UserName);
 
             if (user != null)
             {
