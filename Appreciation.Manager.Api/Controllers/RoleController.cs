@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
 {
+    [Authorize]
     public class RoleController : ApiBaseController
     {
         protected readonly IUserRoleService _service;

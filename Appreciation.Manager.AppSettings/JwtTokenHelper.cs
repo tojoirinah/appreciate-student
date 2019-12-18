@@ -75,16 +75,30 @@ namespace Appreciation.Manager.Utils
             }
         }
 
-        TokenValidationParameters GetTokenValidationParameters(string secretKey)
+        public static TokenValidationParameters GetTokenValidationParameters(string secretKey)
         {
             TokenValidationParameters validationParameters = new TokenValidationParameters()
             {
+                 ValidAudience = Settings.ValidAudience,
+                ValidIssuer = Settings.ValidIssuer,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                LifetimeValidator = LifetimeValidator,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(secretKey))
             };
 
             return validationParameters;
+        }
+
+        static bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+        {
+            if (expires != null)
+            {
+                if (DateTime.UtcNow < expires) return true;
+            }
+            return false;
         }
     }
 }

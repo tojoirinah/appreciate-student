@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
 {
+    [Authorize]
     public class UsersController : ApiBaseController
     {
         protected readonly IUsersService _service;
@@ -50,5 +51,21 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Users/Profile")]
+        public async Task<IHttpActionResult> StudentExamById()
+        {
+            try
+            {
+                var student = await _service.GetByIdAsync(CurrentUserId);
+                await _service.CommitAsync();
+                return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
     }
 }

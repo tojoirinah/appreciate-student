@@ -5,6 +5,7 @@ using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
@@ -41,6 +42,16 @@ namespace Appreciation.Manager.Services
             req.ProjectTo(item);
 
             await _repository.AddOrUpdateAsync(item);
+        }
+
+        public async override Task<IEnumerable<BehaviorEvaluate>> GetAllAsync()
+        {
+            return await _repository.GetAllAsync(new string[] { "Behavior", "NoteCriteria" });
+        }
+
+        public async override Task<BehaviorEvaluate> GetByIdAsync(long id)
+        {
+            return await _repository.GetByIdAsync(id, new string[] { "Behavior", "NoteCriteria" });
         }
     }
 }

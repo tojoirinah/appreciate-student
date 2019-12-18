@@ -1,4 +1,5 @@
-﻿using Appreciation.Manager.Utils;
+﻿using Appreciation.Manager.Api.Handler;
+using Appreciation.Manager.Utils;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -15,6 +16,8 @@ namespace Appreciation.Manager.Api
                 config.EnableCors(cors);
             }
 
+            // Handler for JWT
+            config.MessageHandlers.Add(new TokenValidationHandler());
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();

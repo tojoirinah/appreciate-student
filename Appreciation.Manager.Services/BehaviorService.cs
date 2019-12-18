@@ -5,7 +5,7 @@ using AutoMapper;
 
 namespace Appreciation.Manager.Services
 {
-    public class BehaviorService : ServiceReadOnly<BehaviorEvaluate>, IBehaviorService
+    public class BehaviorService : ServiceReadOnly<Behavior>, IBehaviorService
     {
         public BehaviorService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
         {

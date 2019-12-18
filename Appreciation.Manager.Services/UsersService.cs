@@ -74,5 +74,10 @@ namespace Appreciation.Manager.Services
             request.ProjectTo(u);
             await _repository.AddOrUpdateAsync(u);
         }
+
+        public async override Task<Users> GetByIdAsync(long id)
+        {
+            return await _repository.GetByIdAsync(id, new string[] { "Role" });
+        }
     }
 }

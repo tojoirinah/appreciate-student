@@ -35,7 +35,7 @@ namespace Appreciation.Manager.Repository
 
         public async Task<IEnumerable<T>> GetAllAsync(string[] arrays = null)
         {
-            return await Query(arrays).ToListAsync();
+            return await Task.Run(() => Query(arrays).ToList<T>());
         }
 
     }

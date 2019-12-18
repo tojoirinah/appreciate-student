@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
 {
-    // [Authorize]
+    [Authorize]
     public class StudentController : ApiBaseController
     {
         protected readonly IStudentService _service;

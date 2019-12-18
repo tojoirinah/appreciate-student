@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace Appreciation.Manager.Api.Controllers
 {
+    [Authorize]
     public class BehaviorController : ApiBaseController
     {
         protected readonly IBehaviorService _service;
