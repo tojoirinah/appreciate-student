@@ -9,5 +9,7 @@ namespace Appreciation.Manager.Utils
         public static string JwtSecretKey => ConfigurationManager.AppSettings["JwtSecretKey"] ?? string.Empty;
         public static string IV => ConfigurationManager.AppSettings["DefaultIV"] ?? string.Empty;
         public static string Key => ConfigurationManager.AppSettings["DefaultKey"] ?? string.Empty;
+        public static string ValidIssuer => ConfigurationManager.AppSettings["ValidIssuer"] ?? string.Empty;
+        public static string ValidAudience => ConfigurationManager.AppSettings["ValidAudience"] ?? string.Empty;
     }
 }
