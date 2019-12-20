@@ -66,14 +66,14 @@ namespace Appreciation.Manager.Services
             _repository = _unitOfWork.Repository<T>();
         }
 
-        protected async Task<IEnumerable<T>> GetOrCreateAsync(string key, Func<string[], Task<IEnumerable<T>>> createItem)
+        protected async Task<IEnumerable<T>> GetOrCreateAsync(string key, Func<string[], Task<IEnumerable<T>>> createItem,string[] arrays = null)
         {
 
             IEnumerable<T> cacheEntry;
             if (!_cache.TryGetValue(key, out cacheEntry))// Look for cache key.
             {
                 // Key not in cache, so get data.
-                cacheEntry = await createItem(null);
+                cacheEntry = await createItem(arrays);
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSize(11024)//Size amount

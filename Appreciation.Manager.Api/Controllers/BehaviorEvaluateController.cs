@@ -18,7 +18,7 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/BehaviorEvalute/Add")]
+        [Route("api/BehaviorEvaluate/Add")]
         public async Task<IHttpActionResult> AddBehaviorEvalute([FromBody]AddBehaviorEvaluateRequest request)
         {
             try
@@ -35,7 +35,7 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpPut]
-        [Route("api/BehaviorEvalute/Update")]
+        [Route("api/BehaviorEvaluate/Update")]
         public async Task<IHttpActionResult> UpdateBehaviorEvalute([FromBody]UpdateBehaviorEvaluateRequest request)
         {
             try
@@ -52,7 +52,7 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/BehaviorEvalute")]
+        [Route("api/BehaviorEvaluate")]
         public async Task<IHttpActionResult> BehaviorEvaluteList()
         {
             try
@@ -69,7 +69,7 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/BehaviorEvalute/id")]
+        [Route("api/BehaviorEvaluate/id")]
         public async Task<IHttpActionResult> BehaviorEvaluteById([FromUri] long id)
         {
             try
