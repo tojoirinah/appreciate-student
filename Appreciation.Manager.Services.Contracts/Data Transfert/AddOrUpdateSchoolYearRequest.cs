@@ -12,4 +12,10 @@
         public string Name { get; set; }
         public bool IsClosed { get; set; }
     }
+
+    public class UpdateStatusSchoolYearRequest : Request
+    {
+        public long Id { get; set; }
+        public bool IsClosed { get; set; }
+    }
 }

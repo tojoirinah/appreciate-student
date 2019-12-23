@@ -13,6 +13,11 @@ namespace Appreciation.Manager.Services.Contracts.Mappers
             entity.IsClosed = request.IsClosed;
         }
 
+        public static void ProjectTo(this UpdateStatusSchoolYearRequest request, SchoolYear entity)
+        {
+            entity.IsClosed = request.IsClosed;
+        }
+
         public static SchoolYear ProjectTo(this AddSchoolYearRequest request, IMapper mapper)
         {
             SchoolYear item = mapper.Map<SchoolYear>(request);

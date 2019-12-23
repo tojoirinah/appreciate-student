@@ -51,6 +51,23 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("api/SchoolYear/SetStatus")]
+        public async Task<IHttpActionResult> UpdateStatusSchoolYear([FromBody]UpdateStatusSchoolYearRequest request)
+        {
+            try
+            {
+                var item = await _service.UpdateStatusSchoolYear(request);
+                await _service.CommitAsync();
+                return Ok(new { Item = item });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
         [HttpGet]
         [Route("api/SchoolYear")]
         public async Task<IHttpActionResult> SchoolYearList()
