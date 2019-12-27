@@ -93,6 +93,7 @@
     <Compile Include="StudentService.cs" />
     <Compile Include="UserRoleService.cs" />
     <Compile Include="UsersService.cs" />
+    <Compile Include="VStudentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Appreciation.Manager.AppSettings\Appreciation.Manager.Utils.csproj">

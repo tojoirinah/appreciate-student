@@ -31,5 +31,11 @@ namespace Appreciation.Manager.Services.Contracts.Data_Transfert
         public UpdateInformationUsersRequest User { get; set; }
     }
 
+    public class StudentSearchRequest : Request
+    {
+        public long SchoolYearId { get; set; }
 
+        public long ClassroomId { get; set; }
+
+    }
 }

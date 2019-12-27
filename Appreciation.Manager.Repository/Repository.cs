@@ -94,7 +94,7 @@ namespace Appreciation.Manager.Repository
             });
         }
 
-        public async Task<IEnumerable<T>> ExecWithStoreProcedure(string query, params object[] parameters)
+        public virtual async Task<IEnumerable<T>> ExecWithStoreProcedure(string query, params object[] parameters)
         {
             
             return await Task.Run(() => _context.Database.SqlQuery<T>(query, parameters).ToList());

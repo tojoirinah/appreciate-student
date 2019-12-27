@@ -16,6 +16,7 @@ namespace Appreciation.Manager.Infrastructure
         public virtual DbSet<StudentExam> StudentExams { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<VStudent> VStudents { get; set; }
 
         public AppreciationContext() : base("AppreciationContext")
         {

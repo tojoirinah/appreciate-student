@@ -69,6 +69,22 @@
     <Compile Include="Migrations\201912162303467_revert_securitySalt.Designer.cs">
       <DependentUpon>201912162303467_revert_securitySalt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912272212351_add_Student_View.cs" />
+    <Compile Include="Migrations\201912272212351_add_Student_View.Designer.cs">
+      <DependentUpon>201912272212351_add_Student_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912272216393_alter_Student_View_1.cs" />
+    <Compile Include="Migrations\201912272216393_alter_Student_View_1.Designer.cs">
+      <DependentUpon>201912272216393_alter_Student_View_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912272257021_alter_Student_View_2.cs" />
+    <Compile Include="Migrations\201912272257021_alter_Student_View_2.Designer.cs">
+      <DependentUpon>201912272257021_alter_Student_View_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912272313004_alter_Student_View_3.cs" />
+    <Compile Include="Migrations\201912272313004_alter_Student_View_3.Designer.cs">
+      <DependentUpon>201912272313004_alter_Student_View_3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BehaviorEvaluate.cs" />
@@ -82,6 +98,7 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\VStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +117,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912162303467_revert_securitySalt.resx">
       <DependentUpon>201912162303467_revert_securitySalt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912272212351_add_Student_View.resx">
+      <DependentUpon>201912272212351_add_Student_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912272216393_alter_Student_View_1.resx">
+      <DependentUpon>201912272216393_alter_Student_View_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912272257021_alter_Student_View_2.resx">
+      <DependentUpon>201912272257021_alter_Student_View_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912272313004_alter_Student_View_3.resx">
+      <DependentUpon>201912272313004_alter_Student_View_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

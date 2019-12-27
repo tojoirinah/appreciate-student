@@ -11,10 +11,12 @@ namespace Appreciation.Manager.Api.Controllers
     public class StudentController : ApiBaseController
     {
         protected readonly IStudentService _service;
+        
 
         public StudentController(IMapper mapper, IStudentService studentService) : base(mapper)
         {
             _service = studentService;
+            
         }
 
         [HttpPost]
@@ -51,13 +53,13 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/Student")]
-        public async Task<IHttpActionResult> StudentList()
+        public async Task<IHttpActionResult> StudentList([FromBody] StudentSearchRequest request)
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                var list = await _service.SearchStudent(request);
                 await _service.CommitAsync();
                 return Ok(new { List = list });
             }

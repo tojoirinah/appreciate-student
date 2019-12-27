@@ -69,6 +69,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Scripts\20191226-dbo.create_view_VStudent.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20191227-dbo.sp_SearchStudent.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\20191220-dbo.fnGetNoteEvaluater.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

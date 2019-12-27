@@ -7,6 +7,8 @@ using Appreciation.Manager.Services.Mappers;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
@@ -15,11 +17,13 @@ namespace Appreciation.Manager.Services
     {
         protected readonly IUsersService _userService;
         protected readonly IStudentExamService _studentSchoolYearService;
+        protected readonly IVStudentService _vService;
 
-        public StudentService(IUnitOfWork unitOfWork, IMapper mapper, IUsersService userService, IStudentExamService studentSchoolYearService) : base(unitOfWork, mapper)
+        public StudentService(IUnitOfWork unitOfWork, IMapper mapper, IUsersService userService, IStudentExamService studentSchoolYearService, IVStudentService viewStudentService) : base(unitOfWork, mapper)
         {
             _userService = userService;
             _studentSchoolYearService = studentSchoolYearService;
+            _vService = viewStudentService;
         }
 
         public override async Task AddAsync(object request)
@@ -59,7 +63,10 @@ namespace Appreciation.Manager.Services
             await _repository.RemoveAsync(student);
         }
 
-
+        public async Task<IEnumerable<VStudent>> SearchStudent(StudentSearchRequest request)
+        {
+            return await _vService.SearchStudent(request);
+        }
 
         public override async Task UpdateAsync(object request)
         {

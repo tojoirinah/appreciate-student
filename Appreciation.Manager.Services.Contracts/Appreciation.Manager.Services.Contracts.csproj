@@ -66,6 +66,7 @@
     <Compile Include="IStudentService.cs" />
     <Compile Include="IUserRoleService.cs" />
     <Compile Include="IUsersService.cs" />
+    <Compile Include="IVStudentService.cs" />
     <Compile Include="Mappers\BehaviorEvaluateMapper.cs" />
     <Compile Include="Mappers\ClassroomMapper.cs" />
     <Compile Include="Mappers\ExamMapper.cs" />

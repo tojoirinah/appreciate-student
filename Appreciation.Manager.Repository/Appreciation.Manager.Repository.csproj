@@ -62,6 +62,7 @@
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="UsersRepository.cs" />
     <Compile Include="UserRoleRepository.cs" />
+    <Compile Include="VStudentRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Appreciation.Manager.Infrastructure\Appreciation.Manager.Infrastructure.csproj">
