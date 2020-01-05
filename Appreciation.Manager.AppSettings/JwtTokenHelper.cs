@@ -79,7 +79,7 @@ namespace Appreciation.Manager.Utils
         {
             TokenValidationParameters validationParameters = new TokenValidationParameters()
             {
-                 ValidAudience = Settings.ValidAudience,
+                ValidAudience = Settings.ValidAudience,
                 ValidIssuer = Settings.ValidIssuer,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,

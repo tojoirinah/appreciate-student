@@ -12,8 +12,10 @@ namespace Appreciation.Manager.Services
 {
     public class NoteEvaluateService : Service<NoteEvaluate>, INoteEvaluateService
     {
-        public NoteEvaluateService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        protected readonly IVNoteEvaluateService _vService;
+        public NoteEvaluateService(IUnitOfWork unitOfWork, IMapper mapper, IVNoteEvaluateService vService) : base(unitOfWork, mapper)
         {
+            _vService = vService;
         }
 
         public async override Task AddAsync(object request)
@@ -51,6 +53,11 @@ namespace Appreciation.Manager.Services
         public async override Task<NoteEvaluate> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id, new string[] { "NoteCriteria" });
+        }
+
+        public async Task<IEnumerable<VNoteEvaluate>> SearchNoteEvaluate(NoteEvaluateSearchRequest request)
+        {
+            return await _vService.SearchNoteEvaluate(request);
         }
     }
 }

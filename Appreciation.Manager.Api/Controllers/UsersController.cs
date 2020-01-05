@@ -23,9 +23,13 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                await _service.AddAsync(request);
-                await _service.CommitAsync();
-                return Ok();
+                if (ModelState.IsValid)
+                {
+                    await _service.AddAsync(request);
+                    await _service.CommitAsync();
+                    return Ok();
+                }
+                return BadRequest(ModelState);
             }
             catch (Exception ex)
             {
@@ -40,9 +44,13 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                await _service.UpdateAsync(request);
-                await _service.CommitAsync();
-                return Ok();
+                if (ModelState.IsValid)
+                {
+                    await _service.UpdateAsync(request);
+                    await _service.CommitAsync();
+                    return Ok();
+                }
+                return BadRequest(ModelState);
             }
             catch (Exception ex)
             {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services.Contracts
 {
-    public interface INoteEvaluateService : IService<NoteEvaluate>
+    public interface IVNoteEvaluateService : IService<VNoteEvaluate>
     {
         Task<IEnumerable<VNoteEvaluate>> SearchNoteEvaluate(NoteEvaluateSearchRequest request);
     }

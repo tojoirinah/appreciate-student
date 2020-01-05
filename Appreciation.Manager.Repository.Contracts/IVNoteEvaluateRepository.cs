@@ -2,7 +2,7 @@
 
 namespace Appreciation.Manager.Repository.Contracts
 {
-    public interface IVStudentRepository : IRepository<VStudent>
+    public interface IVNoteEvaluateRepository : IRepository<VNoteEvaluate>
     {
     }
 }

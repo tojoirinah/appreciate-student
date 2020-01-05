@@ -75,7 +75,8 @@ namespace Appreciation.Manager.Repository
 
         public async Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter)
         {
-            return await Task.Run(() => {
+            return await Task.Run(() =>
+            {
 
                 if (filter == null) throw new ArgumentNullException(nameof(filter),
                                       $"The parameter filter can not be null");
@@ -86,7 +87,8 @@ namespace Appreciation.Manager.Repository
 
         public async Task<T> GetDataAsync(Expression<Func<T, bool>> filter)
         {
-            return await Task.Run(() => {
+            return await Task.Run(() =>
+            {
                 if (filter == null) throw new ArgumentNullException(nameof(filter),
                                           $"The parameter filter can not be null");
 
@@ -96,7 +98,7 @@ namespace Appreciation.Manager.Repository
 
         public virtual async Task<IEnumerable<T>> ExecWithStoreProcedure(string query, params object[] parameters)
         {
-            
+
             return await Task.Run(() => _context.Database.SqlQuery<T>(query, parameters).ToList());
         }
 

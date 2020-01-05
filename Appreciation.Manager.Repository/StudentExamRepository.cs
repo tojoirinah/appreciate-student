@@ -1,9 +1,7 @@
 ﻿using Appreciation.Manager.Infrastructure;
 using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 

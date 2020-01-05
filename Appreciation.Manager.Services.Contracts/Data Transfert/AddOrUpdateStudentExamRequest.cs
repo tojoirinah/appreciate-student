@@ -1,15 +1,20 @@
-﻿namespace Appreciation.Manager.Services.Contracts.Data_Transfert
+﻿using Appreciation.Manager.Utils.Attributes;
+
+namespace Appreciation.Manager.Services.Contracts.Data_Transfert
 {
     public class AddStudentExamRequest : Request
     {
+        [IdentityValidation]
         public long StudentId { get; set; }
 
         public bool IsAbsent { get; set; }
 
         public double? Note { get; set; }
 
+        [IdentityValidation]
         public long BehaviorId { get; set; }
 
+        [IdentityValidation]
         public long ExamId { get; set; }
 
         public bool IsClosed { get; set; }
@@ -18,16 +23,20 @@
 
     public class UpdateStudentExamRequest : Request
     {
+        [IdentityValidation]
         public long Id { get; set; }
 
+        [IdentityValidation]
         public long StudentId { get; set; }
 
         public bool IsAbsent { get; set; }
 
         public double? Note { get; set; }
 
+        [IdentityValidation]
         public long BehaviorId { get; set; }
 
+        [IdentityValidation]
         public long ExamId { get; set; }
 
         public bool IsClosed { get; set; }

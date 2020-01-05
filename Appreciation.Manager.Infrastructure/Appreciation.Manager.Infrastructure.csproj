@@ -85,6 +85,18 @@
     <Compile Include="Migrations\201912272313004_alter_Student_View_3.Designer.cs">
       <DependentUpon>201912272313004_alter_Student_View_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001042312160_add_NoteEvaluate_view.cs" />
+    <Compile Include="Migrations\202001042312160_add_NoteEvaluate_view.Designer.cs">
+      <DependentUpon>202001042312160_add_NoteEvaluate_view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001050012563_alter_NoteEvaluate_view.cs" />
+    <Compile Include="Migrations\202001050012563_alter_NoteEvaluate_view.Designer.cs">
+      <DependentUpon>202001050012563_alter_NoteEvaluate_view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001050042283_alter_NoteEvaluate_view_2.cs" />
+    <Compile Include="Migrations\202001050042283_alter_NoteEvaluate_view_2.Designer.cs">
+      <DependentUpon>202001050042283_alter_NoteEvaluate_view_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BehaviorEvaluate.cs" />
@@ -98,6 +110,7 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\VNoteEvaluate.cs" />
     <Compile Include="Models\VStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -129,6 +142,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912272313004_alter_Student_View_3.resx">
       <DependentUpon>201912272313004_alter_Student_View_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001042312160_add_NoteEvaluate_view.resx">
+      <DependentUpon>202001042312160_add_NoteEvaluate_view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001050012563_alter_NoteEvaluate_view.resx">
+      <DependentUpon>202001050012563_alter_NoteEvaluate_view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001050042283_alter_NoteEvaluate_view_2.resx">
+      <DependentUpon>202001050042283_alter_NoteEvaluate_view_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

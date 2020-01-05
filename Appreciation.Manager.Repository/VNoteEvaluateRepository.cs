@@ -4,9 +4,9 @@ using Appreciation.Manager.Repository.Contracts;
 
 namespace Appreciation.Manager.Repository
 {
-    public class VStudentRepository : Repository<VStudent>, IVStudentRepository
+    public class VNoteEvaluateRepository : Repository<VNoteEvaluate>, IVNoteEvaluateRepository
     {
-        public VStudentRepository(AppreciationContext context) : base(context)
+        public VNoteEvaluateRepository(AppreciationContext context) : base(context)
         {
         }
     }

@@ -1,8 +1,6 @@
 ﻿using Appreciation.Manager.Infrastructure;
 using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
-using System.Data.Entity;
-using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Repository
 {

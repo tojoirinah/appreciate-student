@@ -26,30 +26,33 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                var user = await _userService.Login(req);
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    var claimIdentity = new ClaimsIdentity(new Claim[] {
+                    var user = await _userService.Login(req);
+                    if (user != null)
+                    {
+                        var claimIdentity = new ClaimsIdentity(new Claim[] {
                     new Claim("UserId",user.Id.ToString()),
                     new Claim("RoleId",user.RoleId.ToString()),
                     new Claim("UserName",user.UserName)
                 });
 
-                    var token = JwtTokenHelper.CreateToken(
-                        claimIdentity,
-                        Settings.TokenExpire,
-                        Settings.JwtSecretKey
-                        );
+                        var token = JwtTokenHelper.CreateToken(
+                            claimIdentity,
+                            Settings.TokenExpire,
+                            Settings.JwtSecretKey
+                            );
 
-                    return Ok(new { Token = token });
+                        return Ok(new { Token = token });
+                    }
                 }
+                return BadRequest(ModelState);
             }
             catch (Exception ex)
             {
                 HttpContext.Current.Response.StatusCode = 500;
                 throw ex;
             }
-            return BadRequest();
         }
     }
 }

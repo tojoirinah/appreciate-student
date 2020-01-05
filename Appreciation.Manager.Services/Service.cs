@@ -66,7 +66,7 @@ namespace Appreciation.Manager.Services
             _repository = _unitOfWork.Repository<T>();
         }
 
-        protected async Task<IEnumerable<T>> GetOrCreateAsync(string key, Func<string[], Task<IEnumerable<T>>> createItem,string[] arrays = null)
+        protected async Task<IEnumerable<T>> GetOrCreateAsync(string key, Func<string[], Task<IEnumerable<T>>> createItem, string[] arrays = null)
         {
 
             IEnumerable<T> cacheEntry;

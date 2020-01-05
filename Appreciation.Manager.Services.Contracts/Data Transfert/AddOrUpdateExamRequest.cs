@@ -1,13 +1,19 @@
-﻿namespace Appreciation.Manager.Services.Contracts.Data_Transfert
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Appreciation.Manager.Services.Contracts.Data_Transfert
 {
     public class AddExamRequest : Request
     {
+        [Required]
         public string Name { get; set; }
     }
 
     public class UpdateExamRequest : Request
     {
+        [Required]
         public long Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
     }
 }

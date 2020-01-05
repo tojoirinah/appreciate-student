@@ -24,9 +24,13 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                await _service.AddAsync(request);
-                await _service.CommitAsync();
-                return Ok();
+                if (ModelState.IsValid)
+                {
+                    await _service.AddAsync(request);
+                    await _service.CommitAsync();
+                    return Ok();
+                }
+                return BadRequest(ModelState);
             }
             catch (Exception ex)
             {
@@ -41,9 +45,13 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                await _service.UpdateAsync(request);
-                await _service.CommitAsync();
-                return Ok();
+                if (ModelState.IsValid)
+                {
+                    await _service.UpdateAsync(request);
+                    await _service.CommitAsync();
+                    return Ok();
+                }
+                return BadRequest(ModelState);
             }
             catch (Exception ex)
             {
@@ -52,13 +60,13 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/NoteEvaluate")]
-        public async Task<IHttpActionResult> NoteEvaluateList()
+        public async Task<IHttpActionResult> NoteEvaluateList([FromBody] NoteEvaluateSearchRequest request)
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                var list = await _service.SearchNoteEvaluate(request);
                 await _service.CommitAsync();
                 return Ok(new { List = list });
             }
