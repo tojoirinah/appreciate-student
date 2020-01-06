@@ -26,4 +26,10 @@ namespace Appreciation.Manager.Services.Contracts.Data_Transfert
 
         public string Evaluation { get; set; }
     }
+
+    public class BehaviorEvaluateSearchRequest : Request
+    {
+        public long BehaviorId { get; set; }
+        public long NoteCriteriaId { get; set; }
+    }
 }

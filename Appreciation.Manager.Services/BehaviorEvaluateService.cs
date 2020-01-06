@@ -12,9 +12,10 @@ namespace Appreciation.Manager.Services
 {
     public class BehaviorEvaluateService : Service<BehaviorEvaluate>, IBehaviorEvaluateService
     {
-
-        public BehaviorEvaluateService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
+        private readonly IVBehaviorEvaluateService _vService;
+        public BehaviorEvaluateService(IMapper mapper, IUnitOfWork unitOfWork, IVBehaviorEvaluateService service) : base(unitOfWork, mapper)
         {
+            _vService = service;
         }
 
         public async override Task AddAsync(object request)
@@ -52,6 +53,11 @@ namespace Appreciation.Manager.Services
         public async override Task<BehaviorEvaluate> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id, new string[] { "Behavior", "NoteCriteria" });
+        }
+
+        public async Task<IEnumerable<VBehaviorEvaluate>> SearchBehaviorEvaluate(BehaviorEvaluateSearchRequest request)
+        {
+            return await _vService.SearchBehaviorEvaluate(request);
         }
     }
 }

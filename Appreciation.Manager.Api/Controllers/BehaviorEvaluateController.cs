@@ -60,13 +60,13 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/BehaviorEvaluate")]
-        public async Task<IHttpActionResult> BehaviorEvaluteList()
+        public async Task<IHttpActionResult> BehaviorEvaluteList([FromBody] BehaviorEvaluateSearchRequest request)
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                var list = await _service.SearchBehaviorEvaluate(request);
                 await _service.CommitAsync();
                 return Ok(new { List = list });
             }

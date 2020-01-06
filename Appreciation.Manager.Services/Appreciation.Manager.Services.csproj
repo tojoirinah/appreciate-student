@@ -93,6 +93,7 @@
     <Compile Include="StudentService.cs" />
     <Compile Include="UserRoleService.cs" />
     <Compile Include="UsersService.cs" />
+    <Compile Include="VBehaviorEvaluateService.cs" />
     <Compile Include="VNoteEvaluateService.cs" />
     <Compile Include="VStudentService.cs" />
   </ItemGroup>
