@@ -39,6 +39,28 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/BehaviorEvaluate/Delete")]
+        public async Task<IHttpActionResult> DeleteBehaviorEvalute([FromUri]long id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _service.Remove(id);
+                    await _service.CommitAsync();
+                    return Ok();
+                }
+                return BadRequest();
+
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
         [HttpPut]
         [Route("api/BehaviorEvaluate/Update")]
         public async Task<IHttpActionResult> UpdateBehaviorEvalute([FromBody]UpdateBehaviorEvaluateRequest request)

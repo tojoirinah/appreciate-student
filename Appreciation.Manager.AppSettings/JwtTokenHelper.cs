@@ -36,7 +36,7 @@ namespace Appreciation.Manager.Utils
             return tokenString;
         }
 
-        public IEnumerable<Claim> GetTokenClaims(string token, string secretKey)
+        public static IEnumerable<Claim> GetTokenClaims(string token, string secretKey)
         {
             if (string.IsNullOrEmpty(token))
                 throw new ArgumentException("token is null or empty");

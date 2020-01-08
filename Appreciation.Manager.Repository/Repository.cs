@@ -106,5 +106,19 @@ namespace Appreciation.Manager.Repository
         {
             await Task.Run(() => _context.Database.ExecuteSqlCommand(query, parameters));
         }
+
+        public T GetById(long id, string[] array = null)
+        {
+            return Query(array).FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Remove(T entity)
+        {
+            var item = _table.FirstOrDefault(i => i.Id == entity.Id);
+            if (item != null)
+            {
+                _table.Remove(item);
+            }
+        }
     }
 }

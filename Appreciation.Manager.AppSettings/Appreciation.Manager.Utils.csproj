@@ -61,6 +61,7 @@
     <Compile Include="Attributes\IdentityValidationAttribute.cs" />
     <Compile Include="EncryptContractor.cs" />
     <Compile Include="JwtTokenHelper.cs" />
+    <Compile Include="MailHelper.cs" />
     <Compile Include="PasswordContractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

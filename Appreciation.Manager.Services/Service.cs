@@ -25,12 +25,17 @@ namespace Appreciation.Manager.Services
             await Task.Run(() =>
             {
                 var item = _repository.GetByIdAsync(id);
-                if (item != null)
+                if (item != null && item.Result!=null)
                     _repository.RemoveAsync(item.Result);
             });
         }
 
-
+        public void Remove(long id)
+        {
+            var item = _repository.GetById(id);
+            if (item != null)
+                _repository.Remove(item);
+        }
     }
 
     public class BaseService : IBaseService

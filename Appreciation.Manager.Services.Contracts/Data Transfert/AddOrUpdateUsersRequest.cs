@@ -36,4 +36,18 @@ namespace Appreciation.Manager.Services.Contracts.Data_Transfert
         [Required]
         public string Password { get; set; }
     }
+
+    public class ForgottenUserPasswordRequest : Request
+    {
+        [Required]
+        public string UserName { get; set; }
+    }
+
+    public class ResetUserPasswordRequest : Request
+    {
+        [Required]
+        public string Token { get; set; }
+        [Required]
+        public string NewPassword { get; set; }
+    }
 }

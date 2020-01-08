@@ -11,5 +11,8 @@ namespace Appreciation.Manager.Services.Contracts
 
         Task UpdatePasswordUsers(UpdatePasswordUsersRequest request);
 
+        Task SendRequestForgottenPassword(ForgottenUserPasswordRequest request);
+
+        Task<Users> ResetUserPassword(ResetUserPasswordRequest request);
     }
 }

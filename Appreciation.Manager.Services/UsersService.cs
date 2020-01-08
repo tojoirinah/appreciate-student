@@ -7,6 +7,10 @@ using Appreciation.Manager.Services.Mappers;
 using Appreciation.Manager.Utils;
 using AutoMapper;
 using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
@@ -78,6 +82,59 @@ namespace Appreciation.Manager.Services
         public async override Task<Users> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id, new string[] { "Role" });
+        }
+
+        public async Task SendRequestForgottenPassword(ForgottenUserPasswordRequest request)
+        {
+            Users user = await _repository.GetDataAsync(x => x.UserName == request.UserName);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+
+            }
+
+            var claimIdentity = new ClaimsIdentity(new Claim[] {
+                    new Claim("UserId",user.Id.ToString()),
+                    new Claim("RoleId",user.RoleId.ToString()),
+                    new Claim("UserName",user.UserName)
+                });
+
+            var token = JwtTokenHelper.CreateToken(
+                claimIdentity,
+                Settings.TokenExpire,
+                Settings.JwtSecretKey
+            );
+
+            using(var client = new WebClient())
+            {
+                var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + Settings.ForgottenPasswordTemplate;
+                var htmlCode = client.DownloadString(path);
+                var url = string.Format("{0}{1}?token={2}", Settings.CorsDomain, Settings.ResetPasswordUrl, token);
+                var body = htmlCode.Replace("_@1_", url);
+
+                var mailRequest = new MailRequest()
+                {
+                    Body = body,
+                    Subject = "Mot de passe oublié",
+                    Recipient = user.UserName
+                };
+
+                MailHelper.SendMailSuccess(mailRequest);
+            }
+           
+        }
+
+        public async Task<Users> ResetUserPassword(ResetUserPasswordRequest request)
+        {
+            var claims = JwtTokenHelper.GetTokenClaims(request.Token, Settings.JwtSecretKey);
+            var userId = claims.FirstOrDefault(x => x.Type == "UserId");
+            if (userId == null)
+                throw new Exception("Invalid token");
+
+            Users u = await _repository.GetByIdAsync(Convert.ToInt64(userId.Value));
+            request.ProjectTo(u);
+            await _repository.AddOrUpdateAsync(u);
+            return u;
         }
     }
 }

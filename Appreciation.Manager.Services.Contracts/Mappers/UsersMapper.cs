@@ -23,6 +23,14 @@ namespace Appreciation.Manager.Services.Mappers
             user.Password = scriptedPassword;
         }
 
+        public static void ProjectTo(this ResetUserPasswordRequest request, Users user)
+        {
+            var securitySalt = EncryptContractor.Instance.SetDefault(Settings.IV, Settings.Key).GenerateEncryptedSecuritySalt();
+            var scriptedPassword = PasswordContractor.Instance.GeneratePassword(request.NewPassword, securitySalt);
+            user.SecuritySalt = securitySalt;
+            user.Password = scriptedPassword;
+        }
+
         public static Users ProjectTo(this AddUsersRequest request, IMapper mapper, RoleEnum roleEnum)
         {
             Users user = mapper.Map<Users>(request);

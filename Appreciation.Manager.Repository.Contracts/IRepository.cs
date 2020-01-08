@@ -9,7 +9,9 @@ namespace Appreciation.Manager.Repository.Contracts
     public interface IRepository<T> : IReadOnlyRepository<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(long id, string[] arrays = null);
+        T GetById(long id, string[] array = null);
         Task RemoveAsync(T entity);
+        void Remove(T entity);
         Task AddOrUpdateAsync(T entity);
         Task<T> GetDataAsync(Expression<Func<T, bool>> filter);
         Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter);

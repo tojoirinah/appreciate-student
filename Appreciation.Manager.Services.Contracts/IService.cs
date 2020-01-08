@@ -13,6 +13,7 @@ namespace Appreciation.Manager.Services.Contracts
 
     public interface IService<T> : IServiceReadOnly<T> where T : BaseEntity
     {
+        void Remove(long id);
         Task RemoveAsync(long id);
         Task AddAsync(object request);
         Task UpdateAsync(object request);

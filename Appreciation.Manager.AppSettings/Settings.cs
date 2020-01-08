@@ -11,5 +11,10 @@ namespace Appreciation.Manager.Utils
         public static string Key => ConfigurationManager.AppSettings["DefaultKey"] ?? string.Empty;
         public static string ValidIssuer => ConfigurationManager.AppSettings["ValidIssuer"] ?? string.Empty;
         public static string ValidAudience => ConfigurationManager.AppSettings["ValidAudience"] ?? string.Empty;
+        public static string MailSmtp => ConfigurationManager.AppSettings["MailSmtp"] ?? string.Empty;
+        public static string MailSender => ConfigurationManager.AppSettings["MailSender"] ?? string.Empty;
+        public static string MailPassword => ConfigurationManager.AppSettings["MailPassword"] ?? string.Empty;
+        public static string ForgottenPasswordTemplate => ConfigurationManager.AppSettings["ForgottenPasswordTemplate"] ?? string.Empty;
+        public static string ResetPasswordUrl => ConfigurationManager.AppSettings["ResetPasswordUrl"] ?? string.Empty;
     }
 }
