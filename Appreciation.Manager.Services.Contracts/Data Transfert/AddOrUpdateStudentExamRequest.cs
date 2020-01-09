@@ -2,26 +2,7 @@
 
 namespace Appreciation.Manager.Services.Contracts.Data_Transfert
 {
-    public class AddStudentExamRequest : Request
-    {
-        [IdentityValidation]
-        public long StudentId { get; set; }
-
-        public bool IsAbsent { get; set; }
-
-        public double? Note { get; set; }
-
-        [IdentityValidation]
-        public long BehaviorId { get; set; }
-
-        [IdentityValidation]
-        public long ExamId { get; set; }
-
-        public bool IsClosed { get; set; }
-
-    }
-
-    public class UpdateStudentExamRequest : Request
+    public class StudentExamRequest : Request
     {
         [IdentityValidation]
         public long Id { get; set; }
@@ -50,5 +31,7 @@ namespace Appreciation.Manager.Services.Contracts.Data_Transfert
         public long ClassroomId { get; set; }
 
         public long ExamId { get; set; }
+
+        public bool IsAbsent { get; set; }
     }
 }

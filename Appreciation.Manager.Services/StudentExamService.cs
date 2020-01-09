@@ -20,10 +20,10 @@ namespace Appreciation.Manager.Services
 
         public override async Task AddAsync(object request)
         {
-            if (!(request is AddStudentExamRequest))
+            if (!(request is StudentExamRequest))
                 throw new Exception("Convert type not allowed");
 
-            AddStudentExamRequest rq = (AddStudentExamRequest)request;
+            StudentExamRequest rq = (StudentExamRequest)request;
             var std = rq.ProjectTo(_mapper);
 
             await _repository.AddOrUpdateAsync(std);
@@ -72,10 +72,10 @@ namespace Appreciation.Manager.Services
         public override async Task UpdateAsync(object request)
         {
 
-            if (!(request is UpdateStudentExamRequest))
+            if (!(request is StudentExamRequest))
                 throw new Exception("Convert type not allowed");
 
-            UpdateStudentExamRequest req = (UpdateStudentExamRequest)request;
+            StudentExamRequest req = (StudentExamRequest)request;
             StudentExam entity = await _repository.GetByIdAsync(req.Id);
             if (entity == null)
                 throw new Exception("Student exam not found");

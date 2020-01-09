@@ -5,6 +5,7 @@ using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
@@ -13,6 +14,16 @@ namespace Appreciation.Manager.Services
     {
         public ClassroomService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
         {
+        }
+
+        public async override Task<IEnumerable<Classroom>> GetAllAsync()
+        {
+            return await _repository.GetAllDataAsync(x => !x.SchoolYear.IsClosed, new string[] { "SchoolYear" });
+        }
+
+        public async override Task<Classroom> GetByIdAsync(long id)
+        {
+            return await _repository.GetByIdAsync(id, new string[] { "SchoolYear" });
         }
 
         public override async Task AddAsync(object request)

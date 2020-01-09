@@ -216,6 +216,7 @@
     <Compile Include="Controllers\BehaviorController.cs" />
     <Compile Include="Controllers\BehaviorEvaluateController.cs" />
     <Compile Include="Controllers\ClassroomController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NoteCriteriaController.cs" />

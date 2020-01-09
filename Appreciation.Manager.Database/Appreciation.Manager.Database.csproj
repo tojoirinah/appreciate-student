@@ -69,6 +69,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Scripts\20200109-dbo.sp_GetDashboardExam.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\20200108-dbo.alter-sp_SearchStudent.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

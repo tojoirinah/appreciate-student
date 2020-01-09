@@ -25,16 +25,14 @@ namespace Appreciation.Manager.Services
             await Task.Run(() =>
             {
                 var item = _repository.GetByIdAsync(id);
-                if (item != null && item.Result!=null)
+                if (item != null)
                     _repository.RemoveAsync(item.Result);
             });
         }
 
         public void Remove(long id)
         {
-            var item = _repository.GetById(id);
-            if (item != null)
-                _repository.Remove(item);
+            throw new NotImplementedException();
         }
     }
 

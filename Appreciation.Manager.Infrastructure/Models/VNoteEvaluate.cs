@@ -19,7 +19,5 @@ namespace Appreciation.Manager.Infrastructure.Models
 
         public double NoteMax { get; set; }
 
-        public string Description { get; set; }
-
     }
 }

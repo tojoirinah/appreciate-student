@@ -109,6 +109,22 @@
     <Compile Include="Migrations\202001061015402_alter_BehaviorEvaluate_view_1.Designer.cs">
       <DependentUpon>202001061015402_alter_BehaviorEvaluate_view_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001090851511_add_foreign_key_schoolyear_to_exam.cs" />
+    <Compile Include="Migrations\202001090851511_add_foreign_key_schoolyear_to_exam.Designer.cs">
+      <DependentUpon>202001090851511_add_foreign_key_schoolyear_to_exam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001090853423_add_foreign_key_schoolyear_to_Classroom.cs" />
+    <Compile Include="Migrations\202001090853423_add_foreign_key_schoolyear_to_Classroom.Designer.cs">
+      <DependentUpon>202001090853423_add_foreign_key_schoolyear_to_Classroom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001091548531_create_view_dashboard_exam.cs" />
+    <Compile Include="Migrations\202001091548531_create_view_dashboard_exam.Designer.cs">
+      <DependentUpon>202001091548531_create_view_dashboard_exam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001092335250_change_type.cs" />
+    <Compile Include="Migrations\202001092335250_change_type.Designer.cs">
+      <DependentUpon>202001092335250_change_type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BehaviorEvaluate.cs" />
@@ -123,6 +139,7 @@
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\VBehaviorEvaluate.cs" />
+    <Compile Include="Models\VDashboardExam.cs" />
     <Compile Include="Models\VNoteEvaluate.cs" />
     <Compile Include="Models\VStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,6 +190,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001061015402_alter_BehaviorEvaluate_view_1.resx">
       <DependentUpon>202001061015402_alter_BehaviorEvaluate_view_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001090851511_add_foreign_key_schoolyear_to_exam.resx">
+      <DependentUpon>202001090851511_add_foreign_key_schoolyear_to_exam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001090853423_add_foreign_key_schoolyear_to_Classroom.resx">
+      <DependentUpon>202001090853423_add_foreign_key_schoolyear_to_Classroom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001091548531_create_view_dashboard_exam.resx">
+      <DependentUpon>202001091548531_create_view_dashboard_exam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001092335250_change_type.resx">
+      <DependentUpon>202001092335250_change_type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,6 +6,9 @@ namespace Appreciation.Manager.Services.Contracts.Data_Transfert
     {
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        public long SchoolYearId { get; set; }
     }
 
     public class UpdateExamRequest : Request

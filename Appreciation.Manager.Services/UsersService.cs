@@ -7,7 +7,6 @@ using Appreciation.Manager.Services.Mappers;
 using Appreciation.Manager.Utils;
 using AutoMapper;
 using System;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -105,7 +104,7 @@ namespace Appreciation.Manager.Services
                 Settings.JwtSecretKey
             );
 
-            using(var client = new WebClient())
+            using (var client = new WebClient())
             {
                 var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + Settings.ForgottenPasswordTemplate;
                 var htmlCode = client.DownloadString(path);
@@ -121,7 +120,7 @@ namespace Appreciation.Manager.Services
 
                 MailHelper.SendMailSuccess(mailRequest);
             }
-           
+
         }
 
         public async Task<Users> ResetUserPassword(ResetUserPasswordRequest request)

@@ -19,7 +19,7 @@ namespace Appreciation.Manager.Api.Controllers
 
         [HttpPost]
         [Route("api/StudentExam/Add")]
-        public async Task<IHttpActionResult> AddStudentExam([FromBody]AddStudentExamRequest request)
+        public async Task<IHttpActionResult> AddStudentExam([FromBody]StudentExamRequest request)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Appreciation.Manager.Api.Controllers
 
         [HttpPut]
         [Route("api/StudentExam/Update")]
-        public async Task<IHttpActionResult> UpdateStudentExam([FromBody]UpdateStudentExamRequest request)
+        public async Task<IHttpActionResult> UpdateStudentExam([FromBody]StudentExamRequest request)
         {
             try
             {

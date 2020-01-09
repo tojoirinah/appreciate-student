@@ -73,7 +73,7 @@ namespace Appreciation.Manager.Repository
 
         }
 
-        public async Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter)
+        public async virtual Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter, string[] arrays = null)
         {
             return await Task.Run(() =>
             {
@@ -81,18 +81,32 @@ namespace Appreciation.Manager.Repository
                 if (filter == null) throw new ArgumentNullException(nameof(filter),
                                       $"The parameter filter can not be null");
 
-                return _table.Where(filter).ToList();
+                var query = _table.Where(filter);
+                if (arrays != null)
+                {
+                    foreach (string propertyName in arrays)
+                        query = query.Include(propertyName);
+
+                }
+                return query.ToList();
             });
         }
 
-        public async Task<T> GetDataAsync(Expression<Func<T, bool>> filter)
+        public async virtual Task<T> GetDataAsync(Expression<Func<T, bool>> filter, string[] arrays = null)
         {
             return await Task.Run(() =>
             {
                 if (filter == null) throw new ArgumentNullException(nameof(filter),
                                           $"The parameter filter can not be null");
 
-                return _table.FirstOrDefault(filter);
+                var query = _table.Where(filter);
+                if (arrays != null)
+                {
+                    foreach (string propertyName in arrays)
+                        query = query.Include(propertyName);
+
+                }
+                return query.FirstOrDefault();
             });
         }
 
@@ -105,20 +119,6 @@ namespace Appreciation.Manager.Repository
         public async Task ExecuteNonQuery(string query, params object[] parameters)
         {
             await Task.Run(() => _context.Database.ExecuteSqlCommand(query, parameters));
-        }
-
-        public T GetById(long id, string[] array = null)
-        {
-            return Query(array).FirstOrDefault(x => x.Id == id);
-        }
-
-        public void Remove(T entity)
-        {
-            var item = _table.FirstOrDefault(i => i.Id == entity.Id);
-            if (item != null)
-            {
-                _table.Remove(item);
-            }
         }
     }
 }

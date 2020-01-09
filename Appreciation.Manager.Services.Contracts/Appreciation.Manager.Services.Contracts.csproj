@@ -54,6 +54,7 @@
     <Compile Include="Data Transfert\AddOrUpdateStudentRequest.cs" />
     <Compile Include="Data Transfert\AddOrUpdateUsersRequest.cs" />
     <Compile Include="Data Transfert\AuthenticationRequest.cs" />
+    <Compile Include="Data Transfert\DashboardDto.cs" />
     <Compile Include="Data Transfert\Request.cs" />
     <Compile Include="IBehaviorEvaluateService.cs" />
     <Compile Include="IBehaviorService.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="IUserRoleService.cs" />
     <Compile Include="IUsersService.cs" />
     <Compile Include="IVBehaviorEvaluateService.cs" />
+    <Compile Include="IVDashboardExamService.cs" />
     <Compile Include="IVNoteEvaluateService.cs" />
     <Compile Include="IVStudentService.cs" />
     <Compile Include="Mappers\BehaviorEvaluateMapper.cs" />

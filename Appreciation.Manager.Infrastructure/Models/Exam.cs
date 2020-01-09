@@ -8,5 +8,10 @@ namespace Appreciation.Manager.Infrastructure.Models
     {
         [MaxLength(50)]
         public string Name { get; set; }
+
+        public long SchoolYearId { get; set; }
+
+        [ForeignKey("SchoolYearId")]
+        public virtual SchoolYear SchoolYear { get; set; }
     }
 }

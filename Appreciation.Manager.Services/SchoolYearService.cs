@@ -5,7 +5,6 @@ using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
@@ -55,6 +54,6 @@ namespace Appreciation.Manager.Services
             return await Task.Run(() => u);
         }
 
-       
+
     }
 }

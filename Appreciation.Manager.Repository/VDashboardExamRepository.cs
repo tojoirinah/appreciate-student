@@ -4,12 +4,10 @@ using Appreciation.Manager.Repository.Contracts;
 
 namespace Appreciation.Manager.Repository
 {
-    public class ClassroomRepository : Repository<Classroom>, IClassroomRepository
+    public class VDashboardExamRepository : Repository<VDashboardExam>, IVDashboardExamRepository
     {
-        public ClassroomRepository(AppreciationContext context) : base(context)
+        public VDashboardExamRepository(AppreciationContext context) : base(context)
         {
-
         }
-
     }
 }

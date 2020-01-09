@@ -76,6 +76,8 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
+
+
         [HttpGet]
         [Route("api/Exam/id")]
         public async Task<IHttpActionResult> ExamById([FromUri] long id)

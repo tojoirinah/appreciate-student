@@ -7,7 +7,7 @@ namespace Appreciation.Manager.Services.Contracts.Mappers
 {
     public static class StudentExamMapper
     {
-        public static void ProjectTo(this UpdateStudentExamRequest request, StudentExam entity)
+        public static void ProjectTo(this StudentExamRequest request, StudentExam entity)
         {
             entity.IsAbsent = request.IsAbsent;
             entity.IsClosed = request.IsClosed;
@@ -17,7 +17,7 @@ namespace Appreciation.Manager.Services.Contracts.Mappers
         }
 
 
-        public static StudentExam ProjectTo(this AddStudentExamRequest request, IMapper mapper)
+        public static StudentExam ProjectTo(this StudentExamRequest request, IMapper mapper)
         {
             StudentExam entity = mapper.Map<StudentExam>(request);
             entity.DateCreated = DateTime.Now;

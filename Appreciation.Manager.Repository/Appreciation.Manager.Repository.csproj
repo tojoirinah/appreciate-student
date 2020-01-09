@@ -63,6 +63,7 @@
     <Compile Include="UsersRepository.cs" />
     <Compile Include="UserRoleRepository.cs" />
     <Compile Include="VBehaviorEvaluateRepository.cs" />
+    <Compile Include="VDashboardExamRepository.cs" />
     <Compile Include="VNoteEvaluateRepository.cs" />
     <Compile Include="VStudentRepository.cs" />
   </ItemGroup>

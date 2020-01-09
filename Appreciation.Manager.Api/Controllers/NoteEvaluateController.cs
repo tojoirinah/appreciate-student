@@ -93,27 +93,5 @@ namespace Appreciation.Manager.Api.Controllers
                 return BadRequest(GetError(ex));
             }
         }
-
-        [HttpPost]
-        [Route("api/NoteEvaluate/Delete")]
-        public async Task<IHttpActionResult> DeleteNoteEvaluate([FromUri]long id)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    _service.Remove(id);
-                    await _service.CommitAsync();
-                    return Ok();
-                }
-                return BadRequest();
-
-            }
-            catch (Exception ex)
-            {
-                await _service.RollbackAsync();
-                return BadRequest(GetError(ex));
-            }
-        }
     }
 }
