@@ -65,7 +65,8 @@ BEGIN
 			
 			FROM dbo.Student s
 			INNER JOIN dbo.SchoolYear sy ON sy.[Id] = s.[SchoolYearId]
-			INNER JOIN dbo.Exam e on e.SchoolYearId = sy.Id
+			INNER JOIN dbo.Classroom c ON (c.[Id] = s.[ClassRoomId] AND c.[SchoolYearId] = sy.[Id])
+			INNER JOIN dbo.Exam e on (e.SchoolYearId = sy.Id AND e.ClassroomId = c.Id)
 			LEFT OUTER JOIN dbo.StudentExam se ON (s.[Id] = se.StudentId and se.ExamId = @examId)
 			WHERE sy.[IsClosed] = 0
 			AND se.[Id] IS NULL
@@ -79,6 +80,13 @@ BEGIN
 		INNER JOIN dbo.SchoolYear sy ON sy.Id = e.SchoolYearId
 		WHERE sy.IsClosed = 1
 
+		UPDATE se
+		SET se.IsClosed = 0
+		FROM  dbo.StudentExam se
+		INNER JOIN dbo.Exam e on e.Id = se.ExamId
+		INNER JOIN dbo.SchoolYear sy ON sy.Id = e.SchoolYearId
+		WHERE sy.IsClosed = 0
+
 		IF OBJECT_ID(''tempdb..#tStudentExam'') IS NOT NULL
 			drop table #tStudentExam
 
@@ -90,20 +98,25 @@ BEGIN
 			where sy.IsClosed = 0
 			AND s.IsClosed = 0
 
-	
-		SELECT @TotalStudents = count(*) FROM #tStudentExam where ExamId = @examId
-		SELECT @TotalAbsents = count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 1
+		IF EXISTS(SELECT 1 FROM #tStudentExam)
+		BEGIN
+			SELECT @TotalStudents = count(*) FROM #tStudentExam where ExamId = @examId
+			SELECT @TotalAbsents = count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 1
 
-		DECLARE @totalStudentsPresent INT = 0, @renseigne INT = 0
+			DECLARE @totalStudentsPresent INT = 0, @renseigne INT = 0
 
-		SELECT @totalStudentsPresent = count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 0
-		SELECT @renseigne =  count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 0  AND [Note] is not null
-		SELECT @TotalWaitingNonReseigne =  count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 0  AND [Note] is null
+			SELECT @totalStudentsPresent = count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 0
+			SELECT @renseigne =  count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 0  AND [Note] is not null
+			SELECT @TotalWaitingNonReseigne =  count(*) FROM #tStudentExam WHERE ExamId = @examId AND IsAbsent = 0  AND [Note] is null
 
-		SELECT @PercentNoteRenseigne = ROUND(@renseigne*100/@totalStudentsPresent,2) 
+			IF @totalStudentsPresent > 0
+				SELECT @PercentNoteRenseigne = ROUND(@renseigne*100/@totalStudentsPresent,2) 
+			ELSE
+				SET @PercentNoteRenseigne = 0
 
-		INSERT INTO #tDashboardExam([ExamId] ,[TotalStudents] ,[TotalAbsents] ,[TotalWaitingNonReseigne] ,[PercentNoteRenseigne], [DateCreated]) VALUES
-		(@examId, @TotalStudents, @TotalAbsents, @TotalWaitingNonReseigne, @PercentNoteRenseigne, GETDATE())
+			INSERT INTO #tDashboardExam([ExamId] ,[TotalStudents] ,[TotalAbsents] ,[TotalWaitingNonReseigne] ,[PercentNoteRenseigne], [DateCreated]) VALUES
+			(@examId, @TotalStudents, @TotalAbsents, @TotalWaitingNonReseigne, @PercentNoteRenseigne, GETDATE())
+		END
 
 		SET @TotalStudents = 0
 		SET @TotalAbsents = 0
@@ -126,16 +139,17 @@ BEGIN
 	INNER JOIN dbo.[Student] s on s.[Id] = se.[StudentId]
 	INNER JOIN dbo.[Classroom] c on s.[ClassroomId] = c.[Id]
 	INNER JOIN dbo.[SchoolYear] sy ON sy.Id = e.[SchoolYearId]
+	WHERE sy.[IsClosed] = 0 AND se.[IsClosed] = 0
 	'
 
 	IF @examIdParam > 0
 	BEGIN
 		SET @sql = @sql + N'
-		WHERE e.Id = ' + + CONVERT(VARCHAR(5),@examIdParam)
+		AND e.Id = ' + + CONVERT(VARCHAR(5),@examIdParam)
 	END
 
 	EXECUTE sp_Executesql @sql
-END  
+END
 Go
 
 GRANT EXECUTE ON [dbo].[sp_GetDashboardExam] TO public

@@ -53,5 +53,10 @@ namespace Appreciation.Manager.Services
 
             await _repository.AddOrUpdateAsync(cr);
         }
+
+        public async Task<IEnumerable<Classroom>> GetAllBySchoolYearAsync(long schoolYearId)
+        {
+            return await _repository.GetAllDataAsync(x => x.SchoolYear.Id == schoolYearId && !x.SchoolYear.IsClosed, new string[] { "SchoolYear" });
+        }
     }
 }

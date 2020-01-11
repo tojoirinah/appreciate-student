@@ -125,6 +125,14 @@
     <Compile Include="Migrations\202001092335250_change_type.Designer.cs">
       <DependentUpon>202001092335250_change_type.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001101441179_update_foreign_key_Exam.cs" />
+    <Compile Include="Migrations\202001101441179_update_foreign_key_Exam.Designer.cs">
+      <DependentUpon>202001101441179_update_foreign_key_Exam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001101504280_add_schoolyear_foreign_key_to_exam.cs" />
+    <Compile Include="Migrations\202001101504280_add_schoolyear_foreign_key_to_exam.Designer.cs">
+      <DependentUpon>202001101504280_add_schoolyear_foreign_key_to_exam.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BehaviorEvaluate.cs" />
@@ -202,6 +210,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001092335250_change_type.resx">
       <DependentUpon>202001092335250_change_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001101441179_update_foreign_key_Exam.resx">
+      <DependentUpon>202001101441179_update_foreign_key_Exam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001101504280_add_schoolyear_foreign_key_to_exam.resx">
+      <DependentUpon>202001101504280_add_schoolyear_foreign_key_to_exam.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

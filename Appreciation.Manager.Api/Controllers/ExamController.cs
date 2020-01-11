@@ -19,7 +19,7 @@ namespace Appreciation.Manager.Api.Controllers
 
         [HttpPost]
         [Route("api/Exam/Add")]
-        public async Task<IHttpActionResult> AddExam([FromBody]AddExamRequest request)
+        public async Task<IHttpActionResult> AddExam([FromBody]ExamRequest request)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Appreciation.Manager.Api.Controllers
 
         [HttpPut]
         [Route("api/Exam/Update")]
-        public async Task<IHttpActionResult> UpdateExam([FromBody]UpdateExamRequest request)
+        public async Task<IHttpActionResult> UpdateExam([FromBody]ExamRequest request)
         {
             try
             {
@@ -59,13 +59,13 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/Exam")]
-        public async Task<IHttpActionResult> ExamList()
+        public async Task<IHttpActionResult> ExamList([FromBody]ExamSearchRequest request)
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                var list = await _service.SearchExam(request);
                 await _service.CommitAsync();
                 return Ok(new { List = list });
             }

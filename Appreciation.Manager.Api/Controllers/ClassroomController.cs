@@ -98,6 +98,23 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpGet]
+        [Route("api/Classroom/SchoolYear")]
+        public async Task<IHttpActionResult> ClassroomList([FromUri] long id)
+        {
+            try
+            {
+                var list = await _service.GetAllBySchoolYearAsync(id);
+                await _service.CommitAsync();
+                return Ok(new { List = list });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpGet]
         [Route("api/Classroom/id")]
         public async Task<IHttpActionResult> ClassroomById(long id)
         {

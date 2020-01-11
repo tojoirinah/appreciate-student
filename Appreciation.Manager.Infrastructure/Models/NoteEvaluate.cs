@@ -8,6 +8,7 @@ namespace Appreciation.Manager.Infrastructure.Models
     {
         public long NoteCriteriaId { get; set; }
 
+        [ForeignKey("NoteCriteriaId")]
         public virtual NoteCriteria NoteCriteria { get; set; }
 
         [Column(TypeName = "VARCHAR")]

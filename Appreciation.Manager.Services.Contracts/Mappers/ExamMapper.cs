@@ -7,12 +7,12 @@ namespace Appreciation.Manager.Services.Contracts.Mappers
 {
     public static class ExamMapper
     {
-        public static void ProjectTo(this UpdateExamRequest request, Exam exam)
+        public static void ProjectTo(this ExamRequest request, Exam exam)
         {
             exam.Name = request.Name;
         }
 
-        public static Exam ProjectTo(this AddExamRequest request, IMapper mapper)
+        public static Exam ProjectTo(this ExamRequest request, IMapper mapper)
         {
             Exam ex = mapper.Map<Exam>(request);
             ex.DateCreated = DateTime.Now;

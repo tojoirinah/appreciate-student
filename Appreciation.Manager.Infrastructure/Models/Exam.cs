@@ -13,5 +13,10 @@ namespace Appreciation.Manager.Infrastructure.Models
 
         [ForeignKey("SchoolYearId")]
         public virtual SchoolYear SchoolYear { get; set; }
+
+        public long ClassroomId { get; set; }
+
+        [ForeignKey("ClassroomId")]
+        public virtual Classroom Classroom { get; set; }
     }
 }
