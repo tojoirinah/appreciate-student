@@ -34,6 +34,22 @@ namespace Appreciation.Manager.Services
             await _repository.ExecuteNonQuery("dbo.sp_GenerateComment");
         }
 
+        public async Task<IEnumerable<StudentExam>> GetListByExam(long examid)
+        {
+            return await _repository.GetAllDataAsync(x => x.ExamId == examid 
+                                                        && !x.ControlContinu.SchoolYear.IsClosed
+                                                        && !x.IsClosed, 
+                new string[] { "Etudiant", 
+                               "Etudiant.User",
+                               "Etudiant.User.Role",
+                               "Etudiant.AnneeScolaire",
+                               "Etudiant.Classroom",
+                               "Comportement", 
+                               "ControlContinu", 
+                               "ControlContinu.SchoolYear",
+                               "ControlContinu.Classroom"});
+        }
+
         public async Task RemoveAllStudentSchoolYearByStudentId(long studentId)
         {
             await ((IStudentExamRepository)_repository).RemoveByStudentId(studentId); // todo

@@ -94,12 +94,29 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/StudentExam/id")]
+        [Route("api/StudentExam")]
         public async Task<IHttpActionResult> StudentExamById([FromUri] long id)
         {
             try
             {
                 var student = await _service.GetByIdAsync(id);
+                await _service.CommitAsync();
+                return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpGet]
+        [Route("api/StudentExam/Exam")]
+        public async Task<IHttpActionResult> StudentExamByExam([FromUri] long id)
+        {
+            try
+            {
+                var student = await _service.GetListByExam(id);
                 await _service.CommitAsync();
                 return Ok(new { Item = student });
             }

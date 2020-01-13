@@ -57,7 +57,7 @@ BEGIN
 				   0, -- IsAbsent
 				   NULL, -- Note
 				(select top 1 Id from dbo.Behavior), -- BehaviorId
-				@examId, -- ExamId
+				e.[Id], -- ExamId
 				0, -- IsClosed
 				'''', -- NoteEvaluate
 				'''', -- BehaviorEvaluate
@@ -67,7 +67,7 @@ BEGIN
 			INNER JOIN dbo.SchoolYear sy ON sy.[Id] = s.[SchoolYearId]
 			INNER JOIN dbo.Classroom c ON (c.[Id] = s.[ClassRoomId] AND c.[SchoolYearId] = sy.[Id])
 			INNER JOIN dbo.Exam e on (e.SchoolYearId = sy.Id AND e.ClassroomId = c.Id)
-			LEFT OUTER JOIN dbo.StudentExam se ON (s.[Id] = se.StudentId and se.ExamId = @examId)
+			LEFT OUTER JOIN dbo.StudentExam se ON (s.[Id] = se.StudentId)
 			WHERE sy.[IsClosed] = 0
 			AND se.[Id] IS NULL
 		)
@@ -153,4 +153,8 @@ END
 Go
 
 GRANT EXECUTE ON [dbo].[sp_GetDashboardExam] TO public
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX IX_StudentExam
+   ON dbo.StudentExam (StudentId, ExamId);
 GO
