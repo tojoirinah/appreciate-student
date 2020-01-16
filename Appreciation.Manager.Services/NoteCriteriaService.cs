@@ -9,14 +9,21 @@ namespace Appreciation.Manager.Services
 {
     public class NoteCriteriaService : ServiceReadOnly<NoteCriteria>, INoteCriteriaService
     {
-        public NoteCriteriaService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
+        private readonly IVNoteCriteriaService _vService;
+        public NoteCriteriaService(IMapper mapper, IUnitOfWork unitOfWork, IVNoteCriteriaService vService) : base(unitOfWork, mapper)
         {
+            _vService = vService;
         }
 
         public async override Task<IEnumerable<NoteCriteria>> GetAllAsync()
         {
             string key = typeof(NoteCriteria).FullName;
             return await GetOrCreateAsync(key, _repository.GetAllAsync);
+        }
+
+        public async Task<IEnumerable<VNoteCriteria>> GetAllViewAsync()
+        {
+            return await _vService.GetAllAsync();
         }
     }
 }

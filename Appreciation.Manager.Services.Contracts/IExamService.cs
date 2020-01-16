@@ -8,6 +8,7 @@ namespace Appreciation.Manager.Services.Contracts
     public interface IExamService : IService<Exam>
     {
 
-        Task<IEnumerable<Exam>> SearchExam(ExamSearchRequest request);
+        Task<IEnumerable<VExam>> SearchExam(ExamSearchRequest request);
+
     }
 }

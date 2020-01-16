@@ -32,5 +32,22 @@ namespace Appreciation.Manager.Api.Controllers
                 return BadRequest(GetError(ex));
             }
         }
+
+        [HttpGet]
+        [Route("api/Stats/Generate")]
+        public async Task<IHttpActionResult> Generate()
+        {
+            try
+            {
+                await _service.GenerateStudentExam();
+                await _service.CommitAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
     }
 }

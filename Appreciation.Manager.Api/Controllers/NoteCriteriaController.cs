@@ -22,7 +22,7 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                var list = await _service.GetAllViewAsync();
                 await _service.CommitAsync();
                 return Ok(new { List = list });
             }

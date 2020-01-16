@@ -29,23 +29,33 @@ namespace Appreciation.Manager.Services
             await _repository.AddOrUpdateAsync(std);
         }
 
-        public async Task GenerateComment()
+        public async Task<IEnumerable<StudentExam>> GenerateComment(long examId)
         {
-            await _repository.ExecuteNonQuery("dbo.sp_GenerateComment");
+            var examIdParameter = new SqlParameter
+            {
+                ParameterName = "examId",
+                Direction = ParameterDirection.Input,
+                SqlDbType = SqlDbType.BigInt,
+                Value = examId
+            };
+
+            await _repository.ExecuteNonQuery("dbo.sp_GenerateComment @examId", examIdParameter);
+
+            return await GetListByExam(examId);
         }
 
         public async Task<IEnumerable<StudentExam>> GetListByExam(long examid)
         {
-            return await _repository.GetAllDataAsync(x => x.ExamId == examid 
+            return await _repository.GetAllDataAsync(x => x.ExamId == examid
                                                         && !x.ControlContinu.SchoolYear.IsClosed
-                                                        && !x.IsClosed, 
-                new string[] { "Etudiant", 
+                                                        && !x.IsClosed,
+                new string[] { "Etudiant",
                                "Etudiant.User",
                                "Etudiant.User.Role",
                                "Etudiant.AnneeScolaire",
                                "Etudiant.Classroom",
-                               "Comportement", 
-                               "ControlContinu", 
+                               "Comportement",
+                               "ControlContinu",
                                "ControlContinu.SchoolYear",
                                "ControlContinu.Classroom"});
         }

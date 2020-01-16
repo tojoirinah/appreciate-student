@@ -45,6 +45,7 @@ BEGIN
 				se.DateCreated = tmp.DateCreated
 				FROM [dbo].[StudentExam] se 
 				INNER JOIN #tStudentExam tmp ON tmp.[Id] = se.[Id]
+
 				select * from #tStudentExam
 
 			END

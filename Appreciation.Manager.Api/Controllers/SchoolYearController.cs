@@ -82,7 +82,7 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                var list = await _service.GetAllAsync();
+                var list = await _service.GetAllViewAsync();
                 await _service.CommitAsync();
                 return Ok(new { List = list });
             }
@@ -102,6 +102,22 @@ namespace Appreciation.Manager.Api.Controllers
                 var student = await _service.GetByIdAsync(id);
                 await _service.CommitAsync();
                 return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+        [HttpDelete]
+        [Route("api/SchoolYear/Delete")]
+        public async Task<IHttpActionResult> DeleteClassroom([FromUri]long id)
+        {
+            try
+            {
+                await _service.RemoveAsync(id);
+                await _service.CommitAsync();
+                return Ok();
             }
             catch (Exception ex)
             {

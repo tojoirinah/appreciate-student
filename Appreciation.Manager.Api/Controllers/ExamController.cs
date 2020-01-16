@@ -97,7 +97,7 @@ namespace Appreciation.Manager.Api.Controllers
 
         [HttpDelete]
         [Route("api/Exam/Delete")]
-        public async Task<IHttpActionResult> DeleteClassroom([FromUri]long id)
+        public async Task<IHttpActionResult> Delete([FromUri]long id)
         {
             try
             {

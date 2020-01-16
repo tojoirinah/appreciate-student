@@ -94,8 +94,13 @@
     <Compile Include="UserRoleService.cs" />
     <Compile Include="UsersService.cs" />
     <Compile Include="VBehaviorEvaluateService.cs" />
+    <Compile Include="VBehaviorService.cs" />
+    <Compile Include="VClassroomService.cs" />
     <Compile Include="VDashboardExamService.cs" />
+    <Compile Include="VExamService.cs" />
+    <Compile Include="VNoteCriteriaService.cs" />
     <Compile Include="VNoteEvaluateService.cs" />
+    <Compile Include="VSchoolYearService.cs" />
     <Compile Include="VStudentService.cs" />
   </ItemGroup>
   <ItemGroup>

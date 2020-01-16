@@ -7,5 +7,7 @@ namespace Appreciation.Manager.Services.Contracts
     public interface IVDashboardExamService : IService<VDashboardExam>
     {
         Task<DashboardDto> GenerateDashboard(long examId = 0);
+
+        Task GenerateStudentExam();
     }
 }

@@ -45,6 +45,11 @@ namespace Appreciation.Manager.Services
             return dtos;
         }
 
+        public async Task GenerateStudentExam()
+        {
+            await _repository.ExecuteNonQuery("dbo.sp_GenerateStudentExam");
+        }
+
         void BuildSchoolYear(IList<SchoolYearDto> source, VDashboardExam item)
         {
             var schoolYear = source.FirstOrDefault(x => x.Id == item.SchoolYearId);
@@ -91,5 +96,7 @@ namespace Appreciation.Manager.Services
             }
             return dto;
         }
+
+        
     }
 }

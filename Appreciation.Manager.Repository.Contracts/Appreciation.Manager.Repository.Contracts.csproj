@@ -64,7 +64,12 @@
     <Compile Include="IUsersRepository.cs" />
     <Compile Include="IUserRoleRepository.cs" />
     <Compile Include="IVBehaviorEvaluateRepository.cs" />
+    <Compile Include="IVBehaviorRepository.cs" />
+    <Compile Include="IVClassroomRepository.cs" />
+    <Compile Include="IVExamRepository.cs" />
+    <Compile Include="IVNoteCriteriaRepository.cs" />
     <Compile Include="IVNoteEvaluateRepository.cs" />
+    <Compile Include="IVSchoolYearRepository.cs" />
     <Compile Include="IVStudentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IVDashboardExamRepository.cs" />
@@ -73,6 +78,10 @@
     <ProjectReference Include="..\Appreciation.Manager.Infrastructure\Appreciation.Manager.Infrastructure.csproj">
       <Project>{d8c710d2-008a-43a9-b140-7054e0689da0}</Project>
       <Name>Appreciation.Manager.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Appreciation.Manager.Services.Contracts\Appreciation.Manager.Services.Contracts.csproj">
+      <Project>{9D6EC4EA-1D15-4464-9896-1F5DAA46B77D}</Project>
+      <Name>Appreciation.Manager.Services.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

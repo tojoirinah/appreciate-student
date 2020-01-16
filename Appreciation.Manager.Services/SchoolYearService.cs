@@ -5,14 +5,17 @@ using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Appreciation.Manager.Services
 {
     public class SchoolYearService : Service<SchoolYear>, ISchoolYearService
     {
-        public SchoolYearService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
+        private readonly IVSchoolYearService _vService;
+        public SchoolYearService(IMapper mapper, IUnitOfWork unitOfWork, IVSchoolYearService vService) : base(unitOfWork, mapper)
         {
+            _vService = vService;
         }
 
         public async override Task AddAsync(object request)
@@ -25,6 +28,11 @@ namespace Appreciation.Manager.Services
 
             // update student
             await _repository.AddOrUpdateAsync(item);
+        }
+
+        public async Task<IEnumerable<VSchoolYear>> GetAllViewAsync()
+        {
+            return await _vService.GetAllAsync();
         }
 
         public async override Task UpdateAsync(object request)

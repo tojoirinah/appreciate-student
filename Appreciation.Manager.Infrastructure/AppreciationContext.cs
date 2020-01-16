@@ -20,6 +20,11 @@ namespace Appreciation.Manager.Infrastructure
         public virtual DbSet<VNoteEvaluate> VNoteEvaluates { get; set; }
         public virtual DbSet<VBehaviorEvaluate> VBehaviorEvaluates { get; set; }
         public virtual DbSet<VDashboardExam> VDashboardExams { get; set; }
+        public virtual DbSet<VBehavior> VBehaviors { get; set; }
+        public virtual DbSet<VClassroom> VClassrooms { get; set; }
+        public virtual DbSet<VNoteCriteria> VNoteCriterias { get; set; }
+        public virtual DbSet<VSchoolYear> VSchoolYears { get; set; }
+        public virtual DbSet<VExam> VExams { get; set; }
 
         public AppreciationContext() : base("AppreciationContext")
         {

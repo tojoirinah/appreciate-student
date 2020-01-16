@@ -79,7 +79,7 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/Student/id")]
+        [Route("api/Student")]
         public async Task<IHttpActionResult> StudentById([FromUri] long id)
         {
             try
@@ -87,6 +87,23 @@ namespace Appreciation.Manager.Api.Controllers
                 var student = await _service.GetByIdAsync(id);
                 await _service.CommitAsync();
                 return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Student/Delete")]
+        public async Task<IHttpActionResult> Delete([FromUri]long id)
+        {
+            try
+            {
+                await _service.RemoveAsync(id);
+                await _service.CommitAsync();
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -133,6 +133,18 @@
     <Compile Include="Migrations\202001101504280_add_schoolyear_foreign_key_to_exam.Designer.cs">
       <DependentUpon>202001101504280_add_schoolyear_foreign_key_to_exam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001151126116_create_views.cs" />
+    <Compile Include="Migrations\202001151126116_create_views.Designer.cs">
+      <DependentUpon>202001151126116_create_views.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001151129319_create_views_1.cs" />
+    <Compile Include="Migrations\202001151129319_create_views_1.Designer.cs">
+      <DependentUpon>202001151129319_create_views_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001161407002_view_VExam.cs" />
+    <Compile Include="Migrations\202001161407002_view_VExam.Designer.cs">
+      <DependentUpon>202001161407002_view_VExam.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BehaviorEvaluate.cs" />
@@ -146,9 +158,14 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\VBehavior.cs" />
     <Compile Include="Models\VBehaviorEvaluate.cs" />
+    <Compile Include="Models\VClassroom.cs" />
     <Compile Include="Models\VDashboardExam.cs" />
+    <Compile Include="Models\VExam.cs" />
+    <Compile Include="Models\VNoteCriteria.cs" />
     <Compile Include="Models\VNoteEvaluate.cs" />
+    <Compile Include="Models\VSchoolYear.cs" />
     <Compile Include="Models\VStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -216,6 +233,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001101504280_add_schoolyear_foreign_key_to_exam.resx">
       <DependentUpon>202001101504280_add_schoolyear_foreign_key_to_exam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001151126116_create_views.resx">
+      <DependentUpon>202001151126116_create_views.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001151129319_create_views_1.resx">
+      <DependentUpon>202001151129319_create_views_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001161407002_view_VExam.resx">
+      <DependentUpon>202001161407002_view_VExam.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

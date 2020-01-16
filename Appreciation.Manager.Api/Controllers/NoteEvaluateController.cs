@@ -93,5 +93,22 @@ namespace Appreciation.Manager.Api.Controllers
                 return BadRequest(GetError(ex));
             }
         }
+
+        [HttpDelete]
+        [Route("api/NoteEvaluate/Delete")]
+        public async Task<IHttpActionResult> Delete([FromUri]long id)
+        {
+            try
+            {
+                await _service.RemoveAsync(id);
+                await _service.CommitAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
     }
 }

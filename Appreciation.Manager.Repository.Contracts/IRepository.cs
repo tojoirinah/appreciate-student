@@ -10,6 +10,7 @@ namespace Appreciation.Manager.Repository.Contracts
     {
         Task<T> GetByIdAsync(long id, string[] arrays = null);
         Task RemoveAsync(T entity);
+        Task RemoveAsync(long id);
         Task AddOrUpdateAsync(T entity);
         Task<T> GetDataAsync(Expression<Func<T, bool>> filter, string[] arrays = null);
         Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter, string[] arrays = null);

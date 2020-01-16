@@ -55,7 +55,7 @@ namespace Appreciation.Manager.Services
             await _userService.RemoveAsync(student.User.Id);
 
             // remove all note StudentSchoolYear
-            await _studentSchoolYearService.RemoveAllStudentSchoolYearByStudentId(student.Id);
+            //  await _studentSchoolYearService.RemoveAllStudentSchoolYearByStudentId(student.Id);
 
             // remove student
             await _repository.RemoveAsync(student);

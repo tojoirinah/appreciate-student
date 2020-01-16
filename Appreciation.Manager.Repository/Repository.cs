@@ -32,6 +32,15 @@ namespace Appreciation.Manager.Repository
             }
         }
 
+        public async Task RemoveAsync(long id)
+        {
+            var item = _table.FirstOrDefault(i => i.Id == id);
+            if (item != null)
+            {
+                await Task.Run(() => _table.Remove(item));
+            }
+        }
+
         public async Task AddOrUpdateAsync(T entity)
         {
             var item = _table.FirstOrDefault(i => i.Id == entity.Id);

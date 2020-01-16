@@ -22,12 +22,7 @@ namespace Appreciation.Manager.Services
 
         public async virtual Task RemoveAsync(long id)
         {
-            await Task.Run(() =>
-            {
-                var item = _repository.GetByIdAsync(id);
-                if (item != null)
-                    _repository.RemoveAsync(item.Result);
-            });
+            await _repository.RemoveAsync(id);
         }
 
         public void Remove(long id)

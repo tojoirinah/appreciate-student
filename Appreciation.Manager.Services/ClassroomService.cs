@@ -12,8 +12,10 @@ namespace Appreciation.Manager.Services
 {
     public class ClassroomService : Service<Classroom>, IClassroomService
     {
-        public ClassroomService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
+        private readonly IVClassroomService _vService;
+        public ClassroomService(IMapper mapper, IUnitOfWork unitOfWork, IVClassroomService vService) : base(unitOfWork, mapper)
         {
+            _vService = vService;
         }
 
         public async override Task<IEnumerable<Classroom>> GetAllAsync()
@@ -54,9 +56,14 @@ namespace Appreciation.Manager.Services
             await _repository.AddOrUpdateAsync(cr);
         }
 
-        public async Task<IEnumerable<Classroom>> GetAllBySchoolYearAsync(long schoolYearId)
+        public async Task<IEnumerable<VClassroom>> GetAllBySchoolYearAsync(long schoolYearId)
         {
-            return await _repository.GetAllDataAsync(x => x.SchoolYear.Id == schoolYearId && !x.SchoolYear.IsClosed, new string[] { "SchoolYear" });
+            return await _vService.GetAllBySchoolYearAsync(schoolYearId);
+        }
+
+        public async Task<IEnumerable<VClassroom>> GetAllViewAsync()
+        {
+            return await _vService.GetAllAsync();
         }
     }
 }

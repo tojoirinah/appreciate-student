@@ -63,8 +63,13 @@
     <Compile Include="UsersRepository.cs" />
     <Compile Include="UserRoleRepository.cs" />
     <Compile Include="VBehaviorEvaluateRepository.cs" />
+    <Compile Include="VBehaviorRepository.cs" />
+    <Compile Include="VClassroomRepository.cs" />
     <Compile Include="VDashboardExamRepository.cs" />
+    <Compile Include="VExamRepository.cs" />
+    <Compile Include="VNoteCriteriaRepository.cs" />
     <Compile Include="VNoteEvaluateRepository.cs" />
+    <Compile Include="VSchoolYearRepository.cs" />
     <Compile Include="VStudentRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +80,14 @@
     <ProjectReference Include="..\Appreciation.Manager.Repository.Contracts\Appreciation.Manager.Repository.Contracts.csproj">
       <Project>{645498f9-7a90-4f48-a718-4fc3770ac39b}</Project>
       <Name>Appreciation.Manager.Repository.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Appreciation.Manager.Services.Contracts\Appreciation.Manager.Services.Contracts.csproj">
+      <Project>{9D6EC4EA-1D15-4464-9896-1F5DAA46B77D}</Project>
+      <Name>Appreciation.Manager.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Appreciation.Manager.Services\Appreciation.Manager.Services.csproj">
+      <Project>{ACB4D68E-7BD1-4046-B3B9-F86662619065}</Project>
+      <Name>Appreciation.Manager.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

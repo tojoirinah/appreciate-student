@@ -69,6 +69,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Scripts\20200116-dbo.sp_GenerateStudentExam.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20200115-alter-dbo.sp_GenerateComment.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\20200115-dbo.create_views.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\20200109-dbo.sp_GetDashboardExam.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

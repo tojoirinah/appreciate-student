@@ -69,8 +69,13 @@
     <Compile Include="IUserRoleService.cs" />
     <Compile Include="IUsersService.cs" />
     <Compile Include="IVBehaviorEvaluateService.cs" />
+    <Compile Include="IVBehaviorService.cs" />
+    <Compile Include="IVClassroomService.cs" />
     <Compile Include="IVDashboardExamService.cs" />
+    <Compile Include="IVExamService.cs" />
+    <Compile Include="IVNoteCriteriaService.cs" />
     <Compile Include="IVNoteEvaluateService.cs" />
+    <Compile Include="IVSchoolYearService.cs" />
     <Compile Include="IVStudentService.cs" />
     <Compile Include="Mappers\BehaviorEvaluateMapper.cs" />
     <Compile Include="Mappers\ClassroomMapper.cs" />

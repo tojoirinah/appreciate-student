@@ -9,15 +9,21 @@ namespace Appreciation.Manager.Services
 {
     public class BehaviorService : ServiceReadOnly<Behavior>, IBehaviorService
     {
-        public BehaviorService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
+        private readonly IVBehaviorService _vService;
+        public BehaviorService(IMapper mapper, IUnitOfWork unitOfWork, IVBehaviorService vService) : base(unitOfWork, mapper)
         {
-
+            _vService = vService;
         }
 
         public async override Task<IEnumerable<Behavior>> GetAllAsync()
         {
             string key = typeof(Behavior).FullName;
             return await GetOrCreateAsync(key, _repository.GetAllAsync);
+        }
+
+        public async Task<IEnumerable<VBehavior>> GetAllViewAsync()
+        {
+            return await _vService.GetAllAsync();
         }
     }
 }

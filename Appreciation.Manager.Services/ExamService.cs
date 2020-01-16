@@ -12,9 +12,10 @@ namespace Appreciation.Manager.Services
 {
     public class ExamService : Service<Exam>, IExamService
     {
-        public ExamService(IMapper mapper, IUnitOfWork unitOfWork) : base(unitOfWork, mapper)
+        private readonly IVExamService _vService;
+        public ExamService(IMapper mapper, IUnitOfWork unitOfWork, IVExamService vService) : base(unitOfWork, mapper)
         {
-
+            _vService = vService;
         }
 
         public async override Task<IEnumerable<Exam>> GetAllAsync()
@@ -53,12 +54,10 @@ namespace Appreciation.Manager.Services
             await _repository.AddOrUpdateAsync(ex);
         }
 
-        public async Task<IEnumerable<Exam>> SearchExam(ExamSearchRequest request)
+        public async Task<IEnumerable<VExam>> SearchExam(ExamSearchRequest request)
         {
-            return await _repository.GetAllDataAsync(
-                x => ((request.SchoolYearId > 0 && x.SchoolYearId == request.SchoolYearId) || request.SchoolYearId == 0)
-                    && ((request.ClassroomId > 0 && x.ClassroomId == request.ClassroomId) || request.ClassroomId == 0)
-                , new string[] { "Classroom", "SchoolYear" });
+            return await _vService.SearchExam(request);
         }
+
     }
 }

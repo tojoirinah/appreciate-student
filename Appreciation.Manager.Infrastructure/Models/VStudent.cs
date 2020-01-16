@@ -19,5 +19,6 @@ namespace Appreciation.Manager.Infrastructure.Models
         public long SchoolYearId { get; set; }
         public long ClassroomId { get; set; }
         public long UserId { get; set; }
+        public bool CanDelete { get; set; }
     }
 }

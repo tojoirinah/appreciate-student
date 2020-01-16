@@ -9,10 +9,10 @@ namespace Appreciation.Manager.Services.Contracts
     {
         Task RemoveAllStudentSchoolYearByStudentId(long studentId);
 
-        Task GenerateComment();
-
         Task<IEnumerable<StudentExam>> SearchStudentExam(StudentExamSearchRequest request);
 
         Task<IEnumerable<StudentExam>> GetListByExam(long examid);
+
+        Task<IEnumerable<StudentExam>> GenerateComment(long examid);
     }
 }

@@ -6,7 +6,8 @@ namespace Appreciation.Manager.Services.Contracts
 {
     public interface IClassroomService : IService<Classroom>
     {
-        Task<IEnumerable<Classroom>> GetAllBySchoolYearAsync(long schoolYearId);
+        Task<IEnumerable<VClassroom>> GetAllBySchoolYearAsync(long schoolYearId);
 
+        Task<IEnumerable<VClassroom>> GetAllViewAsync();
     }
 }

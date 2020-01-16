@@ -76,22 +76,22 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("api/StudentExam/Generate")]
-        public async Task<IHttpActionResult> StudentExamGenerate()
-        {
-            try
-            {
-                await _service.GenerateComment();
-                await _service.CommitAsync();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                await _service.RollbackAsync();
-                return BadRequest(GetError(ex));
-            }
-        }
+        //[HttpPost]
+        //[Route("api/StudentExam/Generate")]
+        //public async Task<IHttpActionResult> StudentExamGenerate()
+        //{
+        //    try
+        //    {
+        //        await _service.GenerateComment();
+        //        await _service.CommitAsync();
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _service.RollbackAsync();
+        //        return BadRequest(GetError(ex));
+        //    }
+        //}
 
         [HttpGet]
         [Route("api/StudentExam")]
@@ -119,6 +119,40 @@ namespace Appreciation.Manager.Api.Controllers
                 var student = await _service.GetListByExam(id);
                 await _service.CommitAsync();
                 return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpGet]
+        [Route("api/StudentExam/GenerateComment")]
+        public async Task<IHttpActionResult> GenerateComment([FromUri] long id)
+        {
+            try
+            {
+                var student = await _service.GenerateComment(id);
+                await _service.CommitAsync();
+                return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/StudentExam/Delete")]
+        public async Task<IHttpActionResult> Delete([FromUri]long id)
+        {
+            try
+            {
+                await _service.RemoveAsync(id);
+                await _service.CommitAsync();
+                return Ok();
             }
             catch (Exception ex)
             {

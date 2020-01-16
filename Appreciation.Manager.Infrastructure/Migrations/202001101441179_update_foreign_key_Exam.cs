@@ -1,8 +1,7 @@
 namespace Appreciation.Manager.Infrastructure.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class update_foreign_key_Exam : DbMigration
     {
         public override void Up()
@@ -14,7 +13,7 @@ namespace Appreciation.Manager.Infrastructure.Migrations
             AddForeignKey("dbo.Exam", "ClassroomId", "dbo.Classroom", "Id", cascadeDelete: false);
             DropColumn("dbo.Exam", "SchoolYearId");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Exam", "SchoolYearId", c => c.Long(nullable: false));
