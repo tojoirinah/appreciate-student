@@ -70,6 +70,7 @@
     <Compile Include="IVNoteCriteriaRepository.cs" />
     <Compile Include="IVNoteEvaluateRepository.cs" />
     <Compile Include="IVSchoolYearRepository.cs" />
+    <Compile Include="IVStudentChartRepository.cs" />
     <Compile Include="IVStudentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IVDashboardExamRepository.cs" />

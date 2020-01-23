@@ -95,6 +95,23 @@ namespace Appreciation.Manager.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Student/Charts")]
+        public async Task<IHttpActionResult> StudentChart([FromUri] long id)
+        {
+            try
+            {
+                var student = await _service.GetStudentChart(id);
+                await _service.CommitAsync();
+                return Ok(new { Item = student });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
         [HttpDelete]
         [Route("api/Student/Delete")]
         public async Task<IHttpActionResult> Delete([FromUri]long id)

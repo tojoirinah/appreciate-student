@@ -101,6 +101,7 @@
     <Compile Include="VNoteCriteriaService.cs" />
     <Compile Include="VNoteEvaluateService.cs" />
     <Compile Include="VSchoolYearService.cs" />
+    <Compile Include="VStudentChartService.cs" />
     <Compile Include="VStudentService.cs" />
   </ItemGroup>
   <ItemGroup>

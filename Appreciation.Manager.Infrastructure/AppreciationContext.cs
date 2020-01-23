@@ -25,6 +25,7 @@ namespace Appreciation.Manager.Infrastructure
         public virtual DbSet<VNoteCriteria> VNoteCriterias { get; set; }
         public virtual DbSet<VSchoolYear> VSchoolYears { get; set; }
         public virtual DbSet<VExam> VExams { get; set; }
+        public virtual DbSet<VStudentChart> VStudentCharts { get; set; }
 
         public AppreciationContext() : base("AppreciationContext")
         {

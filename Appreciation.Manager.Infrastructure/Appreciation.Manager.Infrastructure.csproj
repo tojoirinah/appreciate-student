@@ -145,6 +145,10 @@
     <Compile Include="Migrations\202001161407002_view_VExam.Designer.cs">
       <DependentUpon>202001161407002_view_VExam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001171532442_add_view_student_chart.cs" />
+    <Compile Include="Migrations\202001171532442_add_view_student_chart.Designer.cs">
+      <DependentUpon>202001171532442_add_view_student_chart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BehaviorEvaluate.cs" />
@@ -167,6 +171,7 @@
     <Compile Include="Models\VNoteEvaluate.cs" />
     <Compile Include="Models\VSchoolYear.cs" />
     <Compile Include="Models\VStudent.cs" />
+    <Compile Include="Models\VStudentChart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001161407002_view_VExam.resx">
       <DependentUpon>202001161407002_view_VExam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001171532442_add_view_student_chart.resx">
+      <DependentUpon>202001171532442_add_view_student_chart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

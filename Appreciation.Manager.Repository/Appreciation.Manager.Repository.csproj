@@ -70,6 +70,7 @@
     <Compile Include="VNoteCriteriaRepository.cs" />
     <Compile Include="VNoteEvaluateRepository.cs" />
     <Compile Include="VSchoolYearRepository.cs" />
+    <Compile Include="VStudentChartRepository.cs" />
     <Compile Include="VStudentRepository.cs" />
   </ItemGroup>
   <ItemGroup>

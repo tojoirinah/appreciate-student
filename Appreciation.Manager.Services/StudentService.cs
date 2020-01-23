@@ -16,12 +16,14 @@ namespace Appreciation.Manager.Services
         protected readonly IUsersService _userService;
         protected readonly IStudentExamService _studentSchoolYearService;
         protected readonly IVStudentService _vService;
+        protected readonly IVStudentChartService _vStudentChartService;
 
-        public StudentService(IUnitOfWork unitOfWork, IMapper mapper, IUsersService userService, IStudentExamService studentSchoolYearService, IVStudentService viewStudentService) : base(unitOfWork, mapper)
+        public StudentService(IUnitOfWork unitOfWork, IMapper mapper, IUsersService userService, IStudentExamService studentSchoolYearService, IVStudentService viewStudentService, IVStudentChartService studentChartService) : base(unitOfWork, mapper)
         {
             _userService = userService;
             _studentSchoolYearService = studentSchoolYearService;
             _vService = viewStudentService;
+            _vStudentChartService = studentChartService;
         }
 
         public override async Task AddAsync(object request)
@@ -45,6 +47,11 @@ namespace Appreciation.Manager.Services
         public async override Task<Student> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id, new string[] { "User", "User.Role", "AnneeScolaire", "ClassRoom" });
+        }
+
+        public async Task<IEnumerable<VStudentChart>> GetStudentChart(long studentId)
+        {
+            return await _vStudentChartService.GetStudentChart(studentId);
         }
 
         public async override Task RemoveAsync(long id)

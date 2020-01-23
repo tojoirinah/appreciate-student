@@ -69,6 +69,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Scripts\20200117-dbo.create_view_VStudentChart.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\20200116-dbo.sp_GenerateStudentExam.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

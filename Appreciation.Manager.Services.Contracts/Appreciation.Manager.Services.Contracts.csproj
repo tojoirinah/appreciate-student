@@ -76,6 +76,7 @@
     <Compile Include="IVNoteCriteriaService.cs" />
     <Compile Include="IVNoteEvaluateService.cs" />
     <Compile Include="IVSchoolYearService.cs" />
+    <Compile Include="IVStudentChartService.cs" />
     <Compile Include="IVStudentService.cs" />
     <Compile Include="Mappers\BehaviorEvaluateMapper.cs" />
     <Compile Include="Mappers\ClassroomMapper.cs" />
