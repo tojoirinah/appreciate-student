@@ -39,7 +39,6 @@ namespace Appreciation.Manager.Api.Controllers
         {
             try
             {
-                // test v1.0
                 await _service.GenerateStudentExam();
                 await _service.CommitAsync();
                 return Ok();
