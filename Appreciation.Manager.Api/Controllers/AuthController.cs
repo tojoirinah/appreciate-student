@@ -1,4 +1,5 @@
-﻿using Appreciation.Manager.Services.Contracts;
+﻿using Appreciation.Manager.Infrastructure.Models;
+using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Utils;
 using AutoMapper;
@@ -31,18 +32,68 @@ namespace Appreciation.Manager.Api.Controllers
                     var user = await _userService.Login(req);
                     if (user != null)
                     {
-                        var claimIdentity = new ClaimsIdentity(new Claim[] {
-                    new Claim("UserId",user.Id.ToString()),
-                    new Claim("RoleId",user.RoleId.ToString()),
-                    new Claim("UserName",user.UserName)
-                });
 
-                        var token = JwtTokenHelper.CreateToken(
-                            claimIdentity,
-                            Settings.TokenExpire,
-                            Settings.JwtSecretKey
-                            );
+                        var token = CreateToken(user);
+                        return Ok(new { Token = token });
+                    }
+                }
+                return BadRequest(ModelState);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.StatusCode = 500;
+                throw ex;
+            }
+        }
 
+        private string CreateToken(Users user)
+        {
+            var claimIdentity = new ClaimsIdentity(new Claim[] {
+                            new Claim("UserId",user.Id.ToString()),
+                            new Claim("RoleId",user.RoleId.ToString()),
+                            new Claim("UserName",user.UserName)
+                        });
+
+            var token = JwtTokenHelper.CreateToken(
+                claimIdentity,
+                Settings.TokenExpire,
+                Settings.JwtSecretKey
+                );
+            return token;
+        }
+
+        [HttpPost]
+        [Route("api/Auth/ForgottenPassword")]
+        public async Task<IHttpActionResult> ForgottenPassword([FromBody] ForgottenUserPasswordRequest request)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await _userService.SendRequestForgottenPassword(request);
+                    return Ok();
+                }
+                return BadRequest(ModelState);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.StatusCode = 500;
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Auth/ResetPassword")]
+        public async Task<IHttpActionResult> ResetPassword([FromBody] ResetUserPasswordRequest request)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = await _userService.ResetUserPassword(request);
+                    if (user != null)
+                    {
+                        var token = CreateToken(user);
                         return Ok(new { Token = token });
                     }
                 }
