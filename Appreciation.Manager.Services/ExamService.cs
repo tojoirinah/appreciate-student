@@ -23,6 +23,12 @@ namespace Appreciation.Manager.Services
             return await _repository.GetAllAsync(new string[] { "Classroom", "SchoolYear" });
         }
 
+        public async override Task<IEnumerable<Exam>> GetPageAsync(int page, int pageSize)
+        {
+            return await _repository.GetPageAsync(page, pageSize, new string[] { "Classroom", "SchoolYear" });
+        }
+
+
         public async override Task<Exam> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id, new string[] { "Classroom", "SchoolYear" });

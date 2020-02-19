@@ -2,6 +2,8 @@
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using AutoMapper;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Appreciation.Manager.Services.Contracts.Mappers
 {
@@ -22,6 +24,11 @@ namespace Appreciation.Manager.Services.Contracts.Mappers
             StudentExam entity = mapper.Map<StudentExam>(request);
             entity.DateCreated = DateTime.Now;
             return entity;
+        }
+
+        public static List<StudentExam> ProjectTo(this List<StudentExamRequest> requests, IMapper mapper)
+        {
+            return requests.Select(x => x.ProjectTo(mapper)).ToList();
         }
     }
 }

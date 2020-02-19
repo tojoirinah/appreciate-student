@@ -93,6 +93,7 @@ namespace Appreciation.Manager.Api.Controllers
                     var user = await _userService.ResetUserPassword(request);
                     if (user != null)
                     {
+                        await _userService.CommitAsync();
                         var token = CreateToken(user);
                         return Ok(new { Token = token });
                     }

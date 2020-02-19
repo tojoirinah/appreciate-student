@@ -2,6 +2,7 @@
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -28,6 +29,27 @@ namespace Appreciation.Manager.Api.Controllers
                 if (ModelState.IsValid)
                 {
                     await _service.AddAsync(studentReq);
+                    await _service.CommitAsync();
+                    return Ok();
+                }
+                return BadRequest(ModelState);
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Student/AddList")]
+        public async Task<IHttpActionResult> AddListStudent([FromBody]List<AddStudentRequest> studentReq)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await _service.AddListAsync(studentReq);
                     await _service.CommitAsync();
                     return Ok();
                 }

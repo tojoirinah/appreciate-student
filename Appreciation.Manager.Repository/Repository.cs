@@ -82,6 +82,41 @@ namespace Appreciation.Manager.Repository
 
         }
 
+        public async Task AddOrUpdateListAsync(List<T> entities)
+        {
+            await Task.Run(() =>
+            {
+                foreach(var entity in entities)
+                {
+                    var item = _table.FirstOrDefault(i => i.Id == entity.Id);
+                    if(item!=null)
+                    {
+                        var entry = _context.Entry<T>(entity);
+                        if (entry.State == EntityState.Detached)
+                        {
+                            var set = _context.Set<T>();
+                            T attachedEntity = set.Local.SingleOrDefault(e => e.Id == entity.Id);  // You need to have access to key
+
+                            if (attachedEntity != null)
+                            {
+                                var attachedEntry = _context.Entry(attachedEntity);
+                                attachedEntry.CurrentValues.SetValues(entity);
+                            }
+                            else
+                            {
+                                entry.State = EntityState.Modified; // This should attach entity
+                            }
+                        }
+                    }
+                    else
+                    {
+                        entity.DateCreated = DateTime.Now;
+                        _table.Add(entity);
+                    }
+                }
+            });
+        }
+
         public async virtual Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter, string[] arrays = null)
         {
             return await Task.Run(() =>
@@ -128,6 +163,25 @@ namespace Appreciation.Manager.Repository
         public async Task ExecuteNonQuery(string query, params object[] parameters)
         {
             await Task.Run(() => _context.Database.ExecuteSqlCommand(query, parameters));
+        }
+
+        public async Task<IEnumerable<T>> GetDataListPageAsync(Expression<Func<T, bool>> filter, int page, int pageSize, string[] arrays = null)
+        {
+            return await Task.Run(() =>
+            {
+
+                if (filter == null) throw new ArgumentNullException(nameof(filter),
+                                      $"The parameter filter can not be null");
+
+                var query = _table.Where(filter).Skip(page*pageSize).Take(pageSize);
+                if (arrays != null)
+                {
+                    foreach (string propertyName in arrays)
+                        query = query.Include(propertyName);
+
+                }
+                return query.ToList();
+            });
         }
     }
 }

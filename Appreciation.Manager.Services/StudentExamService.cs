@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Appreciation.Manager.Services
 {
@@ -109,6 +110,26 @@ namespace Appreciation.Manager.Services
             req.ProjectTo(entity);
 
             await _repository.AddOrUpdateAsync(entity);
+        }
+
+        public async Task UpdateListAsync(List<StudentExamRequest> request)
+        {
+            if (request.Any())
+            {
+                var list = new List<StudentExam>();
+                foreach(var req in request)
+                {
+                    StudentExam entity = await _repository.GetByIdAsync(req.Id);
+                    if(entity!=null)
+                    {
+                        req.ProjectTo(entity);
+                        list.Add(entity);
+                    }
+                }
+
+                // update student
+                await _repository.AddOrUpdateListAsync(list);
+            }
         }
     }
 }

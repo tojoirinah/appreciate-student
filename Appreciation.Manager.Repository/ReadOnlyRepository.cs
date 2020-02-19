@@ -28,15 +28,24 @@ namespace Appreciation.Manager.Repository
                     query = query.Include(propertyName);
 
             }
-            return query;
+            return query.OrderBy(x => x.Id);
 
 
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(string[] arrays = null)
+        public async virtual Task<IEnumerable<T>> GetAllAsync(string[] arrays = null)
         {
             return await Task.Run(() => Query(arrays).ToList<T>());
         }
 
+        public async virtual Task<IEnumerable<T>> GetPageAsync(int page, int pageSize, string[] arrays = null)
+        {
+            return await Task.Run(() => Query(arrays).Skip(page*pageSize).Take(pageSize).ToList<T>());
+        }
+
+        public virtual int GetCount()
+        {
+            return _table.Count<T>();
+        }
     }
 }

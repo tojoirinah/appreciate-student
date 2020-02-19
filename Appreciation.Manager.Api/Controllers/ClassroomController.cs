@@ -98,8 +98,40 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpGet]
+        [Route("api/Classroom/Page")]
+        public async Task<IHttpActionResult> ClassroomPage([FromUri] int page, int pageSize)
+        {
+            try
+            {
+                var list = await _service.GetPageViewAsync(page, pageSize);
+                await _service.CommitAsync();
+                return Ok(new { List = list });
+            }
+            catch (Exception ex)
+            {
+                await _service.RollbackAsync();
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpGet]
+        [Route("api/Classroom/Count")]
+        public IHttpActionResult ClassroomCount()
+        {
+            try
+            {
+                int count = _service.GetCount();
+                return Ok(new { Item = count });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(GetError(ex));
+            }
+        }
+
+        [HttpGet]
         [Route("api/Classroom/SchoolYear")]
-        public async Task<IHttpActionResult> ClassroomList([FromUri] long id)
+        public async Task<IHttpActionResult> ClassroomSchoolYear([FromUri] long id)
         {
             try
             {
@@ -115,8 +147,8 @@ namespace Appreciation.Manager.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/Classroom/id")]
-        public async Task<IHttpActionResult> ClassroomById(long id)
+        [Route("api/Classroom/Item")]
+        public async Task<IHttpActionResult> ClassroomById([FromUri]long id)
         {
             try
             {

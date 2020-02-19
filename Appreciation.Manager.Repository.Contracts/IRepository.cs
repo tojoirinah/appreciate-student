@@ -12,8 +12,10 @@ namespace Appreciation.Manager.Repository.Contracts
         Task RemoveAsync(T entity);
         Task RemoveAsync(long id);
         Task AddOrUpdateAsync(T entity);
+        Task AddOrUpdateListAsync(List<T> entities);
         Task<T> GetDataAsync(Expression<Func<T, bool>> filter, string[] arrays = null);
         Task<IEnumerable<T>> GetAllDataAsync(Expression<Func<T, bool>> filter, string[] arrays = null);
+        Task<IEnumerable<T>> GetDataListPageAsync(Expression<Func<T, bool>> filter, int page, int pageSize, string[] arrays = null);
 
         Task<IEnumerable<T>> ExecWithStoreProcedure(string query, params object[] parameters);
 

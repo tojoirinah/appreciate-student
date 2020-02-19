@@ -9,5 +9,7 @@ namespace Appreciation.Manager.Services.Contracts
         Task<IEnumerable<VClassroom>> GetAllBySchoolYearAsync(long schoolYearId);
 
         Task<IEnumerable<VClassroom>> GetAllViewAsync();
+
+        Task<IEnumerable<VClassroom>> GetPageViewAsync(int page, int pageSize);
     }
 }

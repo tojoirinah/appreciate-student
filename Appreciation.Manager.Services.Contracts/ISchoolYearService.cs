@@ -9,5 +9,7 @@ namespace Appreciation.Manager.Services.Contracts
     {
         Task<SchoolYear> UpdateStatusSchoolYear(UpdateStatusSchoolYearRequest request);
         Task<IEnumerable<VSchoolYear>> GetAllViewAsync();
+
+        Task<IEnumerable<VSchoolYear>> GetPageViewAsync(int page, int pageSize);
     }
 }

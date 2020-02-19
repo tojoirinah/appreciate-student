@@ -35,6 +35,11 @@ namespace Appreciation.Manager.Services
             return await _vService.GetAllAsync();
         }
 
+        public async  Task<IEnumerable<VSchoolYear>> GetPageViewAsync(int page, int pageSize)
+        {
+            return await _vService.GetPageAsync(page, pageSize);
+        }
+
         public async override Task UpdateAsync(object request)
         {
             if (!(request is UpdateSchoolYearRequest))

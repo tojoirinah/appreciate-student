@@ -8,5 +8,6 @@ namespace Appreciation.Manager.Services.Contracts
     public interface IStudentService : IService<Student>
     {
         Task<IEnumerable<VStudent>> SearchStudent(StudentSearchRequest request);
+        Task AddListAsync(List<AddStudentRequest> request);
     }
 }

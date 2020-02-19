@@ -2,6 +2,9 @@
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using AutoMapper;
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using Appreciation.Manager.Infrastructure.Enumerations;
 
 namespace Appreciation.Manager.Services.Mappers
 {
@@ -16,11 +19,17 @@ namespace Appreciation.Manager.Services.Mappers
             request.User.ProjectTo(student.User);
         }
 
-        public static Student ProjectTo(this AddStudentRequest request, IMapper mapper)
+        public static Student ProjectTo(this AddStudentRequest request, IMapper mapper, RoleEnum roleEnum)
         {
             Student std = mapper.Map<Student>(request);
             std.DateCreated = DateTime.Now;
+            std.User = request.User.ProjectTo(mapper, roleEnum);
             return std;
+        }
+
+        public static List<Student> ProjectTo(this List<AddStudentRequest> request, IMapper mapper, RoleEnum roleEnum)
+        {
+            return request.Select(x => x.ProjectTo(mapper, roleEnum)).ToList();
         }
     }
 }

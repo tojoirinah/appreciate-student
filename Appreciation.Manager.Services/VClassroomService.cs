@@ -19,6 +19,11 @@ namespace Appreciation.Manager.Services
             return await _repository.GetAllDataAsync(x => !x.SchoolYear.IsClosed, new string[] { "SchoolYear" });
         }
 
+        public async override Task<IEnumerable<VClassroom>> GetPageAsync(int page, int pageSize)
+        {
+            return await _repository.GetPageAsync(page, pageSize, new string[] { "SchoolYear" });
+        }
+
 
         public override Task AddAsync(object request)
         {

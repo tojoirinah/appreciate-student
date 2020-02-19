@@ -14,5 +14,7 @@ namespace Appreciation.Manager.Services.Contracts
         Task<IEnumerable<StudentExam>> GetListByExam(long examid);
 
         Task<IEnumerable<StudentExam>> GenerateComment(long examid);
+
+        Task UpdateListAsync(List<StudentExamRequest> request);
     }
 }

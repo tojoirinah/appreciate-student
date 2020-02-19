@@ -6,6 +6,7 @@ using Appreciation.Manager.Services.Contracts.Data_Transfert;
 using Appreciation.Manager.Services.Mappers;
 using AutoMapper;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -30,8 +31,7 @@ namespace Appreciation.Manager.Services
                 throw new Exception("Convert type not allowed");
 
             AddStudentRequest rq = (AddStudentRequest)request;
-            var std = rq.ProjectTo(_mapper);
-            std.User = rq.User.ProjectTo(_mapper, RoleEnum.Student);
+            var std = rq.ProjectTo(_mapper, RoleEnum.Student);
 
             // update student
             await _repository.AddOrUpdateAsync(std);
@@ -40,6 +40,11 @@ namespace Appreciation.Manager.Services
         public async override Task<IEnumerable<Student>> GetAllAsync()
         {
             return await _repository.GetAllAsync(new string[] { "User", "User.Role", "AnneeScolaire", "ClassRoom" });
+        }
+
+        public async override Task<IEnumerable<Student>> GetPageAsync(int page, int pageSize)
+        {
+            return await _repository.GetPageAsync(page, pageSize, new string[] { "User", "User.Role", "AnneeScolaire", "ClassRoom" });
         }
 
         public async override Task<Student> GetByIdAsync(long id)
@@ -80,6 +85,17 @@ namespace Appreciation.Manager.Services
 
             await _repository.AddOrUpdateAsync(std);
 
+        }
+
+        public async Task AddListAsync(List<AddStudentRequest> request)
+        {
+            if(request.Any())
+            {
+                var stds = request.ProjectTo(_mapper, RoleEnum.Student);
+
+                // update student
+                await _repository.AddOrUpdateListAsync(stds);
+            }
         }
     }
 }

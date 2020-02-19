@@ -23,6 +23,11 @@ namespace Appreciation.Manager.Services
             return await _repository.GetAllDataAsync(x => !x.SchoolYear.IsClosed, new string[] { "SchoolYear" });
         }
 
+        public async override Task<IEnumerable<Classroom>> GetPageAsync(int page, int pageSize)
+        {
+            return await _repository.GetDataListPageAsync(x => !x.SchoolYear.IsClosed, page, pageSize, new string[] { "Behavior", "NoteCriteria" });
+        }
+
         public async override Task<Classroom> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id, new string[] { "SchoolYear" });
@@ -64,6 +69,11 @@ namespace Appreciation.Manager.Services
         public async Task<IEnumerable<VClassroom>> GetAllViewAsync()
         {
             return await _vService.GetAllAsync();
+        }
+
+        public async Task<IEnumerable<VClassroom>> GetPageViewAsync(int page, int pageSize)
+        {
+            return await _vService.GetPageAsync(page, pageSize);
         }
     }
 }

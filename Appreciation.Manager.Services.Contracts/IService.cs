@@ -8,7 +8,8 @@ namespace Appreciation.Manager.Services.Contracts
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(long id);
-
+        int GetCount();
+        Task<IEnumerable<T>> GetPageAsync(int page, int pageSize);
     }
 
     public interface IService<T> : IServiceReadOnly<T> where T : BaseEntity

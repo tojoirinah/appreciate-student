@@ -21,6 +21,12 @@ namespace Appreciation.Manager.Services
             return await GetOrCreateAsync(key, _repository.GetAllAsync);
         }
 
+        public async override Task<IEnumerable<Behavior>> GetPageAsync(int page, int pageSize)
+        {
+            string key = typeof(Behavior).FullName + "_" + "GetPageAsync";
+            return await GetOrCreatePageAsync(key, _repository.GetPageAsync, page, pageSize);
+        }
+
         public async Task<IEnumerable<VBehavior>> GetAllViewAsync()
         {
             return await _vService.GetAllAsync();

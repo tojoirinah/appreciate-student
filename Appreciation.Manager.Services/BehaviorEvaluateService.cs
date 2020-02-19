@@ -50,6 +50,11 @@ namespace Appreciation.Manager.Services
             return await _repository.GetAllAsync(new string[] { "Behavior", "NoteCriteria" });
         }
 
+        public async override Task<IEnumerable<BehaviorEvaluate>> GetPageAsync(int page, int pageSize)
+        {
+            return await _repository.GetPageAsync(page, pageSize, new string[] { "Behavior", "NoteCriteria" });
+        }
+
         public async override Task<BehaviorEvaluate> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id, new string[] { "Behavior", "NoteCriteria" });
