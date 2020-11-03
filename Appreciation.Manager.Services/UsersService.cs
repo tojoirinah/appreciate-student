@@ -108,7 +108,7 @@ namespace Appreciation.Manager.Services
             {
                 var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + Settings.ForgottenPasswordTemplate;
                 var htmlCode = client.DownloadString(path);
-                var url = string.Format("{0}{1}?token={2}", Settings.CorsDomain, Settings.ResetPasswordUrl, token);
+                var url = string.Format("{0}{1}{2}?token={3}", Settings.CorsDomain, Settings.Domain, Settings.ResetPasswordUrl, token);
                 var body = htmlCode.Replace("_@1_", url);
 
                 var mailRequest = new MailRequest()
