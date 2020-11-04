@@ -3,6 +3,7 @@ using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
+using Appreciation.Manager.Services.Contracts.Exceptions;
 using Appreciation.Manager.Services.Mappers;
 using Appreciation.Manager.Utils;
 using AutoMapper;
@@ -43,13 +44,13 @@ namespace Appreciation.Manager.Services
         public override async Task UpdateAsync(object request)
         {
             if (!(request is UpdateInformationUsersRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             UpdateInformationUsersRequest req = (UpdateInformationUsersRequest)request;
             Users user = await _repository.GetByIdAsync(req.Id);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new EntityNotFoundException<Users>();
             }
 
             user = _mapper.Map<Users>(request);
@@ -59,7 +60,7 @@ namespace Appreciation.Manager.Services
         public override async Task AddAsync(object request)
         {
             if (!(request is AddUsersRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             AddUsersRequest rq = (AddUsersRequest)request;
             Users u = rq.ProjectTo(_mapper, RoleEnum.Admin);
@@ -72,7 +73,7 @@ namespace Appreciation.Manager.Services
             Users u = await _repository.GetByIdAsync(request.Id);
 
             if (u == null)
-                throw new Exception("User not found");
+                throw new EntityNotFoundException<Users>();
 
             request.ProjectTo(u);
             await _repository.AddOrUpdateAsync(u);
@@ -88,7 +89,7 @@ namespace Appreciation.Manager.Services
             Users user = await _repository.GetDataAsync(x => x.UserName == request.UserName);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new EntityNotFoundException<Users>();
 
             }
 

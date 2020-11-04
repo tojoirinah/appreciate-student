@@ -1,15 +1,17 @@
-﻿using Appreciation.Manager.Infrastructure.Models;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+
+using Appreciation.Manager.Infrastructure.Models;
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
+using Appreciation.Manager.Services.Contracts.Exceptions;
 using Appreciation.Manager.Services.Contracts.Mappers;
+
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Linq;
 
 namespace Appreciation.Manager.Services
 {
@@ -22,7 +24,7 @@ namespace Appreciation.Manager.Services
         public override async Task AddAsync(object request)
         {
             if (!(request is StudentExamRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             StudentExamRequest rq = (StudentExamRequest)request;
             var std = rq.ProjectTo(_mapper);
@@ -100,12 +102,12 @@ namespace Appreciation.Manager.Services
         {
 
             if (!(request is StudentExamRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             StudentExamRequest req = (StudentExamRequest)request;
             StudentExam entity = await _repository.GetByIdAsync(req.Id);
             if (entity == null)
-                throw new Exception("Student exam not found");
+                throw new EntityNotFoundException<StudentExam>();
 
             req.ProjectTo(entity);
 

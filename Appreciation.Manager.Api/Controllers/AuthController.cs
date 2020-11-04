@@ -42,7 +42,7 @@ namespace Appreciation.Manager.Api.Controllers
             catch (Exception ex)
             {
                 HttpContext.Current.Response.StatusCode = 500;
-                throw ex;
+                return BadRequest(ex.Message);
             }
         }
 

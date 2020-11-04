@@ -2,6 +2,7 @@
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
+using Appreciation.Manager.Services.Contracts.Exceptions;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
@@ -36,7 +37,7 @@ namespace Appreciation.Manager.Services
         public override async Task AddAsync(object request)
         {
             if (!(request is AddClassroomRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             AddClassroomRequest rq = (AddClassroomRequest)request;
             var cr = rq.ProjectTo(_mapper);
@@ -48,13 +49,13 @@ namespace Appreciation.Manager.Services
         public async override Task UpdateAsync(object request)
         {
             if (!(request is UpdateClassroomRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             UpdateClassroomRequest req = (UpdateClassroomRequest)request;
 
             Classroom cr = await _repository.GetByIdAsync(req.Id);
             if (cr == null)
-                throw new Exception("Classroom not found");
+                throw new EntityNotFoundException<Classroom>();
 
             req.ProjectTo(cr);
 

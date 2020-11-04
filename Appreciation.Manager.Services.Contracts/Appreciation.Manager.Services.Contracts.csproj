@@ -55,7 +55,11 @@
     <Compile Include="Data Transfert\AddOrUpdateUsersRequest.cs" />
     <Compile Include="Data Transfert\AuthenticationRequest.cs" />
     <Compile Include="Data Transfert\DashboardDto.cs" />
+    <Compile Include="Data Transfert\ImportStudentRequest.cs" />
+    <Compile Include="Data Transfert\ImportStudentResponse.cs" />
     <Compile Include="Data Transfert\Request.cs" />
+    <Compile Include="Exceptions\ConversionTypeNotAllowedException.cs" />
+    <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="IBehaviorEvaluateService.cs" />
     <Compile Include="IBehaviorService.cs" />
     <Compile Include="IClassroomService.cs" />

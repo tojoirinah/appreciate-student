@@ -19,6 +19,6 @@ namespace Appreciation.Manager.Repository.Contracts
 
         Task<IEnumerable<T>> ExecWithStoreProcedure(string query, params object[] parameters);
 
-        Task ExecuteNonQuery(string query, params object[] parameters);
+        Task<int> ExecuteNonQuery(string query, params object[] parameters);
     }
 }

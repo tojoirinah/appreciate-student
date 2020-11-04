@@ -9,5 +9,6 @@ namespace Appreciation.Manager.Services.Contracts
     {
         Task<IEnumerable<VStudent>> SearchStudent(StudentSearchRequest request);
         Task AddListAsync(List<AddStudentRequest> request);
+        Task<string> ImportDatas(List<ImportStudentRequest> request);
     }
 }

@@ -9,7 +9,7 @@ namespace Appreciation.Manager.Api.Controllers
     [Authorize]
     public class DashboardController : ApiBaseController
     {
-        private IVDashboardExamService _service;
+        private readonly IVDashboardExamService _service;
 
         public DashboardController(IMapper mapper, IVDashboardExamService service) : base(mapper)
         {

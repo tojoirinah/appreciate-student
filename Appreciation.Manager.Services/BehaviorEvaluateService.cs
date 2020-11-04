@@ -2,6 +2,7 @@
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
+using Appreciation.Manager.Services.Contracts.Exceptions;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
@@ -21,7 +22,7 @@ namespace Appreciation.Manager.Services
         public async override Task AddAsync(object request)
         {
             if (!(request is AddBehaviorEvaluateRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             AddBehaviorEvaluateRequest rq = (AddBehaviorEvaluateRequest)request;
             var item = rq.ProjectTo(_mapper);
@@ -33,12 +34,12 @@ namespace Appreciation.Manager.Services
         public async override Task UpdateAsync(object request)
         {
             if (!(request is UpdateBehaviorEvaluateRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             UpdateBehaviorEvaluateRequest req = (UpdateBehaviorEvaluateRequest)request;
             BehaviorEvaluate item = await _repository.GetByIdAsync(req.Id);
             if (item == null)
-                throw new Exception("Behavior evaluate not found");
+                throw new EntityNotFoundException<BehaviorEvaluate>();
 
             req.ProjectTo(item);
 

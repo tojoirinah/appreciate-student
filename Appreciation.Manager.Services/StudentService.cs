@@ -9,6 +9,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Appreciation.Manager.Services.Contracts.Exceptions;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Appreciation.Manager.Services
 {
@@ -28,7 +31,7 @@ namespace Appreciation.Manager.Services
         public override async Task AddAsync(object request)
         {
             if (!(request is AddStudentRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             AddStudentRequest rq = (AddStudentRequest)request;
             var std = rq.ProjectTo(_mapper, RoleEnum.Student);
@@ -74,12 +77,12 @@ namespace Appreciation.Manager.Services
         public override async Task UpdateAsync(object request)
         {
             if (!(request is UpdateInformationStudentRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             UpdateInformationStudentRequest req = (UpdateInformationStudentRequest)request;
             Student std = await _repository.GetByIdAsync(req.Id);
             if (std == null)
-                throw new Exception("Student not found");
+                throw new EntityNotFoundException<Student>();
 
             req.ProjectTo(std);
 
@@ -96,6 +99,48 @@ namespace Appreciation.Manager.Services
                 // update student
                 await _repository.AddOrUpdateListAsync(stds);
             }
+        }
+
+        public async Task<string> ImportDatas(List<ImportStudentRequest> request)
+        {
+            await Task.Run(async () =>
+            {
+                if (request == null || !request.Any())
+                    throw new Exception("No data to import");
+
+                DataTable dt = GetStudentAppreciationDatatable(request);
+                var studentParameter = new SqlParameter
+                {
+                    ParameterName = "student",
+                    Direction = ParameterDirection.Input,
+                    SqlDbType = SqlDbType.Structured,
+                    TypeName = "dbo.StudentAppreciation",
+                    Value = dt
+                };
+
+
+                int result  = await _repository.ExecuteNonQuery("dbo.sp_ImportDatas @student", studentParameter);
+                //return result.Result;
+                return $"{result}  students imported";
+            });
+            return "No data found";
+        }
+
+        private DataTable GetStudentAppreciationDatatable(List<ImportStudentRequest> request)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Genre", typeof(string));
+            dt.Columns.Add("LastName", typeof(string));
+            dt.Columns.Add("FirstName", typeof(string));
+            dt.Columns.Add("SchoolYear", typeof(string));
+            dt.Columns.Add("ClassNumber", typeof(string));
+
+            foreach (var student in request)
+            {
+                dt.Rows.Add(student.Genre, student.LastName, student.FirstName, student.SchoolYear, student.ClassRoom);
+            }
+
+            return dt;
         }
     }
 }

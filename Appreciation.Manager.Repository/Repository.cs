@@ -160,9 +160,10 @@ namespace Appreciation.Manager.Repository
             return await Task.Run(() => _context.Database.SqlQuery<T>(query, parameters).ToList());
         }
 
-        public async Task ExecuteNonQuery(string query, params object[] parameters)
+
+        public async Task<int> ExecuteNonQuery(string query, params object[] parameters)
         {
-            await Task.Run(() => _context.Database.ExecuteSqlCommand(query, parameters));
+            return await Task.Run(() => _context.Database.ExecuteSqlCommand(query, parameters));
         }
 
         public async Task<IEnumerable<T>> GetDataListPageAsync(Expression<Func<T, bool>> filter, int page, int pageSize, string[] arrays = null)

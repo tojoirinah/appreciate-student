@@ -2,6 +2,7 @@
 using Appreciation.Manager.Repository.Contracts;
 using Appreciation.Manager.Services.Contracts;
 using Appreciation.Manager.Services.Contracts.Data_Transfert;
+using Appreciation.Manager.Services.Contracts.Exceptions;
 using Appreciation.Manager.Services.Contracts.Mappers;
 using AutoMapper;
 using System;
@@ -21,7 +22,7 @@ namespace Appreciation.Manager.Services
         public async override Task AddAsync(object request)
         {
             if (!(request is AddSchoolYearRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             AddSchoolYearRequest rq = (AddSchoolYearRequest)request;
             var item = rq.ProjectTo(_mapper);
@@ -43,12 +44,12 @@ namespace Appreciation.Manager.Services
         public async override Task UpdateAsync(object request)
         {
             if (!(request is UpdateSchoolYearRequest))
-                throw new Exception("Convert type not allowed");
+                throw new ConversionTypeNotAllowedException();
 
             UpdateSchoolYearRequest req = (UpdateSchoolYearRequest)request;
             SchoolYear item = await _repository.GetByIdAsync(req.Id);
             if (item == null)
-                throw new Exception("SchoolYear not found");
+                throw new EntityNotFoundException<SchoolYear>();
 
             req.ProjectTo(item);
 
@@ -60,7 +61,7 @@ namespace Appreciation.Manager.Services
             SchoolYear u = await _repository.GetByIdAsync(request.Id);
 
             if (u == null)
-                throw new Exception("User not found");
+                throw new EntityNotFoundException<SchoolYear>();
 
             request.ProjectTo(u);
             await _repository.AddOrUpdateAsync(u);
